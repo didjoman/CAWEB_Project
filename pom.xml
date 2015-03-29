@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.ensimag</groupId>
+    <artifactId>caweb</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>caweb</name>
+
+    <properties>
+        <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <!-- Repository to be able to add front-end dependencies easyli -->
+    <repositories>
+        <repository>
+            <id>webjars</id>
+            <url>http://webjars.github.com/m2</url>
+        </repository>
+    </repositories>
+    
+    <dependencies>
+        <!-- ******************** BACK-END DEPENDENCIES ******************** -->
+        <!-- Java EE -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- jFree: to make diagrams easily -->
+        <dependency>
+            <groupId>jfree</groupId>
+            <artifactId>jfreechart</artifactId>
+            <version>1.0.13</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSP : to embbed java code into html -->
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- JSTL : JSP Standard Tag Libray (ex: <c:foreach> ...)  -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+        <!-- Oracle JDBC : -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0.1</version>
+        </dependency>
+        
+        <!-- ******************* FRONT-END DEPENDENCIES ******************** -->
+        <!-- JQUERY for UI building & AJAX requests -->
+        <!-- BOOTSTRAP TWITTER : for easy UI building & responsie designs -->
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <compilerArguments>
+                        <endorseddirs>${endorsed.dir}</endorseddirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <!-- Appends the minifyed CSS to the target -->
+                    <webResources combine.children="append">
+                        <resource>
+                            <directory>${project.build.directory}/${project.build.finalName}/css-min</directory>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${endorsed.dir}</outputDirectory>
+                            <silent>true</silent>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>javax</groupId>
+                                    <artifactId>javaee-endorsed-api</artifactId>
+                                    <version>7.0</version>
+                                    <type>jar</type>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- ******************* FRONT-END PLUGINS ********************* -->
+            <!-- SASS : sort of intelligent CSS compilable -->
+            <plugin>
+                <groupId>org.jasig.maven</groupId>
+                <artifactId>sass-maven-plugin</artifactId>
+                <version>1.1.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-css</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>update-stylesheets</goal>
+                        </goals>
+                        <configuration>
+                            <sassSourceDirectory>${basedir}/src/main/webapp/scss</sassSourceDirectory>
+                            <destination>${project.build.directory}/${project.build.finalName}/css</destination>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- CSS minifyer: to reduce the size of CSS for the production --> 
+            <plugin>
+                <groupId>com.samaxes.maven</groupId>
+                <artifactId>minify-maven-plugin</artifactId>
+                <version>1.7.4</version>
+                <configuration>
+                    <charset>UTF-8</charset>
+                    <nosuffix>true</nosuffix>
+                    <webappTargetDir>${project.build.directory}/${project.build.finalName}/css-min</webappTargetDir>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>minify-css</id>
+                        <goals>
+                            <goal>minify</goal>
+                        </goals>
+                        <configuration>
+                            <webappSourceDir>${project.build.directory}/${project.build.finalName}</webappSourceDir>
+                            <cssSourceDir>css</cssSourceDir>
+                            <cssSourceIncludes>
+                                <include>*.css</include>
+                            </cssSourceIncludes>
+                            <skipMerge>true</skipMerge>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
