@@ -67,7 +67,7 @@
         </div>
         
         <!-- [PANNEL] Valider ou refuser le contrat ?-->
-        <div class="panel panel-default" id="validation-panel" style="display: none;">
+        <div class="panel panel-default hidden" id="validation-panel">
             <div class="panel-heading">
                 <h3 class="panel-title">Valider ou refuser le contrat</h3>
             </div>

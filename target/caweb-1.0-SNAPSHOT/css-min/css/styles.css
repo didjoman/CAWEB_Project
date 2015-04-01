@@ -5,6 +5,9 @@
 body {
   padding-top: 50px; }
 
+.hidden {
+  display: none; }
+
 #connexion-dropdown {
   padding: 8px; }
   #connexion-dropdown input {
