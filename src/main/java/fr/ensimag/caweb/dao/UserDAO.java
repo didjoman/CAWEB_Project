@@ -15,11 +15,13 @@ import java.util.List;
 public interface UserDAO{
     public abstract User create(User obj)  throws DAOException ;
     
-    public abstract User read(String pseudo, String pwd)  throws DAOException ;
+    public abstract User read(String pseudo)  throws DAOException ;
     
     public abstract List<User> readAll()  throws DAOException ;
 
     public abstract User update(User obj)  throws DAOException ;
     
     public abstract void delete(User obj)  throws DAOException ;
+    
+    public boolean isPasswordValid(String pseudo, String pwd) throws DAOException;
 }

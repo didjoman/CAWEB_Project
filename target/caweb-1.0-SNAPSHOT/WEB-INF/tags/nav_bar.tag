@@ -25,31 +25,25 @@
                                 Login <span class="caret"></span>
                             </a>
                             <div id="connexion-dropdown" class="dropdown-menu" role="menu">
-                                <form action="user" method="post">
-                                    <div>
-                                        <label for="Login">Login :</label><br />
-                                        <input type="text" value="${param.login}"
-                                               name="login" id="login" placeholder="Identifiant" />
-                                        <span class="erreur">${erreurs['login']}</span>
-                                    </div>
-                                    
-                                    <div>
-                                        <label for="password">Mot de passe :</label><br />
-                                        <input type="password" name="password" id="password" placeholder="Mot de passe" />
-                                        <span class="erreur">${erreurs['password']}</span> <input
-                                            type="hidden" name="connexion" value="1" />
-                                    </div>
-                                    <br />
-                                    <input class="submit btn btn-primary" type="submit" value="Se connecter" id="submit" />
-                                    <p style="${empty erreurs ? 'color: green;' : 'color: red;'}">${resultat}</p>
-                                </form>
+                                <jsp:include page="connection_form.jsp" />
                             </div>
                         </li>
-                        <li><a href="#">Inscription</a></li>
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                Inscription <span class="caret"></span>
+                            </a>
+                            <div id="subscription-dropdown" class="dropdown-menu" role="menu">
+                                <jsp:include page="subscription_form.jsp" />
+                            </div>
+                        </li>
                         </c:when>
                         <c:when test="${sessionScope.login != null}">
                         <li><a href="#">${sessionScope.login}</a></li> 
-                        <li><a href="#">Deconnexion</a></li>
+                        <li>
+                            <a href="session?action=delete">
+                                Deconnexion
+                            </a>
+                        </li>
                         </c:when>
                     </c:choose>
             </ul>

@@ -131,7 +131,7 @@ CREATE TABLE AssurePermanence(
     CONSTRAINT fk_AssurePerm_Util1 FOREIGN KEY (permanencier1)
     REFERENCES Utilisateur(pseudo) 
     ON DELETE CASCADE,
-    CONSTRAINT fk_AssurePerm_Util1 FOREIGN KEY (permanencier2)
+    CONSTRAINT fk_AssurePerm_Util2 FOREIGN KEY (permanencier2)
     REFERENCES Utilisateur(pseudo) 
     ON DELETE CASCADE
 );

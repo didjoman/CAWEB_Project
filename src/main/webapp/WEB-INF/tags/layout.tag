@@ -3,6 +3,7 @@
     Created on : 26 mars 2015, 18:11:15
     Author     : Alexandre Rupp
 --%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
     
 <%@tag description="caweb template" pageEncoding="UTF-8"%>
@@ -36,10 +37,12 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/lumen/bootstrap.min.css">
-            
-        -->
         <link rel="stylesheet" href="https://bootswatch.com/spacelab/bootstrap.min.css">
+        -->
         
+        <link rel="stylesheet" href="https://bootswatch.com/lumen/bootstrap.min.css">
+           
+           
         <!-- jquery UI -->           
         <!-- SCRIPTS -->
     </head>
@@ -53,6 +56,42 @@
                 <div id="content-wrapper" 
                      class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main hidden"
                      >
+                    <c:if test="${error != null}">
+                        <div class="alert alert-danger" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            ${error}
+                        </div>
+                    </c:if>
+                    
+                    <c:if test="${success != null}">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            ${success}
+                        </div>
+                    </c:if>
+                    
+                    <c:if test="${info != null}">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            ${info}
+                        </div>
+                    </c:if>
+                    
+                    <c:if test="${warning != null}">
+                        <div class="alert alert-success" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            ${warning}
+                        </div>
+                    </c:if>
+                    
                     <jsp:doBody/>    
                 </div>
             </div>
@@ -64,6 +103,7 @@
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
         <!-- Bootstrap : -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/validator.js"></script>
         <!-- Our Js : -->
         <script src="${pageContext.request.contextPath}/js/app.js"></script>
         <noscript>
@@ -71,5 +111,6 @@
             .hidden{ display: block !important; }
         </style>
         </noscript>
+        
     </body>
 </html>

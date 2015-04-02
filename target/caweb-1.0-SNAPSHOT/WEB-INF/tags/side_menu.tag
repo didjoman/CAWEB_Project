@@ -16,7 +16,7 @@
     ${pageContext.request.requestURL.substring(pageContext.request.requestURL.lastIndexOf("/")+1, pageContext.request.requestURL.lastIndexOf(".jsp"))}
 </c:set>
 
-<div class="col-sm-3 col-md-2 sidebar">
+<div class="col-sm-3 col-md-2 sidebar navbar-collapse collapse">
     <ul class="nav nav-sidebar">
         <li class="<c:if test="${page == 'accueil'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/accueil">

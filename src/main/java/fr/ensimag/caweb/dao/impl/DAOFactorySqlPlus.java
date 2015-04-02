@@ -6,7 +6,6 @@
 package fr.ensimag.caweb.dao.impl;
 
 
-import fr.ensimag.caweb.controllers.ContextListener;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.UserDAO;
@@ -26,7 +25,7 @@ import javax.sql.DataSource;
  */
 public class DAOFactorySqlPlus extends DAOFactory {
     private static final String DB_DATASRC_REF = "java:comp/env/jdbc/pool/MyAppDB";
-    private DataSource dataSource;
+    private final DataSource dataSource;
     
     private DAOFactorySqlPlus(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -38,7 +37,7 @@ public class DAOFactorySqlPlus extends DAOFactory {
             Context ctx = new InitialContext();
             dataSource = (DataSource)ctx.lookup(DB_DATASRC_REF);
         } catch (NamingException ex) {
-            Logger.getLogger(ContextListener.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactorySqlPlus.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return new DAOFactorySqlPlus(dataSource);
@@ -66,6 +65,6 @@ public class DAOFactorySqlPlus extends DAOFactory {
     
     @Override
     public UserDAO getUserDAO(){
-        return new UserDAOSqlPlus(this);
+        return new UserDAOSqlPlus(getInstance());
     }
 }

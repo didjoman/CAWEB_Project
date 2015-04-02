@@ -5,7 +5,6 @@
 */
 package fr.ensimag.caweb.dao;
 
-import fr.ensimag.caweb.controllers.ContextListener;
 import fr.ensimag.caweb.dao.impl.DAOFactorySqlPlus;
 import fr.ensimag.caweb.dao.impl.UserDAOSqlPlus;
 import java.sql.Connection;
