@@ -40,7 +40,7 @@
                         <c:when test="${sessionScope.login != null}">
                         <li><a href="#">${sessionScope.login}</a></li> 
                         <li>
-                            <a href="session?action=delete">
+                            <a href="${pageContext.request.contextPath}/session?action=delete">
                                 Deconnexion
                             </a>
                         </li>

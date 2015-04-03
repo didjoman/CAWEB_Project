@@ -99,5 +99,5 @@ public abstract class User {
         return "User{" + "pseudo=" + pseudo + ", motDePasse=" + motDePasse + ", email=" + email + ", adresse=" + adresse + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + '}';
     }
     
-    public abstract String getRole();
+    public abstract UserTypes getRole();
 }

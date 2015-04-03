@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre Rupp
  */
-@WebServlet(name = "ContractRequestServlet", urlPatterns = {"/request"})
+@WebServlet(name = "ContractRequestServlet", urlPatterns = {"/request"},  loadOnStartup = 1)
 public class ContractRequestServlet extends HttpServlet {
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

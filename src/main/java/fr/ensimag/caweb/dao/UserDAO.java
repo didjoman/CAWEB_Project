@@ -23,5 +23,5 @@ public interface UserDAO{
     
     public abstract void delete(User obj)  throws DAOException ;
     
-    public boolean isPasswordValid(String pseudo, String pwd) throws DAOException;
+    public User read(String pseudo, String pwd) throws DAOException;
 }

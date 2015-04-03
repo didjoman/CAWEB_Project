@@ -39,10 +39,8 @@
         <link rel="stylesheet" href="https://bootswatch.com/lumen/bootstrap.min.css">
         <link rel="stylesheet" href="https://bootswatch.com/spacelab/bootstrap.min.css">
         -->
+        <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
         
-        <link rel="stylesheet" href="https://bootswatch.com/lumen/bootstrap.min.css">
-           
-           
         <!-- jquery UI -->           
         <!-- SCRIPTS -->
     </head>

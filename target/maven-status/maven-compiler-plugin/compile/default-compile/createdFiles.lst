@@ -1,3 +1,4 @@
+fr/ensimag/caweb/models/UserTypes.class
 fr/ensimag/caweb/controllers/ErrorServlet.class
 fr/ensimag/caweb/dao/DAOException.class
 fr/ensimag/caweb/controllers/UserServlet.class
@@ -5,9 +6,13 @@ fr/ensimag/caweb/dao/UserDAO.class
 fr/ensimag/caweb/dao/DAOFactory$1.class
 fr/ensimag/caweb/dao/DAOFactory.class
 fr/ensimag/caweb/dao/impl/DAOFactorySqlPlus.class
+fr/ensimag/caweb/models/Producteur.class
+fr/ensimag/caweb/models/Responsable.class
+fr/ensimag/caweb/filters/ConsommateurFilter.class
 fr/ensimag/caweb/models/User.class
 fr/ensimag/caweb/controllers/ContractRequestServlet.class
 fr/ensimag/caweb/dao/DAOFactoryType.class
 fr/ensimag/caweb/dao/impl/UserDAOSqlPlus.class
 fr/ensimag/caweb/controllers/SessionServlet.class
 fr/ensimag/caweb/controllers/AccueilServlet.class
+fr/ensimag/caweb/models/Consommateur.class

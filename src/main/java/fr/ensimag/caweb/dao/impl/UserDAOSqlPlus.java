@@ -36,7 +36,7 @@ public class UserDAOSqlPlus implements UserDAO{
     
     private static final String insertQuery =
             "INSERT INTO Utilisateur (pseudo, motDePasse, eMail, adresse, nom, prenom, tel, roleUtilisateur)\n" +
-            "VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+            "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     
     public UserDAOSqlPlus(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -47,20 +47,21 @@ public class UserDAOSqlPlus implements UserDAO{
         Connection connec = daoFactory.getConnection();
         
         PreparedStatement insertPrep = null;
-        
+
         try {
             insertPrep = connec.prepareStatement(insertQuery);
             insertPrep.setString(1, user.getPseudo());
-            insertPrep.setString(1, user.getMotDePasse());
-            insertPrep.setString(1, user.getEmail());
-            insertPrep.setString(1, user.getAdresse());
-            insertPrep.setString(1, user.getNom());
-            insertPrep.setString(1, user.getPrenom());
-            insertPrep.setString(1, user.getTel());
-            insertPrep.setString(1, user.getRole()); // ROLE
+            insertPrep.setString(2, user.getMotDePasse());
+            insertPrep.setString(3, user.getEmail());
+            insertPrep.setString(4, user.getAdresse());
+            insertPrep.setString(5, user.getNom());
+            insertPrep.setString(6, user.getPrenom());
+            insertPrep.setString(7, user.getTel());
+            insertPrep.setString(8, user.getRole().toString()); // ROLE
             insertPrep.executeUpdate();
-            
         } catch (SQLException ex) {
+            System.out.println("erreur");
+            ex.printStackTrace();
             throw new DAOException("Erreur BD " + ex.getMessage(), ex);
         } finally {
             try {
@@ -68,6 +69,7 @@ public class UserDAOSqlPlus implements UserDAO{
                     insertPrep.close();
                 daoFactory.closeConnection(connec);
             } catch (SQLException ex) {
+                ex.printStackTrace();
                 throw new DAOException("Erreur BD " + ex.getMessage(), ex);
             }
         }
@@ -135,14 +137,13 @@ public class UserDAOSqlPlus implements UserDAO{
     
     
     @Override
-    public boolean isPasswordValid(String pseudo, String pwd){
+    public User read(String pseudo, String pwd){
         try {
-            User u = read(pseudo);
-            System.out.println("ici "+u);
-            return (u != null) ? read(pseudo).getMotDePasse().equals(pwd) : false;
+            User u = UserDAOSqlPlus.this.read(pseudo);
+            return (u != null && UserDAOSqlPlus.this.read(pseudo).getMotDePasse().equals(pwd)) ? u : null;
         } catch (DAOException ex) {
             Logger.getLogger(UserDAOSqlPlus.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+            return null;
         }
         
     }

@@ -7,12 +7,12 @@ package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
-import fr.ensimag.caweb.models.Consommateur;
-import fr.ensimag.caweb.models.Producteur;
+import fr.ensimag.caweb.models.ConnectionForm;
 import fr.ensimag.caweb.models.SubscriptionForm;
 import fr.ensimag.caweb.models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -27,8 +27,38 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alexandre Rupp
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/user"})
-public class UserServlet extends HttpServlet {
+@WebServlet(name = "SessionServlet", urlPatterns = {"/session"})
+public class SessionServlet extends HttpServlet {
+    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        String action = request.getParameter("action");
+        if(action != null){
+            switch (action) {
+                case "post":
+                    doPost(request, response);
+                    break;
+                case "put":
+                    doPut(request, response);
+                    break;
+                case "delete":
+                    doDelete(request, response);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -42,8 +72,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
+        processRequest(request, response);
     }
     
     /**
@@ -57,41 +86,35 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        SubscriptionForm form = new SubscriptionForm();
+        ConnectionForm form = new ConnectionForm();
         
         // User to create in the Data Base
-        User u = form.subscribeUser(request);
-        String error = form.getError();
-        for (String err : form.getErrorDetails().values())
-            error += err;
+        User u = form.logUser(request);
         
-        // If everything oK :
+        // If the user is logged :
         if(u != null){
-            // Create a session directly :
+            // Update the session :
             HttpSession session = request.getSession(true);
             session.setAttribute("login", u.getPseudo());
+            session.setAttribute("status", u.getRole().toString());
         }
         
         // We print the login page.
-        request.setAttribute("error", error);
-        //request.setAttribute("errors", form.getErrorDetails());
+        request.setAttribute("error", form.getError());
         request.setAttribute("success", form.getSuccess());
         
         RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
         view.forward(request, response);
-        
-        
     }
     
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        if(session != null)
+            session.invalidate();
+        request.setAttribute("info", "Vous êtes désormais déconnectés.");
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
+        view.forward(request, response);
+    }
     
 }
