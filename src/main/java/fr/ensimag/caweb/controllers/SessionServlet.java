@@ -9,7 +9,7 @@ import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.ConnectionForm;
 import fr.ensimag.caweb.models.SubscriptionForm;
-import fr.ensimag.caweb.models.User;
+import fr.ensimag.caweb.models.User.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -103,7 +103,7 @@ public class SessionServlet extends HttpServlet {
         request.setAttribute("error", form.getError());
         request.setAttribute("success", form.getSuccess());
         
-        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
         view.forward(request, response);
     }
     
@@ -113,7 +113,7 @@ public class SessionServlet extends HttpServlet {
         if(session != null)
             session.invalidate();
         request.setAttribute("info", "Vous êtes désormais déconnectés.");
-        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
         view.forward(request, response);
     }
     

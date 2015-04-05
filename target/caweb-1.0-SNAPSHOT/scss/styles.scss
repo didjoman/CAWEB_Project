@@ -234,6 +234,31 @@ body {
     color: #fff;
     background-color: #428bca;
 }
+/*
+* *********************** [Page Specific] Offres : *****************************
+*/
+
+.offre{
+    padding: 5px;
+    h3{
+        margin: 5px;
+    }
+    ul{
+        padding-left: 5px;
+        li{
+            list-style-type: none;
+            table{
+                td, th{
+                    padding: 3px;
+                }
+            }
+        }
+    }
+    hr{
+        margin: 1px;
+        margin-bottom: 5px;
+    }
+}
 
 /*
 * ***************** [Page Specific] Demande de Contrats : **********************
@@ -242,7 +267,6 @@ body {
     padding-left: 10px;
     li{
         list-style-type: none;
-        
         strong{
             display: block;
             float: left;
@@ -251,3 +275,8 @@ body {
     } 
 }
 
+.modal-create-request{
+    label{
+        width: 150px;
+    }
+}

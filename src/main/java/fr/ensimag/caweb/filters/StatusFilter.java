@@ -5,7 +5,7 @@
 */
 package fr.ensimag.caweb.filters;
 
-import fr.ensimag.caweb.models.UserTypes;
+import fr.ensimag.caweb.models.User.UserStatus;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -54,16 +54,18 @@ public abstract class StatusFilter implements Filter{
             req.setAttribute("error", "Vous devez être identifié pour accéder "
                     + "à la ressource "+ req.getRequestURI());
             
-            RequestDispatcher view = request.getRequestDispatcher("/accueil");
+            RequestDispatcher view = request.getRequestDispatcher("/error");
             view.forward(request, response);
+            return;
         }
         
         if(!isLoggedWithCorrectStatus(session)){
             // If the user is logged but is not a <status> :
             req.setAttribute("error", "Vous n'avez pas le droit d'accéder "
                     + "à la ressource "+ req.getRequestURI());
-            RequestDispatcher view = request.getRequestDispatcher("/accueil");
+            RequestDispatcher view = request.getRequestDispatcher("/error");
             view.forward(request, response);
+            return;
         }
         
         // If the user is logged && is a <status> : OK
@@ -87,5 +89,5 @@ public abstract class StatusFilter implements Filter{
     }
     
     
-    public abstract UserTypes getStatus();
+    public abstract UserStatus getStatus();
 }

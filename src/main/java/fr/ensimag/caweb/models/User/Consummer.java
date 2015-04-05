@@ -3,24 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.User;
 
 /**
  *
  * @author Alexandre Rupp
  */
-public class Consommateur extends User {
+public class Consummer extends User {
 
-    public Consommateur(String pseudo, String motDePasse, String email, String adresse, String nom, String prenom, String tel) {
+    public Consummer(String pseudo, String motDePasse, String email, String adresse, String nom, String prenom, String tel) {
         super(pseudo, motDePasse, email, adresse, nom, prenom, tel);
     }
 
-    public Consommateur(User u) {
+    public Consummer(User u) {
         super(u);
     }
     
     @Override
-    public UserTypes getRole() {
-        return UserTypes.CONS;
+    public UserStatus getRole() {
+        return UserStatus.CONS;
     }
 }

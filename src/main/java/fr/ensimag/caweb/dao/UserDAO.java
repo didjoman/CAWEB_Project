@@ -5,7 +5,7 @@
 */
 package fr.ensimag.caweb.dao;
 
-import fr.ensimag.caweb.models.User;
+import fr.ensimag.caweb.models.User.User;
 import java.util.List;
 
 /**

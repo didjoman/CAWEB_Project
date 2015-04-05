@@ -1,12 +1,14 @@
-/*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
-*/
 package fr.ensimag.caweb.controllers;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +20,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre Rupp
  */
-@WebServlet(name = "ContractRequestServlet", urlPatterns = {"/request"},  loadOnStartup = 1)
-public class ContractRequestServlet extends HttpServlet {
+@WebServlet(name = "AccueilServlet", urlPatterns = {"/index"})
+public class IndexServlet extends HttpServlet {
+
     
+    @Override
+    public void init() {
+    } 
+
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -33,27 +41,10 @@ public class ContractRequestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        
-        if(action != null && action.equals("create")){
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_create.jsp");
-            view.forward(request, response);
-        } else if(request.getParameter("id") != null){
-            // Get Contract Request Id <id>
-            Integer id = Integer.parseInt(request.getParameter("id"));
-            request.setAttribute("id", id);
-            
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
-            view.forward(request, response);
-        } else {
-            // Get the list of Contract Requests. 
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read_all.jsp");
-            view.forward(request, response);
-        }
-        
-        
+	RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
+	view.forward(request, response);
     }
-    
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -65,8 +56,10 @@ public class ContractRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
+	view.forward(request, response);
     }
-    
+
     /**
      * Returns a short description of the servlet.
      *
@@ -76,5 +69,5 @@ public class ContractRequestServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    
+
 }

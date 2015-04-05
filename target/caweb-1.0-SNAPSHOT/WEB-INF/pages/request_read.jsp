@@ -77,50 +77,33 @@
                 &nbsp; <span class="clickable glyphicon glyphicon-remove" aria-hidden="true" data-toggle="modal" data-target=".modal-refuse-request"></span>
                 
                 <!-- [POP-UP] Formulaire d'acceptation du contrat -->
-                <div class="modal fade modal-accept-request" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Accepter le contrat</h4>
-                            </div>
-                            <div class="modal-body">
-                                Veuillez sélectionner une date de début de livraison :
-                                    
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="shipping-date">
-                                        <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
-                                    </span>
-                                    <input type="text" class="form-control" id="datepicker" placeholder="date" aria-describedby="shipping-date">
-                                </div>
-                                    
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Valider</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            </div>
+                <t:popup title="Accepter le contrat" classes="modal-accept-request" type="modal-lg">
+                    <jsp:attribute name="footer">
+                        <button type="button" class="btn btn-primary">Valider</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </jsp:attribute>
+                    <jsp:body>
+                        Veuillez sélectionner une date de début de livraison :
+                        
+                        <div class="input-group">
+                            <span class="input-group-addon" id="shipping-date">
+                                <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+                            </span>
+                            <input type="text" class="form-control" id="datepicker" placeholder="date" aria-describedby="shipping-date">
                         </div>
-                    </div>
-                </div>
+                    </jsp:body>
+                </t:popup> 
                     
                 <!-- [POP-UP] Formulaire de refus du contrat -->
-                <div class="modal fade modal-refuse-request" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Refuser le contrat</h4>
-                            </div>
-                            <div class="modal-body">
-                                Etes-vous sûr de vouloir refuser le contrat ?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger">Refuser</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <t:popup title="Refuser le contrat" classes="modal-refuse-request" type="modal-sm">
+                    <jsp:attribute name="footer">
+                        <button type="button" class="btn btn-danger">Refuser</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                    </jsp:attribute>
+                    <jsp:body>
+                        Etes-vous sûr de vouloir refuser le contrat ?
+                    </jsp:body>
+                </t:popup> 
                     
             </div>
         </div>

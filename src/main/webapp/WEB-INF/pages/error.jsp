@@ -8,27 +8,29 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@page isErrorPage="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<t:layout title="Accueil">        
+    
+<t:layout title="Erreur">        
     <jsp:body>
-        <h1>Vous avez tout cassé ...</h1>
-        <c:choose>
-            <c:when test="${statusCode != 500}">
-                <h3>Error Details</h3>
-                <strong>Status Code</strong>: ${statusCode} <br>
-                <strong>Requested URI</strong>: ${requestUri}
+        <c:if test="${statusCode != null}" >
+            <h1>Vous avez tout cassé ...</h1>
+            <c:choose>
+                <c:when test="${statusCode != 500}">
+                    <h3>Error Details</h3>
+                    <strong>Status Code</strong>: ${statusCode} <br>
+                    <strong>Requested URI</strong>: ${requestUri}
                     
-            </c:when>
-            <c:otherwise>
-                <h3>Exception Details</h3>
-                <ul>
-                    <li><strong>Servlet Name</strong>: ${servletName}</li>
-                    <li><strong>Exception Name</strong>: ${throwable.getClass().getName()}</li>
-                    <li><strong>Requested URI</strong>: ${requestUri}</li>
-                    <li><strong>Exception Message</strong>: ${throwable.getMessage()}</li>
-                </ul>
-            </c:otherwise>
-        </c:choose>
-        
+                </c:when>
+                <c:otherwise>
+                    <h3>Exception Details</h3>
+                    <ul>
+                        <li><strong>Servlet Name</strong>: ${servletName}</li>
+                        <li><strong>Exception Name</strong>: ${throwable.getClass().getName()}</li>
+                        <li><strong>Requested URI</strong>: ${requestUri}</li>
+                        <li><strong>Exception Message</strong>: ${throwable.getMessage()}</li>
+                    </ul>
+                </c:otherwise>
+            </c:choose>
+        </c:if>
+            
     </jsp:body>
 </t:layout>    

@@ -1,14 +1,12 @@
-package fr.ensimag.caweb.controllers;
-
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
+package fr.ensimag.caweb.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alexandre Rupp
  */
-@WebServlet(name = "AccueilServlet", urlPatterns = {"/accueil"})
-public class AccueilServlet extends HttpServlet {
-
+@WebServlet(name = "OfferServlet", urlPatterns = {"/offer"})
+public class OfferServlet extends HttpServlet {
     
-    @Override
-    public void init() {
-    } 
-
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -41,10 +34,11 @@ public class AccueilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-	RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
-	view.forward(request, response);
+        request.setAttribute("producer", "ici");
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
+        view.forward(request, response);
     }
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -56,18 +50,7 @@ public class AccueilServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
-	view.forward(request, response);
+        
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
 }

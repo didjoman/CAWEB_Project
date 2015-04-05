@@ -7,10 +7,10 @@ package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
-import fr.ensimag.caweb.models.Consommateur;
-import fr.ensimag.caweb.models.Producteur;
+import fr.ensimag.caweb.models.User.Consummer;
+import fr.ensimag.caweb.models.User.Producer;
 import fr.ensimag.caweb.models.SubscriptionForm;
-import fr.ensimag.caweb.models.User;
+import fr.ensimag.caweb.models.User.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -78,7 +78,7 @@ public class UserServlet extends HttpServlet {
         //request.setAttribute("errors", form.getErrorDetails());
         request.setAttribute("success", form.getSuccess());
         
-        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/accueil.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
         view.forward(request, response);
         
         

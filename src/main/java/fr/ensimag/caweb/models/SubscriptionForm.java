@@ -5,6 +5,9 @@
 */
 package fr.ensimag.caweb.models;
 
+import fr.ensimag.caweb.models.User.User;
+import fr.ensimag.caweb.models.User.Consummer;
+import fr.ensimag.caweb.models.User.Producer;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import java.util.HashMap;
@@ -141,9 +144,9 @@ public class SubscriptionForm {
         // Creation of the user to return
         if(errorDetails.isEmpty()){
             if(status.equals("prod"))
-                user = new Producteur(login, password, email, address, name, firstname, tel);
+                user = new Producer(login, password, email, address, name, firstname, tel);
             else
-                user = new Consommateur(login, password, email, address, name, firstname, tel);
+                user = new Consummer(login, password, email, address, name, firstname, tel);
             createUserInDB(user);
         }
         

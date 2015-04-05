@@ -18,12 +18,22 @@
 
 <div class="col-sm-3 col-md-2 sidebar navbar-collapse collapse">
     <ul class="nav nav-sidebar">
-        <li class="<c:if test="${page == 'accueil'}">active</c:if>">
-            <a href="${pageContext.request.contextPath}/accueil">
+        <li class="<c:if test="${page == 'index'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/index">
                 Accueil
             </a>
         </li>
-        <li class="<c:if test="${page == 'request_get_all' || page == 'request_get'}">active</c:if>">
+        <li class="<c:if test="${page == 'offer_read'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/offer">
+                Liste des offres
+            </a>
+        </li>
+        <li class="<c:if test="${page == 'product_read'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/product">
+                Produits proposés
+            </a>
+        </li>
+        <li class="<c:if test="${page == 'request_read_all' || page == 'request_read' || page == 'request_create'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/request">
                 Demandes de contrats <span class="badge">3</span>
             </a>

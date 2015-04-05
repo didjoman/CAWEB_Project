@@ -3,25 +3,25 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.User;
 
 /**
  *
  * @author Alexandre Rupp
  */
-public class Responsable extends User{
+public class Responsible extends User{
 
-    public Responsable(String pseudo, String motDePasse, String email, String adresse, String nom, String prenom, String tel) {
+    public Responsible(String pseudo, String motDePasse, String email, String adresse, String nom, String prenom, String tel) {
         super(pseudo, motDePasse, email, adresse, nom, prenom, tel);
     }
 
-    public Responsable(User u) {
+    public Responsible(User u) {
         super(u);
     }
     
    @Override
-    public UserTypes getRole() {
-        return UserTypes.RESP;
+    public UserStatus getRole() {
+        return UserStatus.RESP;
     }
     
 }

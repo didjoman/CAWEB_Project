@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.User;
 
 /**
  *
@@ -99,5 +99,5 @@ public abstract class User {
         return "User{" + "pseudo=" + pseudo + ", motDePasse=" + motDePasse + ", email=" + email + ", adresse=" + adresse + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + '}';
     }
     
-    public abstract UserTypes getRole();
+    public abstract UserStatus getRole();
 }

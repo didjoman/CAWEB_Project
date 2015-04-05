@@ -5,6 +5,7 @@
 */
 package fr.ensimag.caweb.models;
 
+import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.controllers.UserServlet;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;

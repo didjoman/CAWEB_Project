@@ -10,11 +10,12 @@ package fr.ensimag.caweb.dao.impl;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.UserDAO;
-import fr.ensimag.caweb.models.Consommateur;
-import fr.ensimag.caweb.models.Producteur;
-import fr.ensimag.caweb.models.Responsable;
-import fr.ensimag.caweb.models.User;
-import fr.ensimag.caweb.models.UserTypes;
+import fr.ensimag.caweb.models.User.Consummer;
+import fr.ensimag.caweb.models.User.Producer;
+import fr.ensimag.caweb.models.User.Responsible;
+import fr.ensimag.caweb.models.User.User;
+import fr.ensimag.caweb.models.User.UserFactory;
+import fr.ensimag.caweb.models.User.UserStatus;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,19 +91,15 @@ public class UserDAOSqlPlus implements UserDAO{
             rs = selectPrep.executeQuery();
             
             if(rs.next()){
-                user = new Consommateur(rs.getString("pseudo"),
+                user = UserFactory.createUser(rs.getString("pseudo"),
                         rs.getString("motDePasse"),
                         rs.getString("email"),
                         rs.getString("adresse"),
                         rs.getString("nom"),
                         rs.getString("prenom"),
-                        rs.getString("tel")
+                        rs.getString("tel"),
+                        rs.getString("roleUtilisateur")
                 );
-                
-                if(rs.getString("roleUtilisateur").equals(UserTypes.PROD.toString()))
-                        user = new Producteur(user);
-                else if(rs.getString("roleUtilisateur").equals(UserTypes.RESP.toString()))
-                        user = new Responsable(user);
             }
         } catch (SQLException ex) {
             throw new DAOException("Erreur BD " + ex.getMessage(), ex);

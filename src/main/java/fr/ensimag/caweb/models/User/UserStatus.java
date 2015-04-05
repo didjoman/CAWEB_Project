@@ -3,26 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.User;
 
 /**
  *
  * @author Alexandre Rupp
  */
-public enum UserTypes {
+public enum UserStatus {
     PROD ("PROD"),
     CONS ("CONS"),
     RESP ("RESP");
 
-    private final String type;
+    private final String status;
     
-    UserTypes(String type){
-        this.type = type;
+    UserStatus(String status){
+        this.status = status;
     }
     
     @Override
     public String toString() {
-        return this.type;
+        return this.status;
     }
     
     

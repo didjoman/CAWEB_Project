@@ -5,7 +5,7 @@
 */
 package fr.ensimag.caweb.filters;
 
-import fr.ensimag.caweb.models.UserTypes;
+import fr.ensimag.caweb.models.User.UserStatus;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -22,12 +22,12 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author Alexandre Rupp
  */
-@WebFilter(filterName = "ProducteurFilter", urlPatterns = {"/ServletDuFutur"})
-public class ProducteurFilter extends StatusFilter {
+@WebFilter(filterName = "ProducerFilter", urlPatterns = {"/offer"})
+public class ProducerFilter extends StatusFilter {
     
     @Override
-    public UserTypes getStatus() {
-        return UserTypes.PROD;
+    public UserStatus getStatus() {
+        return UserStatus.PROD;
     }
     
 }
