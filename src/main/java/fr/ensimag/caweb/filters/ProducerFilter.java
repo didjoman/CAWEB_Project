@@ -22,7 +22,7 @@ import javax.servlet.annotation.WebFilter;
  *
  * @author Alexandre Rupp
  */
-@WebFilter(filterName = "ProducerFilter", urlPatterns = {"/offer"})
+@WebFilter(filterName = "ProducerFilter", urlPatterns = {"/product"})
 public class ProducerFilter extends StatusFilter {
     
     @Override
