@@ -61,7 +61,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
             
             int line = 0;
             ContractBuilder builder = new ContractBuilder();
-            if(rs.next()){
+            while(rs.next()){
                 // With the first line we set the attribute of the contract
                 if(line == 0)
                     builder.setIdContrat(rs.getInt("idContrat"))
