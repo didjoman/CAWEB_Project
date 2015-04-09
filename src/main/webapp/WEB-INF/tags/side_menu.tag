@@ -23,6 +23,11 @@
                 Accueil
             </a>
         </li>
+        <li class="<c:if test="${page == 'permanency_read_all'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/permanency">
+                Permanences
+            </a>
+        </li>
         <li class="<c:if test="${page == 'offer_read'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/offer">
                 Liste des offres
@@ -34,7 +39,7 @@
             </a>
         </li>
         <li class="<c:if test="${page == 'request_read_all' || page == 'request_read' || page == 'request_create'}">active</c:if>">
-            <a href="${pageContext.request.contextPath}/request">
+            <a href="${pageContext.request.contextPath}/request?producer=${login}">
                 Demandes de contrats <span class="badge">3</span>
             </a>
         </li>

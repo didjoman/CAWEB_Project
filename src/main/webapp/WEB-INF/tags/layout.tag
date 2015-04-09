@@ -27,6 +27,7 @@
         <!-- our style -->    
         <link rel="stylesheet" media="screen" type="text/css" title="Design"
               href="${pageContext.request.contextPath}/css-min/css/styles.css" />
+                  
         <!-- jquery UI style -->
         <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
@@ -40,7 +41,7 @@
         <link rel="stylesheet" href="https://bootswatch.com/spacelab/bootstrap.min.css">
         -->
         <link rel="stylesheet" href="https://bootswatch.com/cerulean/bootstrap.min.css">
-        
+            
         <!-- jquery UI -->           
         <!-- SCRIPTS -->
     </head>
@@ -62,7 +63,7 @@
                             ${error}
                         </div>
                     </c:if>
-                    
+                        
                     <c:if test="${success != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -71,7 +72,7 @@
                             ${success}
                         </div>
                     </c:if>
-                    
+                        
                     <c:if test="${info != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -80,7 +81,7 @@
                             ${info}
                         </div>
                     </c:if>
-                    
+                        
                     <c:if test="${warning != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -89,7 +90,7 @@
                             ${warning}
                         </div>
                     </c:if>
-                    
+                        
                     <jsp:doBody/>    
                 </div>
             </div>
@@ -102,6 +103,8 @@
         <!-- Bootstrap : -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/validator.js"></script>
+        <!-- Plugin Jquery for week-selection in jquery calendar -->
+        <!--<script src="${pageContext.request.contextPath}/js/jquery.weekpicker.js"></script>-->
         <!-- Our Js : -->
         <script src="${pageContext.request.contextPath}/js/app.js"></script>
         <noscript>
@@ -109,6 +112,6 @@
             .hidden{ display: block !important; }
         </style>
         </noscript>
-        
+            
     </body>
 </html>

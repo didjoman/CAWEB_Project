@@ -44,6 +44,8 @@ public abstract class DAOFactory {
     }
     
     public abstract UserDAO getUserDAO();
+    public abstract WeekDAO getWeekDAO();
+    public abstract ContractDAO getContractDAO();
     
     public abstract Connection getConnection();
     

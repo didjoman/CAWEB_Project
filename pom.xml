@@ -26,6 +26,12 @@
         <!-- ******************** BACK-END DEPENDENCIES ******************** -->
         <!-- Java EE -->
         <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
@@ -57,12 +63,7 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-        <!-- Oracle JDBC : -->
-        <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc7</artifactId>
-            <version>12.1.0.1</version>
-        </dependency>
+
         
         <!-- ******************* FRONT-END DEPENDENCIES ******************** -->
         <!-- JQUERY for UI building & AJAX requests -->

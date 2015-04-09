@@ -13,7 +13,7 @@
         
         
         <div class="page-header">
-            <h1>Demande de contrat n°${id} <small>(validé)</small></h1>
+            <h1>Demande de contrat n°${id} <small>(à valider)</small></h1>
         </div>
             
         <ol class="breadcrumb">
@@ -33,16 +33,16 @@
                     <div class="panel-body">
                         <ul id="consumer-info">
                             <li>
-                                <strong>pseudo:</strong> didjo
+                                <strong>pseudo:</strong> ${req.demandeur.pseudo}
                             </li>
                             <li>
-                                <strong>tel:</strong> 06-00-00-00-00
+                                <strong>tel:</strong> ${req.demandeur.tel}
                             </li>
                             <li>
-                                <strong>email:</strong> <a href="mailto:#">didjo@gmail.com</a>
+                                <strong>email:</strong> <a href="mailto:#">${req.demandeur.email}</a>
                             </li>
                             <li>
-                                <strong>adresse:</strong> 36 rue de là bas
+                                <strong>adresse:</strong>${req.demandeur.adresse}
                             </li>
                         </ul>
                     </div>
@@ -57,9 +57,9 @@
                     </div>
                     <div id="contract-info" class="panel-body">
                         <ul>
-                            <li><strong>Produit:</strong> Carottes</li>
-                            <li><strong>Quantité:</strong> 50 <em>unités</em></li>
-                            <li><strong>Prix:</strong> 34.99€</li>
+                            <li><strong>Produit:</strong> ${req.nonProduitContrat}</li>
+                            <li><strong>Quantité:</strong> ${req.quantite.qte} <em>${req.quantite.uniteQte}</em></li>
+                            <li><strong>Prix:</strong> 3${req.quantite.prix}€</li>
                         </ul>
                     </div>
                 </div>

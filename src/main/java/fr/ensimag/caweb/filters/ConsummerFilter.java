@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Alexandre Rupp
  */
-@WebFilter(filterName = "ConsummerFilter", urlPatterns = {"/request"})
+@WebFilter(filterName = "ConsummerFilter", urlPatterns = {""})
 public class ConsummerFilter extends StatusFilter {
     
     @Override

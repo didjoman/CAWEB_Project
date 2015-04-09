@@ -6,9 +6,11 @@
 package fr.ensimag.caweb.dao.impl;
 
 
+import fr.ensimag.caweb.dao.ContractDAO;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.UserDAO;
+import fr.ensimag.caweb.dao.WeekDAO;
 import fr.ensimag.caweb.dao.impl.UserDAOSqlPlus;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -66,5 +68,15 @@ public class DAOFactorySqlPlus extends DAOFactory {
     @Override
     public UserDAO getUserDAO(){
         return new UserDAOSqlPlus(getInstance());
+    }
+    
+    @Override
+    public WeekDAO getWeekDAO() {
+        return new WeekDAOSqlPlus(getInstance());
+    }
+    
+    @Override
+    public ContractDAO getContractDAO() {
+        return new ContractDAOSqlPlus(getInstance());
     }
 }

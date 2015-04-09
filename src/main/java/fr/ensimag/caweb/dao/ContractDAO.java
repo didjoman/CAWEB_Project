@@ -7,6 +7,8 @@ package fr.ensimag.caweb.dao;
 
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.models.Contract.Contract;
+import fr.ensimag.caweb.models.User.Consummer;
+import java.sql.Date;
 import java.util.List;
 
 /**
@@ -19,8 +21,12 @@ public interface ContractDAO {
     public abstract Contract read(int id)  throws DAOException ;
     
     public abstract List<Contract> readAll()  throws DAOException ;
+    
+    public List<Contract> readAllRequests(String offreurPseudo) throws DAOException;
 
-    public abstract Contract update(Contract obj)  throws DAOException ;
+    public void updateToReNew(int id) throws DAOException;
+    
+    public void updateValidate(int id, Date dateCont, Date begin) throws DAOException;
     
     public abstract void delete(Contract obj)  throws DAOException ;
 }
