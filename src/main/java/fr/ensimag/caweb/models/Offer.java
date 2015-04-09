@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Alexandre Rupp
  */
-public class Offer {
+public class Offer {    
     private String nomProduit;
     private int duree;
     private List<Quantity> quantities;    

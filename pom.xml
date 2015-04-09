@@ -63,7 +63,6 @@
             <artifactId>jstl</artifactId>
             <version>1.2</version>
         </dependency>
-
         
         <!-- ******************* FRONT-END DEPENDENCIES ******************** -->
         <!-- JQUERY for UI building & AJAX requests -->

@@ -33,12 +33,16 @@
         <h3>Produits proposés</h3>
         <div class="row">
             <div class="offre col-sm-4 col-md-3">
-                <div class="thumbnail">
-                    <h3>Produit 1</h3>
+                  <c:forEach items="${offers}" var="offer">
+                <div class="thumbnail"> 
+                    
+                    
+                   
+                    <h3>${offer.nomProduit}</h3>
                     <hr />
                     <ul>
                         <li><strong>Producteur: </strong> M. Machin</li>
-                        <li><strong>duréee contrat: </strong> 10 j</li>
+                        <li><strong>duréee contrat: </strong> ${offer.duree}</li>
                         <li>
                             <strong>Qtés proposées:</strong><br />
                             <table class="table">
@@ -64,13 +68,15 @@
                             </a>
                             <t:request_creation_popup 
                                 producer="${producer}"
-                                product="${product}"
-                                duration="${duration}"
+                                product="${offer.nomProduit}"
+                                duration="${offer.duree}"
                                 quantities="${quantities}">
                             </t:request_creation_popup>
                         </c:if>
                     </p>
+                     
                 </div>
+                         </c:forEach>
             </div>
             
             
