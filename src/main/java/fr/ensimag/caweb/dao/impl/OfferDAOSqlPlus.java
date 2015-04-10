@@ -69,7 +69,7 @@ CREATE TABLE Quantite(
                 Statement st_qte = conn.createStatement();
                 String requeteSQL_qte = "select * from Quantite where idOffrePrecisee = "+rs.getInt("idOffre");
                 ResultSet rs_qte = st_qte.executeQuery(requeteSQL_qte);
-                while(rs_qte.next())
+                //while(rs_qte.next())
                 Offer offer = new Offer(rs.getString("nomProduit"),
                         rs.getInt("dureeOffre"),
                         null);                

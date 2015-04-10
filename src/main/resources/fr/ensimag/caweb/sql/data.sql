@@ -43,6 +43,13 @@ VALUES ('', 'test1', 'test3', SYSDATE, 'tomate', 5, 60, 1, 'kg', 3, '', '');
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
 VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, '', '');
 
+
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
+VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('03/04/2015', 'DD.MM.YYYY'));
+
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
+VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, '03/04/15', '');
+
 -- Remplissage EstDisponible:
 INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
 VALUES ('test3', 8, 2015, 1);

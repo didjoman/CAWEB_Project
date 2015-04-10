@@ -26,7 +26,7 @@ public class ContractBuilder {
     private int nbLots;
     
     private Date dateDebut;
-    private boolean aRenouveler;
+    private Boolean aRenouveler;
     
     public ContractBuilder setIdContrat(int idContrat) {
         this.idContrat = idContrat;
@@ -73,7 +73,7 @@ public class ContractBuilder {
         return this;
     }
     
-    public ContractBuilder setaRenouveler(boolean aRenouveler) {
+    public ContractBuilder setaRenouveler(Boolean aRenouveler) {
         this.aRenouveler = aRenouveler;
         return this;
     }
