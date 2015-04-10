@@ -24,8 +24,9 @@ public class ContractFactory {
             String nonProduitContrat, int duree, Quantity quantite, int nbLots, Date dateDebut){
         Contract contract;
         contract = createContract(idContrat, offreur, demandeur, dateContrat, nonProduitContrat, duree, quantite, nbLots);
-        if(dateContrat != null)
-            contract.validate(dateContrat);
+        
+        if(dateDebut != null)
+            contract.validate(dateDebut);
         return contract;
     }
     
@@ -33,7 +34,7 @@ public class ContractFactory {
             String nonProduitContrat, int duree, Quantity quantite, int nbLots, Date dateDebut, Boolean aRenouveler){
         Contract contract = createContract(idContrat, offreur, demandeur,
                 dateContrat, nonProduitContrat, duree, quantite, nbLots, dateDebut);
-        if(aRenouveler != null && aRenouveler)
+                if(aRenouveler != null && aRenouveler)
             contract.reNew();
         return contract;
     }

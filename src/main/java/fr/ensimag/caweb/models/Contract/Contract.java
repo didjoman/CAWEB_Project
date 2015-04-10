@@ -8,6 +8,7 @@ package fr.ensimag.caweb.models.Contract;
 import fr.ensimag.caweb.models.User.Consummer;
 import fr.ensimag.caweb.models.User.Producer;
 import fr.ensimag.caweb.models.Quantity;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -33,6 +34,9 @@ public class Contract{
     private int duree;
     private Quantity quantite;
     private int nbLots;
+    protected Date dateDebut;
+    protected Date dateFin;
+    
     
     public Contract(int idContrat, Producer offreur, Consummer demandeur, Date dateContrat,
             String nonProduitContrat, int duree, Quantity quantite, int nbLots){
@@ -45,6 +49,18 @@ public class Contract{
         this.duree = duree;
         this.quantite = quantite;
         this.nbLots = nbLots;
+    }
+    
+    protected void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
+        calculateAndSetDateFin(dateDebut);
+    }
+    
+    private void calculateAndSetDateFin(Date dateDebut){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(dateDebut);
+        cal.add(Calendar.DATE, getDuree());
+        dateFin = cal.getTime();
     }
     
     public String getState(){

@@ -14,23 +14,9 @@ import java.util.Date;
  */
 public abstract class ContractState {
     protected final Contract contract;
-    protected Date dateDebut;
-    protected Date dateFin;
     
     public ContractState(Contract contract) {
         this.contract = contract;
-    }
-    
-    protected void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
-        calculateAndSetDateFin(dateDebut);
-    }
-    
-    private void calculateAndSetDateFin(Date dateDebut){
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(dateDebut);
-        cal.add(Calendar.DATE, contract.getDuree());
-        dateFin = cal.getTime();
     }
     
     public String getState(){

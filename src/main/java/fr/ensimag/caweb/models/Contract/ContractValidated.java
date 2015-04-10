@@ -25,12 +25,12 @@ class ContractValidated extends ContractState {
     
     @Override
     public Date getDateDebut(){
-        return dateDebut;
+        return contract.dateDebut;
     }
     
     @Override
     public Date getDateFin() {
-        return dateFin;
+        return contract.dateFin;
     }
     
 }

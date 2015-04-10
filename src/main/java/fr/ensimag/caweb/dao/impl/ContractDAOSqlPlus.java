@@ -195,7 +195,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
                                     rs.getDouble("prixLotContrat")))
                             .setNbLots(rs.getInt("nbLots"))
                             .setDateDebut(rs.getDate("dateDebutLivraison"))
-                            .setaRenouveler((rs.getInt("aRenouveler") == 0));
+                            .setaRenouveler((rs.getInt("aRenouveler") == 1));
                 
                 // Then we set either the "offreur" or the "demandeur"
                 if(rs.getString("offreur").equals(rs.getString("pseudo")))
@@ -278,7 +278,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
                                     rs.getDouble("prixLotContrat")))
                             .setNbLots(rs.getInt("nbLots"))
                             .setDateDebut(rs.getDate("dateDebutLivraison"))
-                            .setaRenouveler((rs.getInt("aRenouveler") == 0));
+                            .setaRenouveler((rs.getInt("aRenouveler") == 1));
                 
                 // Then we set either the "offreur" or the "demandeur"
                 if(rs.getString("offreur").equals(rs.getString("pseudo")))

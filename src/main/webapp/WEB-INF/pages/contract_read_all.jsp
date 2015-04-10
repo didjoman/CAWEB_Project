@@ -25,7 +25,6 @@
                     <th>Prix d'un lot</th>
                     <th>Offreur</th>
                     <th>Demandeur</th>
-                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -33,7 +32,7 @@
                     <tr>
                         <td>${req.nonProduitContrat}</td>
                         <td>${req.dateContrat}</td>
-                        <td>${req.state}</td>
+                        <td>${req.getDateDebut()}</td>
                         <td>${req.duree}</td>
                         <td>${req.nbLots}</td>
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>

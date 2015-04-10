@@ -19,7 +19,7 @@ class ContractInRequest extends ContractState {
     
     @Override
     public void validate(Date dateDebut){
-        setDateDebut(dateDebut);
+        contract.setDateDebut(dateDebut);
         contract.setState(contract.VALIDATED);
     }
 }

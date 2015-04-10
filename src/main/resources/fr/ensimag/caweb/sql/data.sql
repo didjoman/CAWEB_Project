@@ -45,10 +45,13 @@ VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, '
 
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
-VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('03/04/2015', 'DD.MM.YYYY'));
+VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('03/04/2015', 'DD.MM.YYYY'), '');
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
-VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, '03/04/15', '');
+VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('05/04/2015', 'DD.MM.YYYY'), '');
+
+SELECT * FROM CONTRAT JOIN UTILISATEUR ON(pseudo = offreur OR pseudo = demandeur) 
+WHERE (demandeur = 'test1' OR offreur = 'test1') AND dateDebutLivraison IS NOT NULL;
 
 -- Remplissage EstDisponible:
 INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
