@@ -13,20 +13,33 @@
         <div class="page-header">
             <h1>Permanences</h1>
         </div>
-        
+            
         <div class="row">
-            <div class="col-sm-6 col-md-4">
+            <div class="thumbnail col-sm-6 col-md-4">
                 <div id="permanency-picker" class="week-picker"></div>
-                <div style="display: none;" id="dates-perm">
-                    05/01/2015
-                    04/04/2015
-                    05/04/2015
-                </div>
-                <div style="display: none;" id="dates-dispo">
-                    {"date" : "05/01/2015", "pers" :"truc"}
+                <div class="caption">
+                    <h4>Légende :</h4>
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <div class="fullperms" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: permanence fixée
+                        </li>
+                        <li>
+                            <div class="perms" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: permanence partiellement fixée
+                        </li>
+                        <li>
+                            <div class="dispos" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: consommateurs disponibles
+                        </li>
+                        <li>
+                            <div class="undispos" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: consommateurs indisponibles
+                        </li>
+                        <li><br /></li>
+                        <li>
+                            <div class="ui-state-active" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: Semaine sélectionnée <img src="img/Cursor_hand.png" alt="cursor"/>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
+                
             <div class="col-sm-6 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -51,18 +64,18 @@
                                 <div id="week-info-indispo"></div>
                             </li>
                         </ul>
-                        
+                            
                         <div id="accordion">
                             <h3>Modifier les permanences</h3>
                             <div>
                                 <form role="form" id="subscription-form" data-toggle="validator" action="user" method="post">
                                     <div>
                                         <label for="field-perm1">Perm1 :</label>
-                                        <input type="text" name="perm1" id="field-perm1" placeholder="Permanencier 1"/>
+                                        <input type="text" name="perm1" class="permConsummers" id="field-perm1" placeholder="Permanencier 1"/>
                                     </div>
                                     <div>
                                         <label for="field-perm2">Perm 2:</label>
-                                        <input type="text" name="perm2" id="field-perm2" placeholder="Permanencier 2"/>
+                                        <input type="text" name="perm2" class="permConsummers" id="field-perm2" placeholder="Permanencier 2"/>
                                     </div>
                                     <br />
                                     <input class="submit btn btn-primary" type="submit" value="Enregistrer" id="submit" /><br />
@@ -79,14 +92,15 @@
         <script>
             
             var consummers = [
+            <c:forEach items="${consummers}" var="consummer">
+                    "${consummer}",
+            </c:forEach>
+                ];
                 
-                
-            ];
-            
-            var listPermSet = [
+                var listPermSet = [
             <c:forEach items="${weeks}" var="week">
                     <c:if test="${week.getPermanencier1() != null || week.getPermanencier2() != null}">
-                            "${week.getFirstDate()}",
+                        "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
@@ -94,7 +108,7 @@
                 var listPermFullySet = [
             <c:forEach items="${weeks}" var="week">
                     <c:if test="${week.getPermanencier1() != null && week.getPermanencier2() != null}">
-                            "${week.getFirstDate()}",
+                        "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
@@ -102,7 +116,7 @@
                 var listDispos = [
             <c:forEach items="${weeks}" var="week">
                     <c:if test="${!week.getEstDisponible().isEmpty()}">
-                            "${week.getFirstDate()}",
+                        "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
@@ -110,7 +124,7 @@
                 var listUndispos = [
             <c:forEach items="${weeks}" var="week">
                     <c:if test="${!week.getEstIndisponible().isEmpty()}">
-                            "${week.getFirstDate()}",
+                        "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];

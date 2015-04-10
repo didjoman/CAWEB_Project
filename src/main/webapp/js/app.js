@@ -13,21 +13,25 @@ $(function() {
 });
 
 
-$( "#datepicker" ).datepicker({
-    showButtonPanel: true,
-    dateFormat: "dd-mm-yy"
-});
+
 
 $(function() {
+    $( "#datepicker" ).datepicker({
+        showButtonPanel: true,
+        dateFormat: "dd-mm-yy"
+    });
+
     $( "#accordion" ).accordion({
         collapsible: true,
         active: false
     });
+    
+    $( ".permConsummers" ).autocomplete({
+        source: consummers
+    });
 });
 
-$( ".permConsummers" ).autocomplete({
-    source: consummers
-});
+
 
 $(function() {
     var startDate;
@@ -144,13 +148,14 @@ $(function() {
         //Colorates the dates of permanence/dispo/undispo set.
         // /!\ listPermSet is a sort of volatile variable generated in java.
         if(isPerm(date, listPermFullySet) !== -1)
+            cssClass = 'fullperms';
+        else if(isPerm(date, listPermSet) !== -1)
             cssClass = 'perms';
         else if(isPerm(date, listDispos) !== -1)
             cssClass = 'dispos';
         else if(isPerm(date, listUndispos) !== -1)
             cssClass = 'undispos';
-        else if(isPerm(date, listPermSet) !== -1)
-            cssClass = 'perms';
+        
         
         // Colorates the days of the selected week :
         if(date >= startDate && date <= endDate)
