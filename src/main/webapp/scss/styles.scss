@@ -284,3 +284,22 @@ body {
 #permanency-picker > .ui-datepicker-inline{
     margin: auto;
 }
+
+@mixin selectedDate($borderColor, $backgroundColor){
+    font-weight: bold !important;
+    color: #ffffff !important;
+    border: 1px solid $borderColor;
+    background: $backgroundColor url("images/ui-bg_glass_50_3baae3_1x400.png") 50% 50% repeat-x !important;
+}
+
+.perms .ui-state-default{
+    @include selectedDate(#006666, #009999);
+}
+
+.dispos .ui-state-default{
+    @include selectedDate(#006633, #006633);
+}
+
+.undispos .ui-state-default{
+    @include selectedDate(#990000, #990033);
+}

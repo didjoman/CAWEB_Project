@@ -19,6 +19,17 @@ $( "#datepicker" ).datepicker({
 });
 
 $(function() {
+    $( "#accordion" ).accordion({
+        collapsible: true,
+        active: false
+    });
+});
+
+$( ".permConsummers" ).autocomplete({
+    source: consummers
+});
+
+$(function() {
     var startDate;
     var endDate;
     
@@ -97,12 +108,14 @@ $(function() {
             }
             
             // Update of the view with values got from the database :
-            var perm1 = (!data.permanencier1) ? "" : data.permanencier1.pseudo+"<br />";
-            $('#week-info #week-info-perm1').html(perm1);
+            var perm1 = (!data.permanencier1) ? "" : data.permanencier1.pseudo;
+            $('#week-info #week-info-perm1').html(perm1+"<br />");
+            $('#field-perm1').val(perm1);
             
             var perm2 = (!data.permanencier2) ? "" : data.permanencier2.pseudo;
-            $('#week-info #week-info-perm2').html(perm2);
-            
+            $('#week-info #week-info-perm2').html(perm2+"<br />");
+            $('#field-perm2').val(perm2);
+
             if(perm1 === "" && perm2 ==="")
                 $('#week-info #week-info-perm1').html("/");
             
@@ -128,12 +141,19 @@ $(function() {
     var renderColoredDays = function(date){
 
         var cssClass = '';
+        //Colorates the dates of permanence/dispo/undispo set.
+        // /!\ listPermSet is a sort of volatile variable generated in java.
+        if(isPerm(date, listPermFullySet) !== -1)
+            cssClass = 'perms';
+        else if(isPerm(date, listDispos) !== -1)
+            cssClass = 'dispos';
+        else if(isPerm(date, listUndispos) !== -1)
+            cssClass = 'undispos';
+        else if(isPerm(date, listPermSet) !== -1)
+            cssClass = 'perms';
+        
         // Colorates the days of the selected week :
         if(date >= startDate && date <= endDate)
-            cssClass = 'ui-datepicker-current-day';
-        //Colorates the dates of permanence set.
-        // /!\ listPermSet is a sort of volatile variable generated in java.
-        if(isPerm(date, listPermSet) !== -1)
             cssClass = 'ui-datepicker-current-day';
         return [true, cssClass];
     };
@@ -149,6 +169,7 @@ $(function() {
             // Get the current date, and week info of the selected date.
             var date = $(this).datepicker('getDate');
             var weekNumber = $.datepicker.iso8601Week(new Date(date));
+            console.log(weekNumber);
             startDate = new Date(getStartDate(date));
             endDate = new Date(getEndDate(date));
             // Update textual informations about the week selected :

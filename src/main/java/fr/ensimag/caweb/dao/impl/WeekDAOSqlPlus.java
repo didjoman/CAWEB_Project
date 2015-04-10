@@ -38,11 +38,30 @@ public class WeekDAOSqlPlus implements WeekDAO{
             "JOIN Utilisateur " +
             "ON (pseudo = permanencier1 OR pseudo = permanencier2) ";
     
+    private static final String selectAllPermsFullySetQuery = "SELECT * " +
+            "FROM AssurePermanence p " +
+            "JOIN Utilisateur " +
+            "ON (pseudo = permanencier1 AND pseudo = permanencier2) "
+            + "WHERE permanencier1 IS NOT NULL "
+            + "AND permanencier2 IS NOT NULL";
+    
+    private static final String selectAllDisposQuery = "SELECT * " +
+            "FROM EstDisponible d " +
+            "JOIN Utilisateur " +
+            "ON pseudo = consoDispo "
+            + "WHERE estDispo = 1";
+    
+    private static final String selectAllUndisposQuery = "SELECT * " +
+            "FROM EstDisponible d " +
+            "JOIN Utilisateur " +
+            "ON pseudo = consoDispo "
+            + "WHERE estDispo = 0";
+    
     private static final String selectQuery = selectAllQuery +
             "WHERE d.numSemaine = ? "
             + "AND d.annee = ? ";
     
-
+    
     public WeekDAOSqlPlus(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
@@ -51,7 +70,7 @@ public class WeekDAOSqlPlus implements WeekDAO{
     public Week create(Week obj) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     
     @Override
     public Week read(int weekNum, int year) throws DAOException {
@@ -186,7 +205,7 @@ public class WeekDAOSqlPlus implements WeekDAO{
         return weeks;
     }
     
-//    @Override
+    @Override
     public List<Week> readAllPerms() throws DAOException {
         Connection connec = daoFactory.getConnection();
         
@@ -197,7 +216,7 @@ public class WeekDAOSqlPlus implements WeekDAO{
         Week week = null;
         Week tmp;
         try {
-            selectPrep = connec.prepareStatement(selectAllQuery);
+            selectPrep = connec.prepareStatement(selectAllPermsQuery);
             rs = selectPrep.executeQuery();
             while(rs.next()){
                 tmp = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
@@ -251,6 +270,202 @@ public class WeekDAOSqlPlus implements WeekDAO{
         }
         return weeks;
     }
+    
+    @Override
+    public List<Week> readAllPermsFullySet() throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        List<Week> weeks = new ArrayList<>();
+        PreparedStatement selectPrep = null;
+        
+        ResultSet rs = null;
+        Week week = null;
+        Week tmp;
+        try {
+            selectPrep = connec.prepareStatement(selectAllPermsFullySetQuery);
+            rs = selectPrep.executeQuery();
+            while(rs.next()){
+                tmp = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
+                
+                // Add the last fetched week to the list, and create a new one.
+                if(!tmp.equals(week)){
+                    // If we fetched an other week before we add it to the list.
+                    if(week != null)
+                        weeks.add(week);
+                    // Now we begin the fetching of a new week :
+                    week = tmp;
+                }
+                
+                // Fetch the last week attributes :
+                String consoPseudo;
+                if((consoPseudo = rs.getString("pseudo")) != null){
+                    Consummer consummer = (Consummer) UserFactory.createUser(rs.getString("pseudo"),
+                            rs.getString("motDePasse"),
+                            rs.getString("email"),
+                            rs.getString("adresse"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getString("tel"),
+                            rs.getString("roleUtilisateur"));
+                    
+                    if(consoPseudo.equals(rs.getString("permanencier1")) &&
+                            week.getPermanencier1() == null)
+                        week.setPermanencier1(consummer);
+                    
+                    if(consoPseudo.equals(rs.getString("permanencier2")) &&
+                            week.getPermanencier2() == null)
+                        week.setPermanencier2(consummer);
+                }
+            }
+            // Add the last week :
+            if(week != null)
+                weeks.add(week);
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return weeks;
+    }
+    
+    @Override
+    public List<Week> readAllDispos() throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        List<Week> weeks = new ArrayList<>();
+        PreparedStatement selectPrep = null;
+        
+        ResultSet rs = null;
+        Week week = null;
+        Week tmp;
+        try {
+            selectPrep = connec.prepareStatement(selectAllDisposQuery);
+            rs = selectPrep.executeQuery();
+            while(rs.next()){
+                tmp = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
+                
+                // Add the last fetched week to the list, and create a new one.
+                if(!tmp.equals(week)){
+                    // If we fetched an other week before we add it to the list.
+                    if(week != null)
+                        weeks.add(week);
+                    // Now we begin the fetching of a new week :
+                    week = tmp;
+                }
+                
+                // Fetch the last week attributes :
+                String consoPseudo;
+                if((consoPseudo = rs.getString("pseudo")) != null){
+                    Consummer consummer = (Consummer) UserFactory.createUser(rs.getString("pseudo"),
+                            rs.getString("motDePasse"),
+                            rs.getString("email"),
+                            rs.getString("adresse"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getString("tel"),
+                            rs.getString("roleUtilisateur"));
+                    
+                    if(consoPseudo.equals(rs.getString("consoDispo")))
+                        if(rs.getInt("estDispo") == 1)
+                            week.addDispo(consummer);
+                        else
+                            week.addIndispo(consummer);
+                }
+            }
+            // Add the last week :
+            if(week != null)
+                weeks.add(week);
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return weeks;
+    }
+    
+    @Override
+    public List<Week> readAllUndispos() throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        List<Week> weeks = new ArrayList<>();
+        PreparedStatement selectPrep = null;
+        
+        ResultSet rs = null;
+        Week week = null;
+        Week tmp;
+        try {
+            selectPrep = connec.prepareStatement(selectAllUndisposQuery);
+            rs = selectPrep.executeQuery();
+            while(rs.next()){
+                tmp = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
+                
+                // Add the last fetched week to the list, and create a new one.
+                if(!tmp.equals(week)){
+                    // If we fetched an other week before we add it to the list.
+                    if(week != null)
+                        weeks.add(week);
+                    // Now we begin the fetching of a new week :
+                    week = tmp;
+                }
+                
+                // Fetch the last week attributes :
+                String consoPseudo;
+                if((consoPseudo = rs.getString("pseudo")) != null){
+                    Consummer consummer = (Consummer) UserFactory.createUser(rs.getString("pseudo"),
+                            rs.getString("motDePasse"),
+                            rs.getString("email"),
+                            rs.getString("adresse"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getString("tel"),
+                            rs.getString("roleUtilisateur"));
+                    
+                    if(consoPseudo.equals(rs.getString("consoDispo")))
+                        if(rs.getInt("estDispo") == 1)
+                            week.addDispo(consummer);
+                        else
+                            week.addIndispo(consummer);
+                }
+            }
+            // Add the last week :
+            if(week != null)
+                weeks.add(week);
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return weeks;
+    }
+    
+    
     
     @Override
     public Week update(Week obj) throws DAOException {

@@ -38,6 +38,11 @@
                 Produits proposés
             </a>
         </li>
+        <li class="<c:if test="${page == 'contract_read_all'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/contract">
+                Contrats
+            </a>
+        </li>
         <li class="<c:if test="${page == 'request_read_all' || page == 'request_read' || page == 'request_create'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/request?producer=${login}">
                 Demandes de contrats <span class="badge">3</span>

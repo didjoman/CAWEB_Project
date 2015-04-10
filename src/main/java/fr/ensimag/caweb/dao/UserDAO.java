@@ -6,6 +6,7 @@
 package fr.ensimag.caweb.dao;
 
 import fr.ensimag.caweb.models.User.User;
+import fr.ensimag.caweb.models.User.UserStatus;
 import java.util.List;
 
 /**
@@ -18,6 +19,8 @@ public interface UserDAO{
     public abstract User read(String pseudo)  throws DAOException ;
     
     public abstract List<User> readAll()  throws DAOException ;
+    
+    public List<User> readAllWithStatus(UserStatus status) throws DAOException;
 
     public abstract User update(User obj)  throws DAOException ;
     

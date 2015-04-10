@@ -26,6 +26,7 @@
                     {"date" : "05/01/2015", "pers" :"truc"}
                 </div>
             </div>
+            
             <div class="col-sm-6 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -50,18 +51,70 @@
                                 <div id="week-info-indispo"></div>
                             </li>
                         </ul>
+                        
+                        <div id="accordion">
+                            <h3>Modifier les permanences</h3>
+                            <div>
+                                <form role="form" id="subscription-form" data-toggle="validator" action="user" method="post">
+                                    <div>
+                                        <label for="field-perm1">Perm1 :</label>
+                                        <input type="text" name="perm1" id="field-perm1" placeholder="Permanencier 1"/>
+                                    </div>
+                                    <div>
+                                        <label for="field-perm2">Perm 2:</label>
+                                        <input type="text" name="perm2" id="field-perm2" placeholder="Permanencier 2"/>
+                                    </div>
+                                    <br />
+                                    <input class="submit btn btn-primary" type="submit" value="Enregistrer" id="submit" /><br />
+                                </form>
+                            </div>
+                        </div>
                     </div>
+                        
+                        
                 </div>
             </div>
         </div>
             
         <script>
-            var listPermSet = ["12/01/2015", "20/04/2015", "27/04/2015"];
+            
+            var consummers = [
+                
+                
+            ];
+            
+            var listPermSet = [
+            <c:forEach items="${weeks}" var="week">
+                    <c:if test="${week.getPermanencier1() != null || week.getPermanencier2() != null}">
+                            "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
+                
+                var listPermFullySet = [
+            <c:forEach items="${weeks}" var="week">
+                    <c:if test="${week.getPermanencier1() != null && week.getPermanencier2() != null}">
+                            "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
+                
+                var listDispos = [
+            <c:forEach items="${weeks}" var="week">
+                    <c:if test="${!week.getEstDisponible().isEmpty()}">
+                            "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
+                
+                var listUndispos = [
+            <c:forEach items="${weeks}" var="week">
+                    <c:if test="${!week.getEstIndisponible().isEmpty()}">
+                            "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
         </script>
-        <c:forEach items="${weeks}" var="week">
-            ${week}<br />
-        </c:forEach>
-        
         
     </jsp:body>
 </t:layout>   

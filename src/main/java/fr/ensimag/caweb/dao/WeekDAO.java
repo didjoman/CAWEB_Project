@@ -14,10 +14,18 @@ import java.util.List;
  */
 public interface WeekDAO {
     public abstract Week create(Week obj)  throws DAOException ;
-        
+    
     public abstract Week read(int weekNum, int year)  throws DAOException ;
     
     public abstract List<Week> readAll()  throws DAOException ;
+    
+    public List<Week> readAllPerms() throws DAOException;
+    
+    public List<Week> readAllPermsFullySet() throws DAOException;
+    
+    public List<Week> readAllDispos() throws DAOException;
+    
+    public List<Week> readAllUndispos() throws DAOException;
     
     public abstract Week update(Week obj)  throws DAOException ;
     
