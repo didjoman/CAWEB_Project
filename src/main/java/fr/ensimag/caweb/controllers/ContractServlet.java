@@ -7,6 +7,7 @@ package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
+import fr.ensimag.caweb.dao.impl.ContractDAOSqlPlus;
 import fr.ensimag.caweb.models.Contract.Contract;
 import fr.ensimag.caweb.models.Week;
 import java.io.IOException;
@@ -14,11 +15,13 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,7 +42,18 @@ public class ContractServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+            HttpSession session = request.getSession(false);
+            String pseudo= session.getAttribute("login").toString();
+            List<Contract> reqs;
+        try {
+            reqs = DAOFactory.getInstance().getContractDAO().readAllContrat(pseudo);
+            request.setAttribute("reqs", reqs);
+            System.out.println(reqs);
+        } catch (DAOException ex) {
+            Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/contract_read_all.jsp");
+            view.forward(request, response);  
     }
     
     /**

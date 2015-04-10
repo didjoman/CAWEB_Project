@@ -67,7 +67,13 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "WHERE dateDebutLivraison IS NULL "
             + "AND aRenouveler IS NULL "
             + "AND offreur = ?";
-    
+    private static final String selectAllContratQuery=
+            "SELECT * "
+            + "FROM Contrat "
+            + "JOIN Utilisateur "
+            + "ON (pseudo=offreur OR pseudo=demandeur) "
+            + "WHERE (demandeur=? OR offreur=?) "
+            + "AND dateDebutLivraison IS NOT NULL ";
     
     public ContractDAOSqlPlus(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -241,6 +247,90 @@ public class ContractDAOSqlPlus implements ContractDAO {
         
         return reqs;
     }
+
+    @Override
+    public List<Contract> readAllContrat(String userPseudo) throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        PreparedStatement selectPrep = null;
+        
+        List<Contract> reqs = new ArrayList<>();
+        
+        ResultSet rs = null;
+        try {
+            selectPrep = connec.prepareStatement(selectAllContratQuery);
+            selectPrep.setString(1, userPseudo);
+            selectPrep.setString(2, userPseudo);
+            rs = selectPrep.executeQuery();
+            
+            int line = 0;
+            ContractBuilder builder = new ContractBuilder();
+            
+            while(rs.next()){
+                // With the first line we set the attribute of the contract
+                if(line == 0)
+                    builder.setIdContrat(rs.getInt("idContrat"))
+                            .setDateContrat(rs.getDate("dateContrat"))
+                            .setNonProduitContrat(rs.getString("nomProduitContrat"))
+                            .setDuree(rs.getInt("dureeContrat"))
+                            .setQuantite(new Quantity(rs.getInt("qteLotContrat"),
+                                    rs.getString("uniteContrat"),
+                                    rs.getDouble("prixLotContrat")))
+                            .setNbLots(rs.getInt("nbLots"))
+                            .setDateDebut(rs.getDate("dateDebutLivraison"))
+                            .setaRenouveler((rs.getInt("aRenouveler") == 0));
+                
+                // Then we set either the "offreur" or the "demandeur"
+                if(rs.getString("offreur").equals(rs.getString("pseudo")))
+                    builder.setOffreur(
+                            (Producer)UserFactory.createUser(rs.getString("pseudo"),
+                                    rs.getString("motDePasse"),
+                                    rs.getString("email"),
+                                    rs.getString("adresse"),
+                                    rs.getString("nom"),
+                                    rs.getString("prenom"),
+                                    rs.getString("tel"),
+                                    rs.getString("roleUtilisateur")
+                            )
+                    );
+                else if(rs.getString("demandeur").equals(rs.getString("pseudo")))
+                    builder.setDemandeur(
+                            (Consummer)UserFactory.createUser(rs.getString("pseudo"),
+                                    rs.getString("motDePasse"),
+                                    rs.getString("email"),
+                                    rs.getString("adresse"),
+                                    rs.getString("nom"),
+                                    rs.getString("prenom"),
+                                    rs.getString("tel"),
+                                    rs.getString("roleUtilisateur")
+                            )
+                    );
+                
+                // When we have read the 2 lines, we can build the contract :
+                if(line == 1){
+                    reqs.add(builder.build());
+                    line = 0;
+                    builder = new ContractBuilder();
+                } else
+                    ++line;
+            }
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        
+        return reqs;
+    }
+    
     
     @Override
     public void updateToReNew(int id) throws DAOException {

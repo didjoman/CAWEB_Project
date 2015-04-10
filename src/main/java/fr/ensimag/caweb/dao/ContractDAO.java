@@ -23,6 +23,8 @@ public interface ContractDAO {
     public abstract List<Contract> readAll()  throws DAOException ;
     
     public List<Contract> readAllRequests(String offreurPseudo) throws DAOException;
+    
+    public List<Contract> readAllContrat(String userPseudo) throws DAOException;
 
     public void updateToReNew(int id) throws DAOException;
     
