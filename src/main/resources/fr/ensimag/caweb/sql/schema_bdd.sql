@@ -149,6 +149,40 @@ CREATE TABLE EstDisponible(
     ON DELETE CASCADE
 );
 
+CREATE OR REPLACE FUNCTION updateUserDispo (conso IN VARCHAR(20), dispo IN NUMBER(0,1))
+IS
+counterDispo INTEGER := 0;
+BEGIN
+   SELECT COUNT(*) INTO counterDispo
+   FROM EstDisponible
+   WHERE numSemaine = numSe
+   AND annee = anneeSe
+   AND consoDispo = conso;
+
+   IF(counterDispo = 0) THEN
+      IF(estDispo <> dispo) THEN
+         UPDATE EstDisponible
+         SET estDispo = dispo
+         WHERE consoDispo = conso;
+      END IF;
+   ELSE
+      INSERT INTO EstDisponible(numSemaine, annee, consoDispo, estDispo)
+      VALUES(numSe, anneeSe, conso, dispo);
+   END IF;
+
+   -- Normally we should test if there is a permanence and delete it.
+/*   
+SELECT COUNT(*) INTO counterPerm
+   FROM AssurePermanence
+   WHERE numSemaine = numSe
+   AND annee = anneeSe
+   WHERE permanencier1 = conso || permanencier2 = conso;
+*/
+END updateUserDispo;
+
+-- trigger pour supprimer un enregistrement dans AssurePermanence si les deux mecs sont vides.
+
+
 COMMIT; 
 
-SET AUTOCOMMIT ON;
+SET AUTOCOMMIT OFF;

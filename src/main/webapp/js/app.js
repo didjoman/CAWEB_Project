@@ -1,5 +1,10 @@
 
 $(function() {
+    // Little extension of jquery to test wether an object is empty :
+    $.fn.exists = function () {
+        return this.length !== 0;
+    };
+    
     // Prevent the close of dropdown when clicking on it
     $('.dropdown-menu').click(function(e) {
         e.stopPropagation(); 
@@ -25,10 +30,10 @@ $(function() {
         collapsible: true,
         active: false
     });
-    
-    $( ".permConsummers" ).autocomplete({
-        source: consummers
-    });
+    if($(".permConsummers").exists())
+        $(".permConsummers").autocomplete({
+            source: consummers
+        });
 });
 
 
@@ -49,13 +54,13 @@ $(function() {
 
     var selectCurrentWeek = function() {
         window.setTimeout(function () {
-            $('.week-picker .ui-datepicker-current-day a').addClass('ui-state-active');
+            $('.ui-datepicker-current-day a').addClass('ui-state-active');
         }, 1);
     };
     
     var weekMouseMoveHandler = function(){
         window.setTimeout(function () {
-            $('.week-picker .ui-datepicker-calendar tr').mousemove(function(){
+            $('.ui-datepicker-calendar tr').mousemove(function(){
                 $(this).find('td a').addClass('ui-state-hover'); 
             });
         }, 1);
@@ -63,7 +68,7 @@ $(function() {
     
     var weekMouseLeaveHandler = function(){
         window.setTimeout(function () {
-            $('.week-picker .ui-datepicker-calendar tr').mouseleave(function(){
+            $('.ui-datepicker-calendar tr').mouseleave(function(){
                 $(this).find('td a').removeClass('ui-state-hover'); 
             });
         }, 1);
@@ -88,11 +93,11 @@ $(function() {
         return new Date(date.getFullYear(), date.getMonth(), day);
     };
     
-    var isPerm = function(date, array){
+    var isInList = function(date, array){
         var startDay = getStartDate(date);
         return $.inArray(printDate(startDay), array);
     };
-    console.log(isPerm(new Date(2015,00,05), listPermSet));
+    console.log(isInList(new Date(2015,00,05), listPermSet));
     
     var updateView = function(start, end, weekNum, year){
         $.get('permanency', {async: "true", weekNum: weekNum, year: year}, 
@@ -143,24 +148,36 @@ $(function() {
     };
     
     var renderColoredDays = function(date){
-
         var cssClass = '';
-        //Colorates the dates of permanence/dispo/undispo set.
-        // /!\ listPermSet is a sort of volatile variable generated in java.
-        if(isPerm(date, listPermFullySet) !== -1)
-            cssClass = 'fullperms';
-        else if(isPerm(date, listPermSet) !== -1)
-            cssClass = 'perms';
-        else if(isPerm(date, listDispos) !== -1)
-            cssClass = 'dispos';
-        else if(isPerm(date, listUndispos) !== -1)
-            cssClass = 'undispos';
-        
-        
         // Colorates the days of the selected week :
         if(date >= startDate && date <= endDate)
-            cssClass = 'ui-datepicker-current-day';
+            cssClass += ' ui-datepicker-current-day ';
+        //Colorates the dates of permanence/dispo/undispo set.
+        // /!\ listPermSet is a sort of volatile variable generated in java.
+        if(isInList(date, listPermFullySet) !== -1)
+            cssClass += 'fullperms';
+        else if(isInList(date, listPermSet) !== -1)
+            cssClass += 'perms';
+        else if(isInList(date, listDispos) !== -1)
+            cssClass += 'dispos';
+        else if(isInList(date, listUndispos) !== -1)
+            cssClass += 'undispos';
+        
         return [true, cssClass];
+    };
+    
+    var onOnSelec = function(dateText, inst) { 
+        // Get the current date, and week info of the selected date.
+        var date = $(this).datepicker('getDate');
+        var weekNumber = $.datepicker.iso8601Week(new Date(date));
+        startDate = new Date(getStartDate(date));
+        endDate = new Date(getEndDate(date));
+        // Update textual informations about the week selected :
+        updateView(startDate, endDate, weekNumber, startDate.getFullYear());
+        selectCurrentWeek();
+        // Re-set the "hover effects" handlers
+        weekMouseMoveHandler();
+        weekMouseLeaveHandler();
     };
     
     $('.week-picker').datepicker( {
@@ -170,25 +187,60 @@ $(function() {
         altField: "#datepicker",
         closeText: 'Fermer',
         firstDay: 1 ,
-        onSelect: function(dateText, inst) { 
-            // Get the current date, and week info of the selected date.
-            var date = $(this).datepicker('getDate');
-            var weekNumber = $.datepicker.iso8601Week(new Date(date));
-            console.log(weekNumber);
-            startDate = new Date(getStartDate(date));
-            endDate = new Date(getEndDate(date));
-            // Update textual informations about the week selected :
-            updateView(startDate, endDate, weekNumber, startDate.getFullYear());
-            selectCurrentWeek();
-            // Re-set the "hover effects" handlers
-            weekMouseMoveHandler();
-            weekMouseLeaveHandler();
-        },
+        onSelect: onOnSelec,
         beforeShowDay: renderColoredDays,
         onChangeMonthYear: function(year, month, inst) {
             selectCurrentWeek();
         }
     });
+    
+    var isDispo = function(date){
+        return $.inArray(date, array)
+    }
+    var onOnSelecConsummer = function(dateText, inst) { 
+        // Get the current date, and week info of the selected date.
+        var date = $(this).datepicker('getDate');
+        var weekNumber = $.datepicker.iso8601Week(new Date(date));
+        startDate = new Date(getStartDate(date));
+        endDate = new Date(getEndDate(date));
+        // Update textual informations about the week selected :
+        $('#week-info #week-info-num').html(weekNumber);
+        $('#week-info #week-info-year').html(startDate.getFullYear());
+        $('#week-info #week-info-start').html(printDate(startDate));
+        $('#week-info #week-info-end').html(printDate(endDate));
+        
+        if(isInList(date, listPermFullySet) !== -1){
+            $('#disponiblity-form').hide();
+            $('#disponiblity-info').show();
+        }else {
+            $('#disponiblity-info').hide();
+            $('#disponiblity-form').show();
+            if(isInList(date, listDispos) !== -1)
+                $('#status-radio input[value="true"]').prop('checked', true);
+            else if(isInList(date, listUndispos) !== -1)
+                $('#status-radio input[value="false"]').prop('checked', true);
+            else 
+                $('#status-radio input[value="maybe"]').prop('checked', true);
+        }
+        selectCurrentWeek();
+        // Re-set the "hover effects" handlers
+        weekMouseMoveHandler();
+        weekMouseLeaveHandler();
+    };
+    $('.consummer-week-picker').datepicker( {
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        dateFormat: "dd-mm-yy",
+        altField: "#datepicker",
+        closeText: 'Fermer',
+        firstDay: 1 ,
+        onSelect: onOnSelecConsummer,
+        beforeShowDay: renderColoredDays,
+        onChangeMonthYear: function(year, month, inst) {
+            selectCurrentWeek();
+        }
+    });
+    
     $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] ); // texte en french
 
     weekMouseMoveHandler();

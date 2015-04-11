@@ -21,6 +21,8 @@ public interface WeekDAO {
     
     public List<Week> readAllPerms() throws DAOException;
     
+    public List<Week> readAllWhereConsumerAppears(String consummerPseudo) throws DAOException;
+    
     public List<Week> readAllPermsFullySet() throws DAOException;
     
     public List<Week> readAllDispos() throws DAOException;

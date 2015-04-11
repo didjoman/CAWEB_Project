@@ -68,7 +68,7 @@
                         <div id="accordion">
                             <h3>Modifier les permanences</h3>
                             <div>
-                                <form role="form" id="subscription-form" data-toggle="validator" action="user" method="post">
+                                <form role="form" id="permanency-form" data-toggle="validator" action="permanency" method="post">
                                     <div>
                                         <label for="field-perm1">Perm1 :</label>
                                         <input type="text" name="perm1" class="permConsummers" id="field-perm1" placeholder="Permanencier 1"/>
@@ -93,38 +93,38 @@
             
             var consummers = [
             <c:forEach items="${consummers}" var="consummer">
-                    "${consummer}",
+                    "${consummer.pseudo}",
             </c:forEach>
                 ];
                 
                 var listPermSet = [
             <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.getPermanencier1() != null || week.getPermanencier2() != null}">
-                        "${week.getFirstDate()}",
+                <c:if test="${week.getPermanencier1() != null || week.getPermanencier2() != null}">
+                            "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
                 
                 var listPermFullySet = [
             <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.getPermanencier1() != null && week.getPermanencier2() != null}">
-                        "${week.getFirstDate()}",
+                <c:if test="${week.getPermanencier1() != null && week.getPermanencier2() != null}">
+                            "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
                 
                 var listDispos = [
             <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstDisponible().isEmpty()}">
-                        "${week.getFirstDate()}",
+                <c:if test="${!week.getEstDisponible().isEmpty()}">
+                            "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];
                 
                 var listUndispos = [
             <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstIndisponible().isEmpty()}">
-                        "${week.getFirstDate()}",
+                <c:if test="${!week.getEstIndisponible().isEmpty()}">
+                            "${week.getFirstDate()}",
                 </c:if>
             </c:forEach>
                 ];

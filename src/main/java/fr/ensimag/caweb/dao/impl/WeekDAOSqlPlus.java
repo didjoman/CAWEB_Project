@@ -33,6 +33,9 @@ public class WeekDAOSqlPlus implements WeekDAO{
             "JOIN Utilisateur " +
             "ON (pseudo = permanencier1 OR pseudo = permanencier2 OR pseudo = consoDispo) ";
     
+    private static final String selectAllWhereConsummerAppearsQuery = selectAllQuery +
+            "WHERE pseudo = ? ";
+    
     private static final String selectAllPermsQuery = "SELECT * " +
             "FROM AssurePermanence p " +
             "JOIN Utilisateur " +
@@ -204,6 +207,81 @@ public class WeekDAOSqlPlus implements WeekDAO{
         }
         return weeks;
     }
+    
+    @Override
+    public List<Week> readAllWhereConsumerAppears(String consummerPseudo) throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        List<Week> weeks = new ArrayList<>();
+        PreparedStatement selectPrep = null;
+        
+        ResultSet rs = null;
+        Week week = null;
+        Week tmp;
+        try {
+            selectPrep = connec.prepareStatement(selectAllWhereConsummerAppearsQuery);
+            selectPrep.setString(1, consummerPseudo);
+            
+            rs = selectPrep.executeQuery();
+            while(rs.next()){
+                tmp = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
+                
+                // Add the last fetched week to the list, and create a new one.
+                if(!tmp.equals(week)){
+                    // If we fetched an other week before we add it to the list.
+                    if(week != null)
+                        weeks.add(week);
+                    // Now we begin the fetching of a new week :
+                    week = tmp;
+                }
+                
+                // Fetch the last week attributes :
+                String consoPseudo;
+                if((consoPseudo = rs.getString("pseudo")) != null){
+                    Consummer consummer = (Consummer) UserFactory.createUser(rs.getString("pseudo"),
+                            rs.getString("motDePasse"),
+                            rs.getString("email"),
+                            rs.getString("adresse"),
+                            rs.getString("nom"),
+                            rs.getString("prenom"),
+                            rs.getString("tel"),
+                            rs.getString("roleUtilisateur"));
+                    
+                    if(consoPseudo.equals(rs.getString("permanencier1")) &&
+                            week.getPermanencier1() == null)
+                        week.setPermanencier1(consummer);
+                    
+                    if(consoPseudo.equals(rs.getString("permanencier2")) &&
+                            week.getPermanencier2() == null)
+                        week.setPermanencier2(consummer);
+                    
+                    if(consoPseudo.equals(rs.getString("consoDispo")))
+                        if(rs.getInt("estDispo") == 1)
+                            week.addDispo(consummer);
+                        else
+                            week.addIndispo(consummer);
+                }
+            }
+            // Add the last week :
+            if(week != null)
+                weeks.add(week);
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return weeks;
+    }
+    
     
     @Override
     public List<Week> readAllPerms() throws DAOException {

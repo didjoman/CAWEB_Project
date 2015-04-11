@@ -16,15 +16,12 @@
             
         <div class="row">
             <div class="thumbnail col-sm-6 col-md-4">
-                <div id="permanency-picker" class="week-picker"></div>
+                <div id="permanency-picker" class="consummer-week-picker"></div>
                 <div class="caption">
                     <h4>Légende :</h4>
                     <ul style="list-style-type: none;">
                         <li>
                             <div class="fullperms" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: permanence fixée
-                        </li>
-                        <li>
-                            <div class="perms" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: permanence partiellement fixée
                         </li>
                         <li>
                             <div class="dispos" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: consommateurs disponibles
@@ -50,85 +47,122 @@
                         <ul>
                             <li><strong>Début : </strong><span id="week-info-start"></span></li>
                             <li><strong>Fin : </strong><span id="week-info-end"></span></li>
-                            <li>
-                                <strong>Permanences : </strong> <br />
-                                <span id="week-info-perm1"></span>
-                                <span id="week-info-perm2"></span>
-                            </li>
-                            <li>
-                                <strong>Disponibles : </strong><br />
-                                <div id="week-info-dispo"></div>
-                            </li>
-                            <li>
-                                <strong>Indisponibles : </strong><br />
-                                <div id="week-info-indispo"></div>
+                            <li><strong>Disponibilité : </strong><br />
+                                
+                                <form id="disponiblity-form" style="display: none;" role="form" data-toggle="validator" action="permanency" method="post">
+                                    <div>
+                                        <ul id="status-radio">
+                                            <li>
+                                                <input type="radio" id="field-dispo" name="dispo" value="true" > disponnible
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="field-dispo" name="dispo" value="false"> Indisponnible
+                                            </li>
+                                            <li>
+                                                <input type="radio" id="field-dispo" name="dispo" value="maybe"> Indéterminé
+                                            </li>
+                                            <li><input class="submit btn btn-primary btn-sm" type="submit" value="Enregistrer" id="submit" /></li>
+                                        </ul>
+                                    </div>
+                                </form>
+                                <div id="disponiblity-info" style="display: none;">
+                                    Vous êtes de permanence cette semaine.
+                                </div>
                             </li>
                         </ul>
-                            
-                        <div id="accordion">
-                            <h3>Modifier les permanences</h3>
-                            <div>
-                                <form role="form" id="subscription-form" data-toggle="validator" action="user" method="post">
-                                    <div>
-                                        <label for="field-perm1">Perm1 :</label>
-                                        <input type="text" name="perm1" class="permConsummers" id="field-perm1" placeholder="Permanencier 1"/>
-                                    </div>
-                                    <div>
-                                        <label for="field-perm2">Perm 2:</label>
-                                        <input type="text" name="perm2" class="permConsummers" id="field-perm2" placeholder="Permanencier 2"/>
-                                    </div>
-                                    <br />
-                                    <input class="submit btn btn-primary" type="submit" value="Enregistrer" id="submit" /><br />
-                                </form>
-                            </div>
-                        </div>
                     </div>
-                        
-                        
+                    
                 </div>
             </div>
         </div>
-            
-        <script>
-            
-            var consummers = [
-            <c:forEach items="${consummers}" var="consummer">
-                    "${consummer}",
-            </c:forEach>
-                ];
+        <div>
+            <form data-toggle="validator" role="form">
+                <div class="form-group">
+                    <label for="inputName" class="control-label">Name</label>
+                    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputTwitter" class="control-label">Twitter</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">@</span>
+                        <input type="text" pattern="^([_A-z0-9]){3,}$" maxlength="20" class="form-control" id="inputTwitter" placeholder="1000hz" required>
+                    </div>
+                    <span class="help-block with-errors">Up to 20 letters, numbers and underscores</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail" class="control-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword" class="control-label">Password</label>
+                    <div class="form-group col-sm-6">
+                        <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
+                        <span class="help-block">Minimum of 6 characters</span>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
                 
-                var listPermSet = [
-            <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.getPermanencier1() != null || week.getPermanencier2() != null}">
-                        "${week.getFirstDate()}",
-                </c:if>
-            </c:forEach>
-                ];
-                
+                <div class="form-group">
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="underwear" required>
+                            Boxers
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="underwear" required>
+                            Briefs
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>
+                            Check yourself
+                        </label>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            </div>
+            
+            <script>
+            
+                var listPermSet = [];
                 var listPermFullySet = [
-            <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.getPermanencier1() != null && week.getPermanencier2() != null}">
-                        "${week.getFirstDate()}",
-                </c:if>
-            </c:forEach>
-                ];
+                <c:forEach items="${weeks}" var="week">
+                    <c:if test="${(week.getPermanencier1() != null &&  week.getPermanencier1().getPseudo().equals(login)) ||
+                        (week.getPermanencier2() != null &&  week.getPermanencier2().getPseudo().equals(login))}">
+                                "${week.getFirstDate()}",
+                    </c:if>
+                </c:forEach>
+                    ];
                 
-                var listDispos = [
-            <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstDisponible().isEmpty()}">
-                        "${week.getFirstDate()}",
-                </c:if>
-            </c:forEach>
-                ];
+                    var listDispos = [
+                <c:forEach items="${weeks}" var="week">
+                    <c:if test="${!week.getEstDisponible().contains(login)}">
+                            "${week.getFirstDate()}",
+                    </c:if>
+                </c:forEach>
+                    ];
                 
-                var listUndispos = [
-            <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstIndisponible().isEmpty()}">
-                        "${week.getFirstDate()}",
-                </c:if>
-            </c:forEach>
-                ];
-        </script>
-        
-    </jsp:body>
-</t:layout>   
+                    var listUndispos = [
+                <c:forEach items="${weeks}" var="week">
+                    <c:if test="${!week.getEstIndisponible().contains(login)}">
+                            "${week.getFirstDate()}",
+                    </c:if>
+                </c:forEach>
+                    ];
+            </script>
+            
+        </jsp:body>
+    </t:layout>   

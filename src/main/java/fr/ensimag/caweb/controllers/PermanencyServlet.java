@@ -25,6 +25,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import sun.misc.IOUtils;
 
 /**
@@ -51,6 +52,7 @@ public class PermanencyServlet extends HttpServlet {
         String async = request.getParameter("async");
         String weekNumParam = request.getParameter("weekNum");
         String yearParam = request.getParameter("year");
+        String isConsummer = request.getParameter("isConsummer");
         
         
         // READ :
@@ -78,6 +80,32 @@ public class PermanencyServlet extends HttpServlet {
                 // Juste transmit the required info.
             }
         }
+        else if(isConsummer != null && isConsummer.equals("true")){
+            String error = null;
+            // Check : A consummer can only access to his own requests :
+            HttpSession session = request.getSession(false);
+            if(!(session != null && session.getAttribute("login") != null)){
+                error = "Vous n'avez pas le droit d'accéder "
+                        + "à la ressource "+ request.getRequestURI();
+                request.setAttribute("error", error);
+                
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
+                view.forward(request, response);
+            }
+            
+            // Get the weeks in the database :
+            List<Week> weeks = null;
+            try {
+                weeks =  DAOFactory.getInstance().getWeekDAO().readAllWhereConsumerAppears((String)session.getAttribute("login"));
+            } catch (DAOException ex) {
+                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            request.setAttribute("weeks", weeks);
+            
+            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
+            view.forward(request, response);
+        }
         // READ ALL
         else{
             // Get the weeks in the database :
@@ -88,33 +116,23 @@ public class PermanencyServlet extends HttpServlet {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            
-            
-            // Send the data to the client :
-            if(async != null && async.equals("true")){
-                response.setContentType("application/json");
-                response.setCharacterEncoding("utf-8");
-                Gson gson = new Gson();
-                response.getWriter().write(gson.toJson(weeks));
-            } else {
-                // Get the consummers to facilitate the choice of people for the permanency :
-                List<User> users = null;
-                try {
-                    users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
-                } catch (DAOException ex) {
-                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                request.setAttribute("consummers", users);
-                request.setAttribute("weeks", weeks);
-                
-                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/permanency_read_all.jsp");
-                view.forward(request, response);
+            List<User> users = null;
+            try {
+                users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
+            } catch (DAOException ex) {
+                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
+            request.setAttribute("consummers", users);
+            request.setAttribute("weeks", weeks);
+            
+            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/responsible/permanency_read_all.jsp");
+            view.forward(request, response);
         }
-        
-        
     }
+    
+    
+    
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -127,6 +145,43 @@ public class PermanencyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String async = request.getParameter("async");
+        String weekNumParam = request.getParameter("weekNum");
+        String yearParam = request.getParameter("year");
+        String dispo = request.getParameter("dispo");
+        
+        
+        // Check : A consummer can only access to his own requests :
+        String error = null;
+        HttpSession session = request.getSession(false);
+        if(!(session != null && session.getAttribute("login") != null)){
+            error = "Vous n'avez pas le droit d'accéder "
+                    + "à la ressource "+ request.getRequestURI();
+            request.setAttribute("error", error);
+            
+            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
+            view.forward(request, response);
+        }
+        
+        // Do the update
+        // TODO :
+        try {
+            DAOFactory.getInstance().getWeekDAO().update(null);
+        } catch (DAOException ex) {
+            Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // TODO :
+        // updateSetDispo(weekNum, year, user, isDispo); // if exists an entry => update it; else => create one (function)
+        // updateSetPerm(weekNum, year, user1, user2); // if user1 = user2 = null => delete entry (trigger)
+        
+        // Transmit confirmation to the client :
+        if(async != null && async.equals("true")){
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+            Gson gson = new Gson();
+            response.getWriter().write("{OK:\"true\"}");
+        }
         
     }
     

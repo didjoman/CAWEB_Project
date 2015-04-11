@@ -137,7 +137,7 @@ public class UserDAOSqlPlus implements UserDAO{
         
         ResultSet rs = null;
         try {
-            selectPrep = connec.prepareStatement(selectQuery);
+            selectPrep = connec.prepareStatement(selectAllWithStatusQuery);
             selectPrep.setString(1, status.toString());
             rs = selectPrep.executeQuery();
             

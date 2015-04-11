@@ -5,11 +5,11 @@
 --%>
     
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form id="connection-form" action="${pageContext.request.contextPath}/session" method="post">
+<form id="connection-form" action="${pageContext.request.contextPath}/session" method="post" >
     <div>
         <label for="Login">Login :</label><br />
         <input type="text" value="${param.login}"
-               name="login" id="login" placeholder="Identifiant" />
+               name="login" id="login" placeholder="Identifiant" required/>
     </div>
                                         
     <div>
