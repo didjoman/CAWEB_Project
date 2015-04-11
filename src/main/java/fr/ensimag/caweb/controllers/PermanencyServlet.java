@@ -5,8 +5,11 @@
 */
 package fr.ensimag.caweb.controllers;
 
+import fr.ensimag.caweb.controllers.errors.CAWEBServletException;
 import com.google.gson.Gson;
 import static com.google.gson.internal.bind.TypeAdapters.URL;
+import fr.ensimag.caweb.controllers.errors.AccessRightsException;
+import fr.ensimag.caweb.controllers.errors.DatabaseAccessException;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.User.User;
@@ -16,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.rmi.ServerException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +56,6 @@ public class PermanencyServlet extends HttpServlet {
         String async = request.getParameter("async");
         String weekNumParam = request.getParameter("weekNum");
         String yearParam = request.getParameter("year");
-        String isConsummer = request.getParameter("isConsummer");
         
         
         // READ :
@@ -67,6 +70,7 @@ public class PermanencyServlet extends HttpServlet {
                 week =  DAOFactory.getInstance().getWeekDAO().read(weekNum, year);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new DatabaseAccessException();
             }
             
             // Transmit it to the client :
@@ -80,57 +84,68 @@ public class PermanencyServlet extends HttpServlet {
                 // Juste transmit the required info.
             }
         }
-        else if(isConsummer != null && isConsummer.equals("true")){
+        // READ ALL
+        else{
             String error = null;
             // Check : A consummer can only access to his own requests :
             HttpSession session = request.getSession(false);
-            if(!(session != null && session.getAttribute("login") != null)){
-                error = "Vous n'avez pas le droit d'accéder "
-                        + "à la ressource "+ request.getRequestURI();
-                request.setAttribute("error", error);
+            String login = null;
+            String status = null;
+            if(session != null && session.getAttribute("login") != null
+                    && session.getAttribute("status") != null){
                 
+                login = (String)session.getAttribute("login");
+                status = (String)session.getAttribute("status");
+            } else
+                throw new AccessRightsException(request.getRequestURI());
+            
+            
+            // Get the weeks in the database :
+            List<Week> weeks = null;
+            
+            // READ ALL for CONSUMMERS :
+            if(status.equals(UserStatus.CONS.toString())){
+                try {
+                    weeks =  DAOFactory.getInstance().getWeekDAO().readAllWhereConsumerAppears(login);
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new DatabaseAccessException();
+                }
+                
+                request.setAttribute("weeks", weeks);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
                 view.forward(request, response);
-                return;
             }
-            
-            // Get the weeks in the database :
-            List<Week> weeks = null;
-            try {
-                weeks =  DAOFactory.getInstance().getWeekDAO().readAllWhereConsumerAppears((String)session.getAttribute("login"));
-            } catch (DAOException ex) {
-                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            // READ ALL for RESPONSIBLES :
+            else if(status.equals(UserStatus.RESP.toString())){
+                try {
+                    weeks =  DAOFactory.getInstance().getWeekDAO().readAll();
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new DatabaseAccessException();
+                }
+                
+                List<User> users = null;
+                try {
+                    users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new DatabaseAccessException();
+                }
+                
+                request.setAttribute("consummers", users);
+                request.setAttribute("weeks", weeks);
+                
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/responsible/permanency_read_all.jsp");
+                view.forward(request, response);
             }
+            else
+                throw new AccessRightsException(request.getRequestURI());
             
-            request.setAttribute("weeks", weeks);
-            
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
-            view.forward(request, response);
-        }
-        // READ ALL
-        else{
-            // Get the weeks in the database :
-            List<Week> weeks = null;
-            try {
-                weeks =  DAOFactory.getInstance().getWeekDAO().readAll();
-            } catch (DAOException ex) {
-                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            List<User> users = null;
-            try {
-                users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
-            } catch (DAOException ex) {
-                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            request.setAttribute("consummers", users);
-            request.setAttribute("weeks", weeks);
-            
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/responsible/permanency_read_all.jsp");
-            view.forward(request, response);
         }
     }
+    
+    
     
     
     
@@ -162,14 +177,9 @@ public class PermanencyServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if(session != null && session.getAttribute("login") != null)
             login = (String)session.getAttribute("login");
-        else{
-            error = "Vous n'avez pas le droit d'accéder "
-                    + "à la ressource "+ request.getRequestURI();
-            request.setAttribute("error", error);
-            
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
-            view.forward(request, response);
-        }
+        else
+            throw new AccessRightsException(request.getRequestURI());
+        
         
         // UDPATE Disponibilities :
         if(weekNumParam != null && yearParam != null && dispo != null){
@@ -189,6 +199,7 @@ public class PermanencyServlet extends HttpServlet {
                 }
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new DatabaseAccessException();
             }
             
             // Transmit confirmation to the client :
@@ -207,6 +218,7 @@ public class PermanencyServlet extends HttpServlet {
                 DAOFactory.getInstance().getWeekDAO().updateSetPerm(weekNum, year, perm1, perm2);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new DatabaseAccessException();
             }
             
             // Transmit confirmation to the client :

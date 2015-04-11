@@ -10,7 +10,7 @@
     
 <%-- The list of normal or fragment attributes can be specified here: --%>
 <%@attribute name="title"%>
-<%@attribute name="logged"%>
+<%@attribute name="error"%>
 <%-- <%@attribute name="head" fragment="true" %> --%>
     
 <%-- any content can be specified here: --%>
