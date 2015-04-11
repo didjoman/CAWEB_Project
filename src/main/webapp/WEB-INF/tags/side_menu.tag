@@ -25,7 +25,12 @@
         </li>
         <li class="<c:if test="${page == 'permanency_read_all'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/permanency">
-                Permanences
+                Permanences (resp)
+            </a>
+        </li>
+        <li class="<c:if test="${page == 'permanency_read_all'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/permanency?isConsummer=true">
+                Permanences (cons)
             </a>
         </li>
         <li class="<c:if test="${page == 'offer_read'}">active</c:if>">

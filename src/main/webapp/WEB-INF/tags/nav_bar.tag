@@ -25,7 +25,7 @@
                                 Login <span class="caret"></span>
                             </a>
                             <div id="connexion-dropdown" class="dropdown-menu" role="menu">
-                                <jsp:include page="connection_form.jsp" />
+                                <jsp:include page="/WEB-INF/pages/connection_form.jsp" />
                             </div>
                         </li>
                         <li>
@@ -33,7 +33,7 @@
                                 Inscription <span class="caret"></span>
                             </a>
                             <div id="subscription-dropdown" class="dropdown-menu" role="menu">
-                                <jsp:include page="subscription_form.jsp" />
+                                <jsp:include page="/WEB-INF/pages/subscription_form.jsp" />
                             </div>
                         </li>
                         </c:when>
