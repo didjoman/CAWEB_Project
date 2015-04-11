@@ -12,6 +12,10 @@ import fr.ensimag.caweb.models.Contract.Contract;
 import fr.ensimag.caweb.models.Week;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,9 +46,9 @@ public class ContractServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            HttpSession session = request.getSession(false);
-            String pseudo= session.getAttribute("login").toString();
-            List<Contract> reqs;
+        HttpSession session = request.getSession(false);
+        String pseudo= session.getAttribute("login").toString();
+        List<Contract> reqs;
         try {
             reqs = DAOFactory.getInstance().getContractDAO().readAllContrat(pseudo);
             request.setAttribute("reqs", reqs);
@@ -52,8 +56,8 @@ public class ContractServlet extends HttpServlet {
         } catch (DAOException ex) {
             Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/contract_read_all.jsp");
-            view.forward(request, response);  
+        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/contract_read_all.jsp");
+        view.forward(request, response);
     }
     
     /**

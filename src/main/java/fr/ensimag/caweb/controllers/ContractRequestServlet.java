@@ -44,19 +44,18 @@ public class ContractRequestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String producer = request.getParameter("producer");
         String idParam = request.getParameter("id");
-        String dateContParam = request.getParameter("dateCont");
-        String dateBeginParam = request.getParameter("dateBegin");
         
+        // VIEW for REQUEST CREATION
         if(action != null){
             if(action.equals("create")){
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_create.jsp");
                 view.forward(request, response);
-                
             }
             
-        }else if(idParam != null){
+        }
+        // READ 1 contract request
+        else if(idParam != null){
             // Get Contract Request Id <id>
             Integer id = Integer.parseInt(idParam);
             request.setAttribute("id", id);
@@ -69,7 +68,7 @@ public class ContractRequestServlet extends HttpServlet {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             String error = null;
-            // Chec si le contrat existe
+            // Checks if the contract exists
             if(req == null)
                 error = "La demande de contrat n'existe pas (ou plus).";
             else{
@@ -87,21 +86,27 @@ public class ContractRequestServlet extends HttpServlet {
             
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
             view.forward(request, response);
-        } else if(producer != null){
+        }
+        // READ ALL contract requests :
+        else {
             // Check : A producer can only access to his own requests :
             HttpSession session = request.getSession(false);
-            if(!(session != null && producer.equals(session.getAttribute("login")))){
+            String login = null;
+            if((session != null && session.getAttribute("login") != null))
+                login = (String)session.getAttribute("login");
+            else {
                 String error = "Vous n'avez pas le droit d'accéder "
                         + "à la ressource "+ request.getRequestURI();
                 request.setAttribute("error", error);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read_all.jsp");
                 view.forward(request, response);
+                return;
             }
             
             // We get the list of contracts in request for the producer :
             List<Contract> reqs = null;
             try {
-                reqs =  DAOFactory.getInstance().getContractDAO().readAllRequests(producer);
+                reqs =  DAOFactory.getInstance().getContractDAO().readAllRequests(login);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -110,14 +115,7 @@ public class ContractRequestServlet extends HttpServlet {
             
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read_all.jsp");
             view.forward(request, response);
-            
-            
-        } else {
-            // Get the list of Contract Requests.
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read_all.jsp");
-            view.forward(request, response);
         }
-        
         
     }
     
@@ -132,34 +130,17 @@ public class ContractRequestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String producer = request.getParameter("producer");
-        String idParam = request.getParameter("id");
-        String dateContParam = request.getParameter("dateCont");
-        String dateBeginParam = request.getParameter("dateBegin");
+        String idParam = request.getParameter("contractId");
+        String dateBeginParam = request.getParameter("begin");
         
         String error = null;
-        if(action != null &&
-                action.equals("validate") && idParam != null &&
-                dateContParam != null && dateBeginParam != null){
-            
-            
-            // Parsing of the date of Contract :
-            DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Date dateCont = null;
-            try {
-                dateCont = new Date(df.parse(dateContParam).getTime());
-            } catch (ParseException ex) {
-                Logger.getLogger(ContractRequestServlet.class.getName()).log(Level.SEVERE, null, ex);
-                error = "Erreur lors de la mise à jour du contrat.";
-                request.setAttribute("error", error);
-                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
-                view.forward(request, response);
-            }
+        // COntract Validation :
+        if(idParam != null && dateBeginParam != null){
             
             // Parsing of the date of beginning :
             Date dateBegin = null;
             try {
+                DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                 dateBegin = new Date(df.parse(dateBeginParam).getTime());
             } catch (ParseException ex) {
                 Logger.getLogger(ContractRequestServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -167,7 +148,18 @@ public class ContractRequestServlet extends HttpServlet {
                 request.setAttribute("error", error);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
                 view.forward(request, response);
+                return;
             }
+            
+            // Check if the beginning date is > today :
+            if(dateBegin.before(new Date(System.currentTimeMillis()))){
+                error += "Erreur lors de la mise à jour du contrat (date de début antérieur à la date actuelle).";
+                request.setAttribute("error", error);
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
+                view.forward(request, response);
+                return;
+            }
+                
             
             // Get Contract Request Id <id>
             Integer id = Integer.parseInt(idParam);
@@ -186,27 +178,33 @@ public class ContractRequestServlet extends HttpServlet {
                 request.setAttribute("error", error);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
                 view.forward(request, response);
+                return;
             }
             
             HttpSession session = request.getSession(false);
-            if(!(session != null && req.getOffreur() != null
+            String login = null;
+            if((session != null && req.getOffreur() != null
                     && req.getOffreur().getPseudo().equals(session.getAttribute("login")))){
+                login = (String)session.getAttribute("login");
+            }else{
                 error = "Vous n'avez pas le droit d'accéder "
                         + "à la ressource "+ request.getRequestURI();
                 request.setAttribute("error", error);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
                 view.forward(request, response);
+                return;
             }
             
             // Update of the contract in DB :
             try {
-                DAOFactory.getInstance().getContractDAO().updateValidate(id, dateCont, dateBegin);
+                DAOFactory.getInstance().getContractDAO().updateValidate(id, new Date(System.currentTimeMillis()), dateBegin);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
                 error = "Erreur lors de la mise à jour du contrat.";
                 request.setAttribute("error", error);
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
                 view.forward(request, response);
+                return;
             }
             
             // message of success/failure
@@ -214,8 +212,7 @@ public class ContractRequestServlet extends HttpServlet {
                 request.setAttribute("success", "Le contrat a été validé.");
             
             // Forwarding :
-            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read.jsp");
-            view.forward(request, response);
+            this.doGet(request, response);
         }
     }
     

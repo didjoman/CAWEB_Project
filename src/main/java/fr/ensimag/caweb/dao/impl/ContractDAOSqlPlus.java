@@ -40,7 +40,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "WHERE idContrat = ? ";
     
     private static final String updateQuery =
-            "UPDATE Contract "
+            "UPDATE Contrat "
             + "SET offreur = ?, demandeur = ?, "
             + "dateContrat = ?, nomProduitContrat = ?, prixLotContrat = ?, "
             + "dureeContrat = ?, qteLotContrat = ?, uniteContrat = ?, nbLots = ?, "
@@ -48,15 +48,15 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "WHERE idContrat = ?";
     
     private static final String updateToReNewQuery =
-            "UPDATE Contract "
+            "UPDATE Contrat "
             + "SET aRenouveler = 1"
             + "WHERE idContrat = ?";
     
     private static final String updateValidateQuery =
-            "UPDATE Contract "
+            "UPDATE Contrat "
             + "SET dateContrat = ?, "
             + "dateDebutLivraison = ?, "
-            + "aRenouveler = 0"
+            + "aRenouveler = 0 "
             + "WHERE idContrat = ?";
     
     private static final String selectAllRequestsQuery =
@@ -65,8 +65,8 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "JOIN Utilisateur "
             + "ON (pseudo = offreur OR pseudo = demandeur) "
             + "WHERE dateDebutLivraison IS NULL "
-            + "AND aRenouveler IS NULL "
-            + "AND offreur = ?";
+            + "AND (aRenouveler IS NULL OR aRenouveler = 0) "
+            + "AND offreur = ? ";
     private static final String selectAllContratQuery=
             "SELECT * "
             + "FROM Contrat "
@@ -179,11 +179,13 @@ public class ContractDAOSqlPlus implements ContractDAO {
         try {
             selectPrep = connec.prepareStatement(selectAllRequestsQuery);
             selectPrep.setString(1, offreurPseudo);
+            System.out.println(offreurPseudo);
             rs = selectPrep.executeQuery();
             
             int line = 0;
             ContractBuilder builder = new ContractBuilder();
             while(rs.next()){
+                System.err.println("ici");
                 // With the first line we set the attribute of the contract
                 if(line == 0)
                     builder.setIdContrat(rs.getInt("idContrat"))
@@ -366,8 +368,8 @@ public class ContractDAOSqlPlus implements ContractDAO {
         
         try {
             updatePrep = connec.prepareStatement(updateValidateQuery);
-            updatePrep.setDate(1, begin);
-            updatePrep.setDate(2, dateCont);
+            updatePrep.setDate(1, dateCont);
+            updatePrep.setDate(2, begin);
             updatePrep.setInt(3, id);
             updatePrep.executeUpdate();
         } catch (SQLException ex) {

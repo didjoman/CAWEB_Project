@@ -328,7 +328,12 @@ ul{
     @include selectedDate(#990000, #ba2c41, #c83c53, #a5273e, #a62b41, #a13049  );
 }
 
-.consummer-week-picker .ui-state-active, .week-picker .ui-state-active {
+.demo-active, .consummer-week-picker .ui-state-active, .week-picker .ui-state-active {
     background: url('../../img/date_hover.png') !important;
     color: inherit !important;
+    border: 1px solid #2694e8;
+}
+
+#accordion-modif-perm div{
+    height: auto !important;
 }
