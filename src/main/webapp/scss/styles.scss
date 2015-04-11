@@ -141,6 +141,10 @@ body {
     @include rounded(10, 1, solid, #DDDDDD);
 }
 
+ul{
+    list-style-type: none;
+}
+
 /*
 * *** Jquery UI components *** /
 */
@@ -158,25 +162,35 @@ body {
 #subscription-form{
     display: block;
     width: 300px;
-    
-    label{
-        width: 120px;
+    padding: 10px;
+    div.form-group{
+        margin: 7px;
+        clear: both;
     }
-    input:not(input[type=radio]){
-        width: 170px;
+    label{
+        width: 130px;
+        clear: both;
+    }
+    input:not([type=radio]){
+        width: 130px !important;
+        float: right;
     }
     #status-radio{
         list-style-type: none; 
         margin-left: 80px;
     }
+    #submit{
+        float: right;
+    }
 }
 
-#connexion-dropdown, #subscription-dropdown{
+#connexion-dropdown{
     padding: 8px;
     input{
         @include rounded(5, 1, solid, #DDDDDD);
     }
 }
+
 
 /*
  * Top navigation
@@ -296,6 +310,8 @@ body {
     @include gradient5($bgCol1, $bgCol2, $bgCol3, $bgCol4, $bgCol5);
 }
 
+
+
 .fullperms, .fullperms .ui-state-default{
     @include selectedDate(#000763, #2c62ba, #3c74c8, #275ba5, #2b5ea6, #3063a1);
 }
@@ -310,4 +326,9 @@ body {
 
 .undispos, .undispos .ui-state-default{
     @include selectedDate(#990000, #ba2c41, #c83c53, #a5273e, #a62b41, #a13049  );
+}
+
+.consummer-week-picker .ui-state-active, .week-picker .ui-state-active {
+    background: url('../../img/date_hover.png') !important;
+    color: inherit !important;
 }

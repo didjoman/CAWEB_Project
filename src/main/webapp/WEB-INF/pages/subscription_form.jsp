@@ -6,61 +6,68 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<form role="form" id="subscription-form" data-toggle="validator" action="user" method="post">
-    <div>
-        <label for="login">*Login :</label>
-        <input type="text" value="${param.login}"
+    
+<form id="subscription-form" action="user" method="post" role="form" data-toggle="validator">
+    <div class="form-group">
+        <label for="login" class="control-label">*Login :</label>
+        <input type="text" value="${param.login}" class="form-control input-sm"
                name="login" id="login" placeholder="Identifiant" required/>
     </div>
         
-    <div>
-        <label for="password">*Mot de passe :</label>
-        <input type="password" name="password" id="password" placeholder="Mot de passe" required/>
-        <input type="hidden" name="connexion" value="1" />
+    <div class="form-group">
+        <label for="password" class="control-label">*Mot de passe :</label>
+        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Mot de passe" required/>
     </div>
-    <div>
-        <label for="password-verif-field">*Mot de passe(2) :</label>
-        <input type="password" name="passwordverif" id="password-verif-field" placeholder="Verif Mot de passe" required/>
-        <input type="hidden" name="connexion" value="1" />
+    <div class="form-group">
+        <label for="password-verif-field" class="control-label">*Mot de passe(2) :</label>
+        <input type="password" name="passwordverif" id="password-verif-field" 
+               data-match="#password" 
+               data-error="Veuillez confirmer le mot de passe." 
+               data-match-error="Mdp(2) doit être identique au mdp ..." 
+               class="form-control input-sm"  placeholder="Verif Mot de passe" required/>
+        <div class="help-block with-errors"></div>
     </div>
-    <div>
-        <label for="courriel-field">*Courriel :</label>
+    <div class="form-group">
+        <label for="courriel-field" class="control-label">*Courriel :</label>
         <input type="email"  value="${param.email}"
-               name="email" id="courriel-field" placeholder="courriel" required/>
+               name="email" id="courriel-field" class="form-control input-sm" 
+               data-error="Veuillez saisir une adresse email valide SVP."
+               placeholder="courriel" required/>
     </div>
-    <div>
-        <label for="adresse-field">*Adresse :</label>
+    <div class="form-group">
+        <label for="adresse-field" class="control-label">*Adresse :</label>
         <input type="text"  value="${param.address}"
-               name="address" id="adresse-field" placeholder="adresse" required/>
+               name="address" id="adresse-field" class="form-control input-sm"  placeholder="adresse" required/>
     </div>
-    <div>
-        <label for="nom-field">*Nom :</label>
+    <div class="form-group">
+        <label for="nom-field" class="control-label">*Nom :</label>
         <input type="text"  value="${param.name}"
-               name="name" id="nom-field" placeholder="Nom" required/>
+               name="name" id="nom-field" class="form-control input-sm"  placeholder="Nom" required/>
     </div>
-    <div>
-        <label for="prenom-field">*Prenom :</label>
+    <div class="form-group">
+        <label for="prenom-field" class="control-label">*Prenom :</label>
         <input type="text"  value="${param.firstname}"
-               name="firstname" id="prenom-field" placeholder="Prenom" required/>
+               name="firstname" id="prenom-field" class="form-control input-sm"  placeholder="Prenom" required/>
     </div>
-    <div>
-        <label for="tel-field">*Tel :</label>
+    <div class="form-group">
+        <label for="tel-field" class="control-label">*Tel :</label>
         <input type="text"  value="${param.tel}"
-               name="tel" id="tel-field" placeholder="telephone" required/>
+               name="tel" id="tel-field" class="form-control input-sm"  placeholder="telephone" required/>
     </div>
-    <div>        
-        <label>*statut :</label>
+    <div class="form-group">        
+        <label class="control-label">*statut :</label>
         <ul id="status-radio">
             <li>
-                <input type="radio" name="status" value="cons" <c:if test="${param.status == 'cons'}">checked</c:if>>
-                           Consommateur
-            </li>
-            <li>
-                <input type="radio" name="status" value="prod" <c:if test="${param.status == 'prod'}">checked</c:if>> Producteur
+                <input type="radio" name="status"  value="cons" <c:if test="${param.status == 'cons'}">checked</c:if>>
+                    Consommateur
+                </li>
+                <li>
+                    <input type="radio" name="status" value="prod" <c:if test="${param.status == 'prod'}">checked</c:if>> Producteur
             </li>
         </ul>
     </div>
+    * : Champs obligatoires
+        
     <br />
     <input class="submit btn btn-primary" type="submit" value="S'inscrire" id="submit" /><br />
-    * : Champs obligatoires
 </form>
