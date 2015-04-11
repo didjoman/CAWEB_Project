@@ -20,11 +20,13 @@ public interface ContractDAO {
     
     public abstract Contract read(int id)  throws DAOException ;
     
-    public abstract List<Contract> readAll()  throws DAOException ;
+    public abstract List<Contract> readAll(String userPseudo)  throws DAOException ;
     
-    public List<Contract> readAllRequests(String offreurPseudo) throws DAOException;
+    public List<Contract> readAllContractRequests(String offreurPseudo) throws DAOException;
     
-    public List<Contract> readAllContrat(String userPseudo) throws DAOException;
+    public List<Contract> readAllValidatedContracts(String userPseudo) throws DAOException;
+    
+    public List<Contract> readAllContractsToRenew(String userPseudo) throws DAOException;
 
     public void updateToReNew(int id) throws DAOException;
     

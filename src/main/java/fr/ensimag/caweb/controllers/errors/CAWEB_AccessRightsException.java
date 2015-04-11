@@ -9,14 +9,14 @@ package fr.ensimag.caweb.controllers.errors;
  *
  * @author Alexandre Rupp
  */
-public class AccessRightsException extends CAWEBServletException{
+public class CAWEB_AccessRightsException extends CAWEBServletException{
     private static final String ERROR_MSG = "Vous n'avez pas le droit d'accéder "
                         + "à la ressource ";
-    public AccessRightsException(String uri) {
+    public CAWEB_AccessRightsException(String uri) {
         super(ERROR_MSG+ uri);
     }
 
-    public AccessRightsException(String error, Throwable throwable) {
+    public CAWEB_AccessRightsException(String error, Throwable throwable) {
         super(ERROR_MSG+ error, throwable);
     }
     

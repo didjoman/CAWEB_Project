@@ -11,7 +11,11 @@ INSERT INTO Utilisateur (pseudo, motDePasse, eMail, adresse, nom, prenom, tel, r
 VALUES('test3', 'mdp3', 'test3@free.fr', '53 rue d ici', 'FamilleTest', 'MrTest3', '06-12-84-23-01', 'CONS');
 
 INSERT INTO Utilisateur (pseudo, motDePasse, eMail, adresse, nom, prenom, tel, roleUtilisateur)
+VALUES('test31', 'mdp31', 'test31@free.fr', '531 rue d ici', 'FamilleTest', 'MrTest31', '06-12-84-23-01', 'CONS');
+
+INSERT INTO Utilisateur (pseudo, motDePasse, eMail, adresse, nom, prenom, tel, roleUtilisateur)
 VALUES('test4', 'mdp4', 'test4@free.fr', '54 rue d ici', 'FamilleTest', 'MrTest4', '06-23-43-65-13', 'RESP');
+
 
 -- Remplissage table Offre
 INSERT INTO Offre (idOffre, createur, nomProduit, dureeOffre)
@@ -49,6 +53,9 @@ VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, T
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
 VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('05/04/2015', 'DD.MM.YYYY'), '');
+
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
+VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('06/08/2014', 'DD.MM.YYYY'), 1);
 
 SELECT * FROM CONTRAT JOIN UTILISATEUR ON(pseudo = offreur OR pseudo = demandeur) 
 WHERE (demandeur = 'test1' OR offreur = 'test1') AND dateDebutLivraison IS NOT NULL;

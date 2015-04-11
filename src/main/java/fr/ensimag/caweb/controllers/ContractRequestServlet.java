@@ -106,12 +106,21 @@ public class ContractRequestServlet extends HttpServlet {
             // We get the list of contracts in request for the producer :
             List<Contract> reqs = null;
             try {
-                reqs =  DAOFactory.getInstance().getContractDAO().readAllRequests(login);
+                reqs =  DAOFactory.getInstance().getContractDAO().readAllContractRequests(login);
+            } catch (DAOException ex) {
+                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // We get the list of contracts in request for the producer :
+            List<Contract> contractsToRenew = null;
+            try {
+                contractsToRenew =  DAOFactory.getInstance().getContractDAO().readAllContractsToRenew(login);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             request.setAttribute("reqs", reqs);
+            request.setAttribute("contractsToRenew", contractsToRenew);
             
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/request_read_all.jsp");
             view.forward(request, response);

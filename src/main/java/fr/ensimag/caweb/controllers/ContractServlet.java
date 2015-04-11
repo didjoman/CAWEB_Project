@@ -50,7 +50,7 @@ public class ContractServlet extends HttpServlet {
         String pseudo= session.getAttribute("login").toString();
         List<Contract> reqs;
         try {
-            reqs = DAOFactory.getInstance().getContractDAO().readAllContrat(pseudo);
+            reqs = DAOFactory.getInstance().getContractDAO().readAllValidatedContracts(pseudo);
             request.setAttribute("reqs", reqs);
             System.out.println(reqs);
         } catch (DAOException ex) {

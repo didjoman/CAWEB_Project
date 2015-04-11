@@ -12,9 +12,9 @@
 <t:layout title="Erreur" error="${throwable.getMessage()}">        
     <jsp:body>
         <c:choose>
-            <c:when test="${throwable.getClass().getName().equals('fr.ensimag.caweb.controllers.errors.CAWEBServletException') ||
-                    throwable.getClass().getName().equals('fr.ensimag.caweb.controllers.errors.AccessRightsException') ||
-                    throwable.getClass().getName().equals('fr.ensimag.caweb.controllers.errors.DatabaseException')}">
+            <c:when test="${throwable.getClass().getName()
+                            .substring(throwable.getClass().getName().lastIndexOf('.')+1)
+                            .lastIndexOf('CAWEB') != -1}">
                 <h1>Erreur ...</h1>
             </c:when>
             <c:when test="${statusCode != null}" >

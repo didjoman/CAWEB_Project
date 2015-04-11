@@ -3,17 +3,17 @@
     Created on : 7 avr. 2015, 09:06:31
     Author     : Alexandre Rupp
 --%>
-    
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-    
+
 <t:layout title="Permanences">        
     <jsp:body>
         <div class="page-header">
             <h1>Permanences</h1>
         </div>
-        
+            
         <div class="row">
             <div class="thumbnail col-sm-6 col-md-4">
                 <div id="permanency-picker" class="consummer-week-picker"></div>
@@ -36,7 +36,7 @@
                     </ul>
                 </div>
             </div>
-            
+                
             <div class="col-sm-6 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -65,46 +65,73 @@
                                         </ul>
                                     </div>
                                 </form>
-                                <div id="disponibility-info" style="display: none;">
+                                <div class="disponibility-info" style="display: none;">
                                     Vous êtes de permanence cette semaine.
+                                </div>
+                                    
+                            </li>
+                            <li class="disponibility-info" style="display: none;">
+                                <strong>Autre Permanencier : </strong><br />
+                                <div id="perm-info" style="display: none;">
+                                    Un autre permanencier a été affecté à cette semaine :
+                                    <ul id="consumer-info" class="thumbnail">
+                                        <li>
+                                            <strong>pseudo:</strong> <span id="perm-info-pseudo"></span>
+                                        </li>
+                                        <li>
+                                            <strong>prenom:</strong> <span id="perm-info-firstname"></span>
+                                        </li>
+                                        <li>
+                                            <strong>nom:</strong> <span id="perm-info-name"></span>
+                                        </li>
+                                        <li>
+                                            <strong>tel:</strong>  <span id="perm-info-phone"></span>
+                                        </li>
+                                        <li>
+                                            <strong>email:</strong> <a href="mailto:#"> <span id="perm-info-email"></span> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div id="no-perm-info" style="display: none;">
+                                    Aucun autre permanencier n'a encore été affecté à cette permanence ...
                                 </div>
                             </li>
                         </ul>
                     </div>
-                        
+                    
                 </div>
             </div>
         </div>
+        
+        
+        <script>
             
-            
-            <script>
-                
-                var listPermSet = [];
-                var listPermFullySet = [
-                <c:forEach items="${weeks}" var="week">
-                    <c:if test="${(week.getPermanencier1() != null &&  week.getPermanencier1().getPseudo().equals(login)) ||
-                                  (week.getPermanencier2() != null &&  week.getPermanencier2().getPseudo().equals(login))}">
-                                "${week.getFirstDate()}",
-                    </c:if>
-                </c:forEach>
-                    ];
-                    
-                    var listDispos = [
-                <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.isDispo(login)}">
+            var listPermSet = [];
+            var listPermFullySet = [
+            <c:forEach items="${weeks}" var="week">
+                <c:if test="${(week.getPermanencier1() != null &&  week.getPermanencier1().getPseudo().equals(login)) ||
+                    (week.getPermanencier2() != null &&  week.getPermanencier2().getPseudo().equals(login))}">
                             "${week.getFirstDate()}",
-                    </c:if>
-                </c:forEach>
-                    ];
-                    
-                    var listUndispos = [
-                <c:forEach items="${weeks}" var="week">
-                    <c:if test="${week.isUndispo(login)}">
-                            "${week.getFirstDate()}",
-                    </c:if>
-                </c:forEach>
-                    ];
-            </script>
+                </c:if>
+            </c:forEach>
+                ];
                 
-        </jsp:body>
-    </t:layout>   
+                var listDispos = [
+            <c:forEach items="${weeks}" var="week">
+                <c:if test="${week.isDispo(login)}">
+                        "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
+                
+                var listUndispos = [
+            <c:forEach items="${weeks}" var="week">
+                <c:if test="${week.isUndispo(login)}">
+                        "${week.getFirstDate()}",
+                </c:if>
+            </c:forEach>
+                ];
+        </script>
+        
+    </jsp:body>
+</t:layout>   

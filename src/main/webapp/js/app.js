@@ -120,13 +120,13 @@ $(function() {
             }
             
             // Update of the view with values got from the database :
-            var perm1 = (!data.permanencier1) ? "" : data.permanencier1.pseudo;
+            var perm1 = (!data.permanencier1) ? "" : data.permanencier1;
             $('#field-perm1').val(""+perm1);
             if(perm1 !== "")
                 perm1 += "<br />";
             $('#week-info #week-info-perm1').html(perm1);
             
-            var perm2 = (!data.permanencier2) ? "" : data.permanencier2.pseudo;
+            var perm2 = (!data.permanencier2) ? "" : data.permanencier2;
             $('#field-perm2').val(""+perm2);
             if(perm2 !== "")
                 perm2 += "<br />";
@@ -138,14 +138,14 @@ $(function() {
             
             var dispo ="";
             for(var i = 0; i < data.estDisponible.length; ++i)
-                dispo += data.estDisponible[i].pseudo + "<br />";
+                dispo += data.estDisponible[i] + "<br />";
             if(dispo === "")
                 dispo = "/";
             $('#week-info #week-info-dispo').html(dispo);
             
             var indispo ="";
             for(var i = 0; i < data.estIndisponible.length; ++i)
-                indispo += data.estIndisponible[i].pseudo + "<br />";
+                indispo += data.estIndisponible[i] + "<br />";
             if(indispo === "")
                 indispo = "/";
             $('#week-info #week-info-indispo').html(indispo);
@@ -200,30 +200,55 @@ $(function() {
     });
 
     var onOnSelecConsummer = function(dateText, inst) { 
+        var updateViewCons = function(){
+            // Update textual info on the right
+            $('#week-info #week-info-num').html(weekNumber);
+            $('#week-info #week-info-year').html(startDate.getFullYear());
+            $('#week-info #week-info-start').html(printDate(startDate));
+            $('#week-info #week-info-end').html(printDate(endDate));
+        
+            // Hide/Show the Form Or Info about the perm
+            if(isInList(date, listPermFullySet) !== -1){
+                $('#disponibility-form').hide(200);
+                $('.disponibility-info').show(200);
+            }else {
+                $('.disponibility-info').hide(200);
+                $('#disponibility-form').show(200);
+                if(isInList(date, listDispos) !== -1)
+                    $('#dispo-radio input[value="true"]').prop('checked', true);
+                else if(isInList(date, listUndispos) !== -1)
+                    $('#dispo-radio input[value="false"]').prop('checked', true);
+                else 
+                    $('#dispo-radio input[value="maybe"]').prop('checked', true);
+            }
+            
+            // Get info about the second permanency holder :
+            $.get('permanency', 
+            {async: "true", weekNum: weekNumber, year: startDate.getFullYear()}, 
+            function(data){
+                if(data.perm){
+                    $('#perm-info-pseudo').html(data.perm.pseudo);
+                    $('#perm-info-firstname').html(data.perm.prenom);
+                    $('#perm-info-name').html(data.perm.nom);
+                    $('#perm-info-phone').html(data.perm.tel);
+                    $('#perm-info-email').html(data.perm.email);
+                    $('#no-perm-info').hide(200);
+                    $('#perm-info').show(200);
+                } else {
+                    $('#perm-info').hide(200);
+                    $('#no-perm-info').show(200);
+                }
+            }, "json");
+            
+        };
+        
         // Get the current date, and week info of the selected date.
         var date = $(this).datepicker('getDate');
         var weekNumber = $.datepicker.iso8601Week(new Date(date));
         startDate = new Date(getStartDate(date));
         endDate = new Date(getEndDate(date));
         // Update textual informations about the week selected :
-        $('#week-info #week-info-num').html(weekNumber);
-        $('#week-info #week-info-year').html(startDate.getFullYear());
-        $('#week-info #week-info-start').html(printDate(startDate));
-        $('#week-info #week-info-end').html(printDate(endDate));
-        
-        if(isInList(date, listPermFullySet) !== -1){
-            $('#disponibility-form').hide();
-            $('#disponibility-info').show();
-        }else {
-            $('#disponibility-info').hide();
-            $('#disponibility-form').show();
-            if(isInList(date, listDispos) !== -1)
-                $('#dispo-radio input[value="true"]').prop('checked', true);
-            else if(isInList(date, listUndispos) !== -1)
-                $('#dispo-radio input[value="false"]').prop('checked', true);
-            else 
-                $('#dispo-radio input[value="maybe"]').prop('checked', true);
-        }
+        updateViewCons();
         selectCurrentWeek();
         // Re-set the "hover effects" handlers
         weekMouseMoveHandler();

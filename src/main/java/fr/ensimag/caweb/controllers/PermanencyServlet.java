@@ -8,8 +8,8 @@ package fr.ensimag.caweb.controllers;
 import fr.ensimag.caweb.controllers.errors.CAWEBServletException;
 import com.google.gson.Gson;
 import static com.google.gson.internal.bind.TypeAdapters.URL;
-import fr.ensimag.caweb.controllers.errors.AccessRightsException;
-import fr.ensimag.caweb.controllers.errors.DatabaseAccessException;
+import fr.ensimag.caweb.controllers.errors.CAWEB_AccessRightsException;
+import fr.ensimag.caweb.controllers.errors.CAWEB_DatabaseAccessException;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.User.User;
@@ -23,6 +23,7 @@ import java.rmi.ServerException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.Json;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,6 +59,18 @@ public class PermanencyServlet extends HttpServlet {
         String yearParam = request.getParameter("year");
         
         
+        // Get the status of the user :
+        HttpSession session = request.getSession(false);
+        String login = null;
+        String status = null;
+        if(session != null && session.getAttribute("login") != null
+                && session.getAttribute("status") != null){
+            
+            login = (String)session.getAttribute("login");
+            status = (String)session.getAttribute("status");
+        } else
+            throw new CAWEB_AccessRightsException(request.getRequestURI());
+        
         // READ :
         if(weekNumParam != null && yearParam != null) {
             // We get the data about the week :
@@ -70,36 +83,41 @@ public class PermanencyServlet extends HttpServlet {
                 week =  DAOFactory.getInstance().getWeekDAO().read(weekNum, year);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                throw new DatabaseAccessException();
+                throw new CAWEB_DatabaseAccessException();
             }
             
-            // Transmit it to the client :
+            // Response to an AJAX request :
             if(async != null && async.equals("true")){
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
                 Gson gson = new Gson();
-                response.getWriter().write(gson.toJson(week));
-                // TODO: to change absolutely !!!!!
-                // DANGEROUS : We transmit EVERYTHING to the client !
-                // Juste transmit the required info.
+                
+                // READ for RESPONSIBLE
+                if(status.equals(UserStatus.RESP.toString())){
+                    response.getWriter().write(week.getJSON());
+                    System.out.println(week.getJSON());
+                    // TODO: to change absolutely !!!!!
+                    // DANGEROUS : We transmit EVERYTHING to the client !
+                    // Juste transmit the required info.
+                }
+                // READ for CONSUMMER
+                else if(status.equals(UserStatus.CONS.toString())){
+                    User perm1 = week.getPermanencier1();
+                    User perm2 = week.getPermanencier2();
+                    
+                    String returnVal = "{";
+                    if(perm1 != null && !perm1.getPseudo().equals(login))
+                        returnVal += "\"perm\" : " + perm1.getJSONContactInfo();
+                    else if(perm2 != null && !perm2.getPseudo().equals(login))
+                        returnVal += "\"perm\" : " + perm2.getJSONContactInfo();
+                    returnVal += "}";
+                    System.out.println(returnVal);
+                    response.getWriter().write(returnVal);
+                }
             }
         }
         // READ ALL
         else{
-            String error = null;
-            // Check : A consummer can only access to his own requests :
-            HttpSession session = request.getSession(false);
-            String login = null;
-            String status = null;
-            if(session != null && session.getAttribute("login") != null
-                    && session.getAttribute("status") != null){
-                
-                login = (String)session.getAttribute("login");
-                status = (String)session.getAttribute("status");
-            } else
-                throw new AccessRightsException(request.getRequestURI());
-            
-            
             // Get the weeks in the database :
             List<Week> weeks = null;
             
@@ -109,7 +127,7 @@ public class PermanencyServlet extends HttpServlet {
                     weeks =  DAOFactory.getInstance().getWeekDAO().readAllWhereConsumerAppears(login);
                 } catch (DAOException ex) {
                     Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new DatabaseAccessException();
+                    throw new CAWEB_DatabaseAccessException();
                 }
                 
                 request.setAttribute("weeks", weeks);
@@ -122,7 +140,7 @@ public class PermanencyServlet extends HttpServlet {
                     weeks =  DAOFactory.getInstance().getWeekDAO().readAll();
                 } catch (DAOException ex) {
                     Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new DatabaseAccessException();
+                    throw new CAWEB_DatabaseAccessException();
                 }
                 
                 List<User> users = null;
@@ -130,7 +148,7 @@ public class PermanencyServlet extends HttpServlet {
                     users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
                 } catch (DAOException ex) {
                     Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                    throw new DatabaseAccessException();
+                    throw new CAWEB_DatabaseAccessException();
                 }
                 
                 request.setAttribute("consummers", users);
@@ -140,15 +158,11 @@ public class PermanencyServlet extends HttpServlet {
                 view.forward(request, response);
             }
             else
-                throw new AccessRightsException(request.getRequestURI());
+                throw new CAWEB_AccessRightsException(request.getRequestURI());
             
         }
     }
-    
-    
-    
-    
-    
+
     
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -178,7 +192,7 @@ public class PermanencyServlet extends HttpServlet {
         if(session != null && session.getAttribute("login") != null)
             login = (String)session.getAttribute("login");
         else
-            throw new AccessRightsException(request.getRequestURI());
+            throw new CAWEB_AccessRightsException(request.getRequestURI());
         
         
         // UDPATE Disponibilities :
@@ -199,7 +213,7 @@ public class PermanencyServlet extends HttpServlet {
                 }
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                throw new DatabaseAccessException();
+                throw new CAWEB_DatabaseAccessException();
             }
             
             // Transmit confirmation to the client :
@@ -207,7 +221,7 @@ public class PermanencyServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
                 Gson gson = new Gson();
-                response.getWriter().write("{OK:\"true\"}");
+                response.getWriter().write("{\"OK\":\"true\"}");
             }
         }
         // UDPATE Permanencies
@@ -218,7 +232,7 @@ public class PermanencyServlet extends HttpServlet {
                 DAOFactory.getInstance().getWeekDAO().updateSetPerm(weekNum, year, perm1, perm2);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                throw new DatabaseAccessException();
+                throw new CAWEB_DatabaseAccessException();
             }
             
             // Transmit confirmation to the client :
@@ -226,7 +240,7 @@ public class PermanencyServlet extends HttpServlet {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
                 Gson gson = new Gson();
-                response.getWriter().write("{OK:\"true\"}");
+                response.getWriter().write("{\"OK\":\"true\"}");
             }
         }
         

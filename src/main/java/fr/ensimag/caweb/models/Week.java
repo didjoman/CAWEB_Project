@@ -157,6 +157,33 @@ public class Week {
         return "Week{" + "numSemaine=" + numSemaine + ", annee=" + annee + ", estDisponible=" + estDisponible.toString() + ", estIndisponible=" + estIndisponible.toString() + ", permanencier1=" + permanencier1 + ", permanencier2=" + permanencier2 + "}\n";
     }
     
+    public String getJSON(){
+        String retString = "{\"numSemaine\" : \"" + numSemaine + "\", \"annee\" : \""+ annee + "\", \"estDisponible\" : [";
+        
+        boolean isFirst = true;
+        for(User u : estDisponible){
+            if(isFirst)
+                isFirst = false;
+            else
+                retString += ", ";
+            retString+="\""+u.getPseudo()+"\"";
+        }
+        retString += "], \"estIndisponible\" : [ ";
+        
+        isFirst = true;
+        for(User u : estIndisponible){
+            if(isFirst)
+                isFirst = false;
+            else
+                retString += ", ";
+            retString+="\""+u.getPseudo()+"\" ";
+        }
+        retString += "], ";
+        
+        retString += "\"permanencier1\" : \"" + ((permanencier1 != null) ? permanencier1.getPseudo() : "") +
+                "\", \"permanencier2\" : \"" + ((permanencier2 != null) ? permanencier2.getPseudo() : "") + "\"}";
+        return retString;
+    }
     
     
 }

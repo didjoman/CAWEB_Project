@@ -13,6 +13,7 @@
         <div class="page-header">
             <h1>Demandes de contrats</h1>
         </div>
+        <h3>Demandes de contrats</h3>
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -27,6 +28,26 @@
                         <td>${req.dateContrat}</td>
                         <td>${req.demandeur.pseudo}</td>
                         <td><a class="btn btn-primary" href="request?id=${req.idContrat}" role="button">Voir</a></td>
+                    </tr>
+                </c:forEach> 
+                                    
+            </tbody>
+        </table>
+        <h3>Demandes de renouvellements</h3>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Consommateur</th>
+                    <th>Voir</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${contractsToRenew}" var="cont">
+                    <tr>
+                        <td>${cont.dateContrat}</td>
+                        <td>${cont.demandeur.pseudo}</td>
+                        <td><a class="btn btn-primary" href="request?id=${cont.idContrat}" role="button">Voir</a></td>
                     </tr>
                 </c:forEach> 
                                     

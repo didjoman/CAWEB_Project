@@ -99,5 +99,11 @@ public abstract class User {
         return "User{" + "pseudo=" + pseudo + ", motDePasse=" + motDePasse + ", email=" + email + ", adresse=" + adresse + ", nom=" + nom + ", prenom=" + prenom + ", tel=" + tel + '}';
     }
     
+    public String getJSONContactInfo(){
+        return "{ \"pseudo\" : \"" + pseudo + "\" , \"email\" : \"" + email + 
+                "\" , \"adresse\" : \"" + adresse + "\" , \"nom\" : \"" + nom + 
+                "\" , \"prenom\" : \"" + prenom + "\" , \"tel\" :\"" + tel + "\" }";
+
+    }
     public abstract UserStatus getRole();
 }

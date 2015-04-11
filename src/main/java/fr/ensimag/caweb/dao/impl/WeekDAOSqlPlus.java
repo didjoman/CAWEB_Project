@@ -105,7 +105,8 @@ public class WeekDAOSqlPlus implements WeekDAO{
             selectPrep.setInt(4, year);
             rs = selectPrep.executeQuery();
             while(rs.next()){
-                week = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
+                if(week == null)
+                    week = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
                 
                 // Fetch the last week attributes :
                 String consoPseudo;
@@ -133,8 +134,9 @@ public class WeekDAOSqlPlus implements WeekDAO{
                         else
                             week.addIndispo(consummer);
                 }
+                System.out.println(week);
+                
             }
-            
         } catch (SQLException ex) {
             throw new DAOException("Erreur BD " + ex.getMessage(), ex);
         } finally {
