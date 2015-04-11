@@ -3,17 +3,17 @@
     Created on : 7 avr. 2015, 09:06:31
     Author     : Alexandre Rupp
 --%>
-
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-
+    
 <t:layout title="Permanences">        
     <jsp:body>
         <div class="page-header">
             <h1>Permanences</h1>
         </div>
-            
+        
         <div class="row">
             <div class="thumbnail col-sm-6 col-md-4">
                 <div id="permanency-picker" class="consummer-week-picker"></div>
@@ -36,7 +36,7 @@
                     </ul>
                 </div>
             </div>
-                
+            
             <div class="col-sm-6 col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -71,82 +71,24 @@
                             </li>
                         </ul>
                     </div>
-                    
+                        
                 </div>
             </div>
         </div>
-        <div>
-            <form data-toggle="validator" role="form">
-                <div class="form-group">
-                    <label for="inputName" class="control-label">Name</label>
-                    <input type="text" class="form-control" id="inputName" placeholder="Cina Saffary" required>
-                </div>
-                <div class="form-group">
-                    <label for="inputTwitter" class="control-label">Twitter</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">@</span>
-                        <input type="text" pattern="^([_A-z0-9]){3,}$" maxlength="20" class="form-control" id="inputTwitter" placeholder="1000hz" required>
-                    </div>
-                    <span class="help-block with-errors">Up to 20 letters, numbers and underscores</span>
-                </div>
-                <div class="form-group">
-                    <label for="inputEmail" class="control-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email" data-error="Bruh, that email address is invalid" required>
-                    <div class="help-block with-errors"></div>
-                </div>
-                <div class="form-group">
-                    <label for="inputPassword" class="control-label">Password</label>
-                    <div class="form-group col-sm-6">
-                        <input type="password" data-minlength="6" class="form-control" id="inputPassword" placeholder="Password" required>
-                        <span class="help-block">Minimum of 6 characters</span>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="underwear" required>
-                            Boxers
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="underwear" required>
-                            Briefs
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox" id="terms" data-error="Before you wreck yourself" required>
-                            Check yourself
-                        </label>
-                        <div class="help-block with-errors"></div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </form>
-            </div>
+            
             
             <script>
-            
+                
                 var listPermSet = [];
                 var listPermFullySet = [
                 <c:forEach items="${weeks}" var="week">
                     <c:if test="${(week.getPermanencier1() != null &&  week.getPermanencier1().getPseudo().equals(login)) ||
-                        (week.getPermanencier2() != null &&  week.getPermanencier2().getPseudo().equals(login))}">
+                                  (week.getPermanencier2() != null &&  week.getPermanencier2().getPseudo().equals(login))}">
                                 "${week.getFirstDate()}",
                     </c:if>
                 </c:forEach>
                     ];
-                
+                    
                     var listDispos = [
                 <c:forEach items="${weeks}" var="week">
                     <c:if test="${!week.getEstDisponible().contains(login)}">
@@ -154,7 +96,7 @@
                     </c:if>
                 </c:forEach>
                     ];
-                
+                    
                     var listUndispos = [
                 <c:forEach items="${weeks}" var="week">
                     <c:if test="${!week.getEstIndisponible().contains(login)}">
@@ -163,6 +105,6 @@
                 </c:forEach>
                     ];
             </script>
-            
+                
         </jsp:body>
     </t:layout>   
