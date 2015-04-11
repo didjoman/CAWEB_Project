@@ -6,6 +6,7 @@
 package fr.ensimag.caweb.models;
 
 import fr.ensimag.caweb.models.User.Consummer;
+import fr.ensimag.caweb.models.User.User;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -103,20 +104,29 @@ public class Week {
         return estIndisponible.add(e);
     }
     
+    public boolean isDispo(String cons){
+        for(User u : estDisponible)
+            if(u.getPseudo().equals(cons))
+                return true;
+        return false;
+    }
+    
+    public boolean isUndispo(String cons){
+        for(User u : estIndisponible)
+            if(u.getPseudo().equals(cons))
+                return true;
+        return false;
+    }
+    
     public String getFirstDate(){
         Calendar gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.setFirstDayOfWeek(Calendar.MONDAY);
         gregorianCalendar.setMinimalDaysInFirstWeek(4);
         // Corresponds to the week having the first thirsday of the month (see ISO8601)
-
-         
+        
         gregorianCalendar.set(Calendar.YEAR , this.annee);
         gregorianCalendar.set(Calendar.WEEK_OF_YEAR , this.numSemaine);
         gregorianCalendar.set(Calendar.DAY_OF_WEEK , Calendar.MONDAY);
-        
-        
-        System.out.println("year : "+annee);
-        System.out.println("week : "+numSemaine);
         
         return "" + String.format("%02d",gregorianCalendar.get(Calendar.DAY_OF_MONTH)) + "/" +
                 String.format("%02d",(gregorianCalendar.get(Calendar.MONTH)+1 )) + "/" +

@@ -12,6 +12,7 @@ import fr.ensimag.caweb.models.User.Consummer;
 import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.models.User.UserFactory;
 import fr.ensimag.caweb.models.Week;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,11 +27,15 @@ import java.util.List;
 public class WeekDAOSqlPlus implements WeekDAO{
     private final DAOFactory daoFactory;
     
-    private static final String selectAllQuery = "SELECT * " +
+    private static final String selectAllQuery = "SELECT COALESCE(d.numSemaine, p.numSemaine) as numSemaine, " +
+            "COALESCE(d.annee, p.annee) as annee, " +
+            "d.consoDispo, d.estDispo," +
+            "p.permanencier1, p.permanencier2, " +
+            "u.* " +
             "FROM EstDisponible d " +
             "FULL OUTER JOIN AssurePermanence p " +
             "ON (d.annee = p.annee AND d.numSemaine = p.numSemaine) " +
-            "JOIN Utilisateur " +
+            "JOIN Utilisateur u " +
             "ON (pseudo = permanencier1 OR pseudo = permanencier2 OR pseudo = consoDispo) ";
     
     private static final String selectAllWhereConsummerAppearsQuery = selectAllQuery +
@@ -61,9 +66,17 @@ public class WeekDAOSqlPlus implements WeekDAO{
             + "WHERE estDispo = 0";
     
     private static final String selectQuery = selectAllQuery +
-            "WHERE d.numSemaine = ? "
-            + "AND d.annee = ? ";
+            "WHERE (d.numSemaine = ? AND d.annee = ?) "
+            + "OR (p.numSemaine = ? AND p.annee = ?)";
     
+    private static final String updateQuery = "begin updateUserDispo (?, ?, ?, ?); end;";
+    
+    private static final String updateSetPermQuery = "begin updatePerm(?, ?, ?, ?); end;";
+    
+    private static final String deleteDispoQuery = "DELETE FROM EstDisponible "
+            + "WHERE numsemaine = ? "
+            + "AND annee = ? "
+            + "AND consoDispo = ?";
     
     public WeekDAOSqlPlus(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
@@ -88,6 +101,8 @@ public class WeekDAOSqlPlus implements WeekDAO{
             selectPrep = connec.prepareStatement(selectQuery);
             selectPrep.setInt(1, weekNum);
             selectPrep.setInt(2, year);
+            selectPrep.setInt(3, weekNum);
+            selectPrep.setInt(4, year);
             rs = selectPrep.executeQuery();
             while(rs.next()){
                 week = new Week(rs.getInt("numSemaine"), rs.getInt("annee"));
@@ -142,7 +157,6 @@ public class WeekDAOSqlPlus implements WeekDAO{
         
         List<Week> weeks = new ArrayList<>();
         PreparedStatement selectPrep = null;
-        
         ResultSet rs = null;
         Week week = null;
         Week tmp;
@@ -186,6 +200,7 @@ public class WeekDAOSqlPlus implements WeekDAO{
                             week.addDispo(consummer);
                         else
                             week.addIndispo(consummer);
+                    
                 }
             }
             // Add the last week :
@@ -255,11 +270,12 @@ public class WeekDAOSqlPlus implements WeekDAO{
                             week.getPermanencier2() == null)
                         week.setPermanencier2(consummer);
                     
-                    if(consoPseudo.equals(rs.getString("consoDispo")))
+                    if(consoPseudo.equals(rs.getString("consoDispo"))){
                         if(rs.getInt("estDispo") == 1)
                             week.addDispo(consummer);
                         else
                             week.addIndispo(consummer);
+                    }
                 }
             }
             // Add the last week :
@@ -551,8 +567,81 @@ public class WeekDAOSqlPlus implements WeekDAO{
     }
     
     @Override
-    public void delete(Week obj) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void updateSetPerm(int numSemaine, int annee,
+            String consummerPseudo1, String consummerPseudo2) throws DAOException  {
+        Connection connec = daoFactory.getConnection();
+        CallableStatement updateStmt = null;
+        try {
+            updateStmt = connec.prepareCall(updateSetPermQuery);
+            updateStmt.setInt(1, numSemaine);
+            updateStmt.setInt(2, annee);
+            updateStmt.setString(3, consummerPseudo1);
+            updateStmt.setString(4, consummerPseudo2);
+            updateStmt.executeQuery();
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(updateStmt != null)
+                    updateStmt.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+    }
+    
+    @Override
+    public void updateSetDispo(int numSemaine, int annee,
+            String consummerPseudo, int estDispo) throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        CallableStatement updateStmt = null;
+        try {
+            updateStmt = connec.prepareCall(updateQuery);
+            updateStmt.setInt(1, numSemaine);
+            updateStmt.setInt(2, annee);
+            updateStmt.setString(3, consummerPseudo);
+            updateStmt.setInt(4, estDispo);
+            updateStmt.execute();
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(updateStmt != null)
+                    updateStmt.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+    }
+    
+    
+    
+    @Override
+    public void deleteDispo(int numSemaine, int annee, String consummerPseudo) throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        PreparedStatement deletePrep = null;
+        
+        try {
+            deletePrep = connec.prepareStatement(deleteDispoQuery);
+            deletePrep.setInt(1, numSemaine);
+            deletePrep.setInt(2, annee);
+            deletePrep.setString(3, consummerPseudo);
+            deletePrep.executeQuery();
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(deletePrep != null)
+                    deletePrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
     }
     
 }

@@ -91,6 +91,7 @@ public class PermanencyServlet extends HttpServlet {
                 
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/consummer/permanency_read_all.jsp");
                 view.forward(request, response);
+                return;
             }
             
             // Get the weeks in the database :
@@ -149,12 +150,19 @@ public class PermanencyServlet extends HttpServlet {
         String weekNumParam = request.getParameter("weekNum");
         String yearParam = request.getParameter("year");
         String dispo = request.getParameter("dispo");
+        String perm1 = request.getParameter("perm1");
+        String perm2 = request.getParameter("perm2");
+        String setPerm = request.getParameter("setPerm");
+        
         
         
         // Check : A consummer can only access to his own requests :
         String error = null;
+        String login = null;
         HttpSession session = request.getSession(false);
-        if(!(session != null && session.getAttribute("login") != null)){
+        if(session != null && session.getAttribute("login") != null)
+            login = (String)session.getAttribute("login");
+        else{
             error = "Vous n'avez pas le droit d'accéder "
                     + "à la ressource "+ request.getRequestURI();
             request.setAttribute("error", error);
@@ -163,25 +171,53 @@ public class PermanencyServlet extends HttpServlet {
             view.forward(request, response);
         }
         
-        // Do the update
-        // TODO :
-        try {
-            DAOFactory.getInstance().getWeekDAO().update(null);
-        } catch (DAOException ex) {
-            Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+        // UDPATE Disponibilities :
+        if(weekNumParam != null && yearParam != null && dispo != null){
+            int weekNum = Integer.parseInt(weekNumParam);
+            int year = Integer.parseInt(yearParam);
+            try {
+                switch (dispo) {
+                    case "maybe":
+                        DAOFactory.getInstance().getWeekDAO().deleteDispo(weekNum, year, login);
+                        break;
+                    case "true":
+                        DAOFactory.getInstance().getWeekDAO().updateSetDispo(weekNum, year, login, 1);
+                        break;
+                    case "false":
+                        DAOFactory.getInstance().getWeekDAO().updateSetDispo(weekNum, year, login, 0);
+                        break;
+                }
+            } catch (DAOException ex) {
+                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // Transmit confirmation to the client :
+            if(async != null && async.equals("true")){
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+                Gson gson = new Gson();
+                response.getWriter().write("{OK:\"true\"}");
+            }
+        }
+        // UDPATE Permanencies
+        else if(setPerm != null && setPerm.equals("true")){
+            int weekNum = Integer.parseInt(weekNumParam);
+            int year = Integer.parseInt(yearParam);
+            try {
+                DAOFactory.getInstance().getWeekDAO().updateSetPerm(weekNum, year, perm1, perm2);
+            } catch (DAOException ex) {
+                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            // Transmit confirmation to the client :
+            if(async != null && async.equals("true")){
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+                Gson gson = new Gson();
+                response.getWriter().write("{OK:\"true\"}");
+            }
         }
         
-        // TODO :
-        // updateSetDispo(weekNum, year, user, isDispo); // if exists an entry => update it; else => create one (function)
-        // updateSetPerm(weekNum, year, user1, user2); // if user1 = user2 = null => delete entry (trigger)
-        
-        // Transmit confirmation to the client :
-        if(async != null && async.equals("true")){
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            Gson gson = new Gson();
-            response.getWriter().write("{OK:\"true\"}");
-        }
         
     }
     

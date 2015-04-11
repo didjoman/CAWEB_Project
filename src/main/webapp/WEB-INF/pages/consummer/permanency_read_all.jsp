@@ -31,7 +31,7 @@
                         </li>
                         <li><br /></li>
                         <li>
-                            <div class="ui-state-active" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: Semaine sélectionnée <img src="img/Cursor_hand.png" alt="cursor"/>
+                            <div class="demo-active" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: Semaine sélectionnée <img src="img/Cursor_hand.png" alt="cursor"/>
                         </li>
                     </ul>
                 </div>
@@ -49,9 +49,9 @@
                             <li><strong>Fin : </strong><span id="week-info-end"></span></li>
                             <li><strong>Disponibilité : </strong><br />
                                 
-                                <form id="disponiblity-form" style="display: none;" role="form" data-toggle="validator" action="permanency" method="post">
+                                <form id="disponibility-form" style="display: none;" role="form" data-toggle="validator" action="permanency" method="post">
                                     <div>
-                                        <ul id="status-radio">
+                                        <ul id="dispo-radio">
                                             <li>
                                                 <input type="radio" id="field-dispo" name="dispo" value="true" > disponnible
                                             </li>
@@ -65,7 +65,7 @@
                                         </ul>
                                     </div>
                                 </form>
-                                <div id="disponiblity-info" style="display: none;">
+                                <div id="disponibility-info" style="display: none;">
                                     Vous êtes de permanence cette semaine.
                                 </div>
                             </li>
@@ -91,7 +91,7 @@
                     
                     var listDispos = [
                 <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstDisponible().contains(login)}">
+                    <c:if test="${week.isDispo(login)}">
                             "${week.getFirstDate()}",
                     </c:if>
                 </c:forEach>
@@ -99,7 +99,7 @@
                     
                     var listUndispos = [
                 <c:forEach items="${weeks}" var="week">
-                    <c:if test="${!week.getEstIndisponible().contains(login)}">
+                    <c:if test="${week.isUndispo(login)}">
                             "${week.getFirstDate()}",
                     </c:if>
                 </c:forEach>

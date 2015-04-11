@@ -31,5 +31,11 @@ public interface WeekDAO {
     
     public abstract Week update(Week obj)  throws DAOException ;
     
-    public abstract void delete(Week obj)  throws DAOException ;
+    public void updateSetPerm(int numSemaine, int annee,
+            String consummerPseudo1, String consummerPseudo2) throws DAOException;
+    
+    public void updateSetDispo(int numSemaine, int annee,
+            String consummerPseudo, int estDispo) throws DAOException;
+    
+    public void deleteDispo(int numSemaine, int annee, String consummerPseudo) throws DAOException;
 }

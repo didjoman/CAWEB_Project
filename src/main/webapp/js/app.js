@@ -21,12 +21,14 @@ $(function() {
 
 
 $(function() {
+    // Date picker in request jsp :
     $( "#datepicker" ).datepicker({
         showButtonPanel: true,
-        dateFormat: "dd-mm-yy"
+        dateFormat: "dd-mm-yy",
+        minDate: 0  // disables dates before today
     });
 
-    $( "#accordion" ).accordion({
+    $( "#accordion-modif-perm" ).accordion({
         collapsible: true,
         active: false
     });
@@ -102,6 +104,7 @@ $(function() {
     var updateView = function(start, end, weekNum, year){
         $.get('permanency', {async: "true", weekNum: weekNum, year: year}, 
         function(data){
+            $( "#accordion-modif-perm" ).show();
             // Update of the view with static values : 
             $('#week-info #week-info-num').html(weekNum);
             $('#week-info #week-info-year').html(year);
@@ -118,12 +121,16 @@ $(function() {
             
             // Update of the view with values got from the database :
             var perm1 = (!data.permanencier1) ? "" : data.permanencier1.pseudo;
-            $('#week-info #week-info-perm1').html(perm1+"<br />");
-            $('#field-perm1').val(perm1);
+            $('#field-perm1').val(""+perm1);
+            if(perm1 !== "")
+                perm1 += "<br />";
+            $('#week-info #week-info-perm1').html(perm1);
             
             var perm2 = (!data.permanencier2) ? "" : data.permanencier2.pseudo;
-            $('#week-info #week-info-perm2').html(perm2+"<br />");
-            $('#field-perm2').val(perm2);
+            $('#field-perm2').val(""+perm2);
+            if(perm2 !== "")
+                perm2 += "<br />";
+            $('#week-info #week-info-perm2').html(perm2);
 
             if(perm1 === "" && perm2 ==="")
                 $('#week-info #week-info-perm1').html("/");
@@ -143,8 +150,6 @@ $(function() {
                 indispo = "/";
             $('#week-info #week-info-indispo').html(indispo);
         });
-        
-        
     };
     
     var renderColoredDays = function(date){
@@ -193,10 +198,7 @@ $(function() {
             selectCurrentWeek();
         }
     });
-    
-    var isDispo = function(date){
-        return $.inArray(date, array)
-    }
+
     var onOnSelecConsummer = function(dateText, inst) { 
         // Get the current date, and week info of the selected date.
         var date = $(this).datepicker('getDate');
@@ -210,17 +212,17 @@ $(function() {
         $('#week-info #week-info-end').html(printDate(endDate));
         
         if(isInList(date, listPermFullySet) !== -1){
-            $('#disponiblity-form').hide();
-            $('#disponiblity-info').show();
+            $('#disponibility-form').hide();
+            $('#disponibility-info').show();
         }else {
-            $('#disponiblity-info').hide();
-            $('#disponiblity-form').show();
+            $('#disponibility-info').hide();
+            $('#disponibility-form').show();
             if(isInList(date, listDispos) !== -1)
-                $('#status-radio input[value="true"]').prop('checked', true);
+                $('#dispo-radio input[value="true"]').prop('checked', true);
             else if(isInList(date, listUndispos) !== -1)
-                $('#status-radio input[value="false"]').prop('checked', true);
+                $('#dispo-radio input[value="false"]').prop('checked', true);
             else 
-                $('#status-radio input[value="maybe"]').prop('checked', true);
+                $('#dispo-radio input[value="maybe"]').prop('checked', true);
         }
         selectCurrentWeek();
         // Re-set the "hover effects" handlers
@@ -247,6 +249,86 @@ $(function() {
     weekMouseLeaveHandler();
 
     
+    
+    var dispoForm = $('#disponibility-form');
+    dispoForm.submit(function (ev) {
+        // Adds data to the form, to tell the backend we are doing an AJAX request
+        var dataToSend = {'async' : 'true', weekNum : $('#week-info-num').html(), year : $('#week-info-year').html()};
+        dataToSend = dispoForm.serialize() + '&' + $.param(dataToSend);
+        $.ajax({
+            type: dispoForm.attr('method'),
+            url: dispoForm.attr('action'),
+            data: dataToSend
+        }).always(function( data ) {
+            //console.log(data);
+            //console.log("ok");
+            if(data !== null){
+                // Update the calendar with new data : 
+                var date = $('.consummer-week-picker').datepicker('getDate');
+                var dateLitteral = printDate(getStartDate(date));
+                // Remove the date from the actual list : 
+                if($.inArray(dateLitteral, listDispos) != -1)
+                    listDispos.splice($.inArray(dateLitteral, listDispos),1);
+                if($.inArray(dateLitteral, listUndispos) != -1)
+                    listUndispos.splice($.inArray(dateLitteral, listUndispos),1);
+                // Insert it to the new list : 
+                var isDispo = dispoForm.find('input[name="dispo"]:checked').val();
+                switch (isDispo){
+                    case 'true':
+                        listDispos.push(dateLitteral);
+                        break;
+                    case 'false':
+                        listUndispos.push(dateLitteral);
+                        break;
+                    case 'maybe':
+                        break;
+                }
+                // Refresh the datepicker :
+                $('.consummer-week-picker').datepicker( "refresh" );
+            }
+        });
+        ev.preventDefault();
+    });
+    
+    var permForm = $('#permanency-form');
+    permForm.submit(function (ev) {
+        // Adds data to the form, to tell the backend we are doing an AJAX request
+        var dataToSend = {'async' : 'true', setPerm : "true", weekNum : $('#week-info-num').html(), year : $('#week-info-year').html()};
+        dataToSend = permForm.serialize() + '&' + $.param(dataToSend);
+        $.ajax({
+            type: permForm.attr('method'),
+            url: permForm.attr('action'),
+            data: dataToSend
+        }).always(function( data ) {
+            if(data !== null){
+                // Update the calendar with new data : 
+                var date = $('.week-picker').datepicker('getDate');
+                var dateLitteral = printDate(getStartDate(date));
+                // Remove the date from the actual list : 
+                var index = $.inArray(dateLitteral, listPermFullySet);
+                if(index != -1)
+                    listPermFullySet.splice(index,1);
+                
+                index = $.inArray(dateLitteral, listPermSet)
+                if(index != -1)
+                    listPermSet.splice(index,1);
+                // Insert it to the new list : 
+                var perm1Set = $('#field-perm1').val() !== "";
+                var perm2Set = $('#field-perm2').val() !== "";
+                if(perm1Set && perm2Set)
+                    listPermFullySet.push(dateLitteral);
+                else if(perm1Set || perm2Set)
+                    listPermSet.push(dateLitteral);
+                
+                // Refresh the datepicker :
+                $('.week-picker').datepicker( "refresh" );
+                
+                // Send visual feedback to the user :
+                $('#success-feedback').show(300).delay(1500).hide(300);
+            }
+        });
+        ev.preventDefault();
+    });
 });
 
 
@@ -284,6 +366,11 @@ Stéphane Raimbault <stephane.raimbault@gmail.com> */
     datepicker.setDefaults(datepicker.regional['fr']);
     return datepicker.regional['fr'];
 }));
+
+
+
+
+
 // On submit of the connection form, we submit it in an asynchronous way.
 /*
 var connec = $('#connection-form');

@@ -34,7 +34,7 @@
                         </li>
                         <li><br /></li>
                         <li>
-                            <div class="ui-state-active" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: Semaine sélectionnée <img src="img/Cursor_hand.png" alt="cursor"/>
+                            <div class="demo-active" style="width: 20px; height: 20px; float: left;"></div> &nbsp;: Semaine sélectionnée <img src="img/Cursor_hand.png" alt="cursor"/>
                         </li>
                     </ul>
                 </div>
@@ -65,7 +65,7 @@
                             </li>
                         </ul>
                             
-                        <div id="accordion">
+                        <div id="accordion-modif-perm" style="display: none;">
                             <h3>Modifier les permanences</h3>
                             <div>
                                 <form role="form" id="permanency-form" data-toggle="validator" action="permanency" method="post">
@@ -78,7 +78,10 @@
                                         <input type="text" name="perm2" class="permConsummers" id="field-perm2" placeholder="Permanencier 2"/>
                                     </div>
                                     <br />
-                                    <input class="submit btn btn-primary" type="submit" value="Enregistrer" id="submit" /><br />
+                                    <input class="submit btn btn-primary" type="submit" value="Enregistrer" id="submit" />
+                                    <span id="success-feedback" class="glyphicon glyphicon-ok" aria-hidden="true"  style="display: none;"></span>
+                                    <br />
+                                    
                                 </form>
                             </div>
                         </div>

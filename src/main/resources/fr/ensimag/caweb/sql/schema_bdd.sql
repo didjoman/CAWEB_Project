@@ -149,7 +149,10 @@ CREATE TABLE EstDisponible(
     ON DELETE CASCADE
 );
 
-CREATE OR REPLACE FUNCTION updateUserDispo (conso IN VARCHAR(20), dispo IN NUMBER(0,1))
+--begin updateUserDispo(13,2015, 'test3', 1); end;
+
+CREATE OR REPLACE PROCEDURE updateUserDispo 
+(numSe IN NUMBER, anneeSe IN NUMBER, conso IN VARCHAR, dispo IN NUMBER)
 IS
 counterDispo INTEGER := 0;
 BEGIN
@@ -159,30 +162,67 @@ BEGIN
    AND annee = anneeSe
    AND consoDispo = conso;
 
-   IF(counterDispo = 0) THEN
-      IF(estDispo <> dispo) THEN
-         UPDATE EstDisponible
-         SET estDispo = dispo
-         WHERE consoDispo = conso;
-      END IF;
+   IF(counterDispo <> 0) THEN
+      UPDATE EstDisponible
+      SET estDispo = dispo
+      WHERE numSemaine = numSe
+      AND annee = anneeSe
+      AND consoDispo = conso;
    ELSE
       INSERT INTO EstDisponible(numSemaine, annee, consoDispo, estDispo)
       VALUES(numSe, anneeSe, conso, dispo);
    END IF;
+END updateUserDispo;
+/
 
-   -- Normally we should test if there is a permanence and delete it.
-/*   
-SELECT COUNT(*) INTO counterPerm
+CREATE OR REPLACE PROCEDURE updatePerm 
+(numSe IN NUMBER, anneeSe IN NUMBER, perm1 IN VARCHAR, perm2 IN VARCHAR)
+IS
+counterPerm INTEGER := 0;
+BEGIN
+   SELECT COUNT(*) INTO counterPerm
    FROM AssurePermanence
    WHERE numSemaine = numSe
-   AND annee = anneeSe
-   WHERE permanencier1 = conso || permanencier2 = conso;
-*/
-END updateUserDispo;
+   AND annee = anneeSe;
+
+   IF(counterPerm <> 0) THEN
+      IF(perm1 IS NULL AND perm2 IS NULL) THEN
+         DELETE FROM AssurePermanence
+         WHERE numSemaine = numSe
+         AND annee = anneeSe;
+      ELSE
+         UPDATE AssurePermanence
+         SET permanencier1 = perm1, permanencier2 = perm2
+         WHERE numSemaine = numSe
+         AND annee = anneeSe;
+      END IF;
+   ELSE
+      INSERT INTO AssurePermanence(numSemaine, annee, permanencier1, permanencier2)
+      VALUES(numSe, anneeSe, perm1, perm2);
+   END IF;
+END updatePerm;
+/
+
 
 -- trigger pour supprimer un enregistrement dans AssurePermanence si les deux mecs sont vides.
+-- Trigger qui vérifie que les attributs du contrat proviennent d'une offre à la création.
+
+CREATE OR REPLACE TRIGGER trigger_verif_perm
+        AFTER INSERT ON AssurePermanence
+        FOR EACH ROW
+DECLARE
+        counter INTEGER := 0;
+BEGIN
+    if(:new.permanencier1 IS NULL AND :new.permanencier1 IS NULL) THEN
+        DELETE AssurePermanence 
+        WHERE numSemaine = :new.numSemaine
+        AND annee = :new.annee;
+    END IF;
+END;
+
+/
 
 
 COMMIT; 
 
-SET AUTOCOMMIT OFF;
+SET AUTOCOMMIT ON;
