@@ -5,6 +5,7 @@
 */
 package fr.ensimag.caweb.controllers;
 
+import fr.ensimag.caweb.controllers.errors.CAWEB_AccessRightsException;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.impl.ContractDAOSqlPlus;
@@ -47,11 +48,20 @@ public class ContractServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        String pseudo= session.getAttribute("login").toString();
+        String login, status;
+        if(session != null && session.getAttribute("login") != null
+           && session.getAttribute("status") != null){
+            
+            login = (String)session.getAttribute("login");
+            status = (String)session.getAttribute("status");
+        } else
+            throw new CAWEB_AccessRightsException(request.getRequestURI());
         List<Contract> reqs;
         try {
-            reqs = DAOFactory.getInstance().getContractDAO().readAllValidatedContracts(pseudo);
+            reqs = DAOFactory.getInstance().getContractDAO().readAllValidatedContracts(login);
             request.setAttribute("reqs", reqs);
+            request.setAttribute("status",status);
+            System.out.println(status);
             System.out.println(reqs);
         } catch (DAOException ex) {
             Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);

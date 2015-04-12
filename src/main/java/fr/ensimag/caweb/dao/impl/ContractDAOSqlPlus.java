@@ -62,7 +62,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "WHERE idContrat = ?";
     private static final String selectAllQuery =
             "SELECT * "
-            + "FROM Contrat "
+            + "FROM Contrat c "
             + "JOIN Utilisateur "
             + "ON (pseudo=offreur OR pseudo=demandeur) "
             + "WHERE (demandeur=? OR offreur=?) ";
@@ -71,9 +71,17 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "AND dateDebutLivraison IS NULL "
             + "AND (aRenouveler IS NULL OR aRenouveler = 0) ";
     
-    private static final String selectAllContractsQuery= selectAllQuery
+    private static final String selectAllContractsQuery= 
+            "SELECT * FROM ("
+            + "SELECT * "
+            + "FROM Contrat c "
+            + "JOIN Utilisateur "
+            + "ON (pseudo=offreur OR pseudo=demandeur) "
+            + "WHERE (demandeur=? OR offreur=?) "
             + "AND dateDebutLivraison IS NOT NULL "
-            + "AND (aRenouveler IS NULL OR aRenouveler = 0) ";
+            + "AND (aRenouveler IS NULL OR aRenouveler = 0)) "
+            + "NATURAL JOIN (SELECT idContrat, (dateDebutLivraison+dureeContrat) AS dateFin FROM Contrat c2) "
+            + "ORDER BY dateFin DESC";
     
     private static final String selectAllContractsToRenewQuery= selectAllQuery
             + "AND aRenouveler = 1";

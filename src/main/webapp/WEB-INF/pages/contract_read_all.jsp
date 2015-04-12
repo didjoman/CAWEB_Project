@@ -19,12 +19,17 @@
                     <th>Produit</th>
                     <th>Date de signature</th>
                     <th>Date de debut</th>
-                    <th>Durée</th>
+                    <th>Date de fin</th>
                     <th>Nombre de lot</th>
                     <th>Quantité d'un lot</th>
                     <th>Prix d'un lot</th>
-                    <th>Offreur</th>
-                    <th>Demandeur</th>
+                    <th>Prix par semaine</th>
+                    <c:if test="${status=='CONS'}">
+                        <th>Offreur</th>
+                    </c:if>
+                    <c:if test="${status=='PROD'}">
+                        <th>Demandeur</th>
+                    </c:if>
                 </tr>
             </thead>
             <tbody>
@@ -33,15 +38,21 @@
                         <td>${req.nonProduitContrat}</td>
                         <td>${req.dateContrat}</td>
                         <td>${req.getDateDebut()}</td>
-                        <td>${req.duree}</td>
+                        <td></td>
                         <td>${req.nbLots}</td>
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>
-                        <td>${req.quantite.prix}</td>
-                        <td>${req.offreur.pseudo}</td>
-                        <td>${req.demandeur.pseudo}</td>
+                        <td>${req.quantite.prix}€</td>
+                        <td>${req.quantite.prix*req.nbLots}€</td>
+                        <c:if test="${status=='CONS'}">
+                            <td>${req.offreur.pseudo}</td>
+                        </c:if>
+                        <c:if test="${status=='PROD'}">
+                         <td>${req.demandeur.pseudo}</td>
+                        </c:if>
                     </tr>
                 </c:forEach> 
-                                    
+                        
+                    
             </tbody>
         </table>
     </jsp:body>
