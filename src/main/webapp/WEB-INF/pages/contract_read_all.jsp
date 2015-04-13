@@ -5,8 +5,10 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+
     
 <t:layout title="Tous les contrats">        
     <jsp:body>
@@ -38,7 +40,7 @@
                         <td>${req.nonProduitContrat}</td>
                         <td>${req.dateContrat}</td>
                         <td>${req.getDateDebut()}</td>
-                        <td></td>
+                        <td> <fmt:formatDate pattern="yyyy-MM-dd" value="${req.getDateFin()}" /></td>
                         <td>${req.nbLots}</td>
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>
                         <td>${req.quantite.prix}€</td>
@@ -51,7 +53,6 @@
                         </c:if>
                     </tr>
                 </c:forEach> 
-                        
                     
             </tbody>
         </table>

@@ -61,8 +61,6 @@ public class ContractServlet extends HttpServlet {
             reqs = DAOFactory.getInstance().getContractDAO().readAllValidatedContracts(login);
             request.setAttribute("reqs", reqs);
             request.setAttribute("status",status);
-            System.out.println(status);
-            System.out.println(reqs);
         } catch (DAOException ex) {
             Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
