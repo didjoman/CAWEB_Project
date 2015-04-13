@@ -45,12 +45,34 @@
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>
                         <td>${req.quantite.prix}€</td>
                         <td>${req.quantite.prix*req.nbLots}€</td>
-                        <c:if test="${status=='CONS'}">
-                            <td>${req.offreur.pseudo}</td>
-                        </c:if>
-                        <c:if test="${status=='PROD'}">
-                         <td>${req.demandeur.pseudo}</td>
-                        </c:if>
+                             <c:if test="${status == 'CONS'}">
+                                 <td>
+                                <a href="#" role="button" data-toggle="modal" data-target=".modal-create-${req.idContrat}">
+                                    ${req.offreur.pseudo}
+                                </a>
+                                <t:info_producer_popup
+                                    pseudo="${req.offreur.pseudo}"
+                                    idContrat="${req.idContrat}"
+                                    tel="${req.offreur.tel}"
+                                    mail="${req.offreur.email}"
+                                    adresse="${req.offreur.adresse}">
+                                </t:info_producer_popup>
+                                </td>
+                             </c:if>
+                               <c:if test="${status=='PROD'}">
+                                 <td>
+                                <a href="#" role="button" data-toggle="modal" data-target=".modal-create-${req.idContrat}">
+                                    ${req.demandeur.pseudo}
+                                </a>
+                                <t:info_producer_popup
+                                    pseudo="${req.demandeur.pseudo}"
+                                    idContrat="${req.idContrat}"
+                                    tel="${req.demandeur.tel}"
+                                    mail="${req.demandeur.email}"
+                                    adresse="${req.demandeur.adresse}">
+                                </t:info_producer_popup>
+                                </td>
+                             </c:if>
                     </tr>
                 </c:forEach> 
                     
