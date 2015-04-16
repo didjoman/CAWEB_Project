@@ -28,6 +28,7 @@
                     <th>Prix par semaine</th>
                     <c:if test="${status=='CONS'}">
                         <th>Offreur</th>
+                        <th>Renouveller</th>
                     </c:if>
                     <c:if test="${status=='PROD'}">
                         <th>Demandeur</th>
@@ -40,23 +41,40 @@
                         <td>${req.nonProduitContrat}</td>
                         <td>${req.dateContrat}</td>
                         <td>${req.getDateDebut()}</td>
-                        <td> <fmt:formatDate pattern="yyyy-MM-dd" value="${req.getDateFin()}" /></td>
+                        <td> <fmt:formatDate pattern="yyyy-MM-dd" value="${req.getDateFin()}"/></td>
                         <td>${req.nbLots}</td>
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>
                         <td>${req.quantite.prix}€</td>
                         <td>${req.quantite.prix*req.nbLots}€</td>
                              <c:if test="${status == 'CONS'}">
-                                 <td>
+                                <td>
                                 <a href="#" role="button" data-toggle="modal" data-target=".modal-create-${req.idContrat}">
                                     ${req.offreur.pseudo}
                                 </a>
-                                <t:info_producer_popup
+                                    <t:info_producer_popup
                                     pseudo="${req.offreur.pseudo}"
                                     idContrat="${req.idContrat}"
                                     tel="${req.offreur.tel}"
                                     mail="${req.offreur.email}"
                                     adresse="${req.offreur.adresse}">
                                 </t:info_producer_popup>
+                                </td>
+                                <td>
+                                <a href="#" role="button" data-toggle="modal" data-target=".modal-renew-${req.idContrat}">
+                                    Renouveller
+                                </a>
+                                <t:renew_contrat_popup
+                                    idContrat="${req.idContrat}"
+                                    produit="${req.nonProduitContrat}"
+                                    dateSign="${req.dateContrat}"
+                                    dateDeb="${req.getDateDebut()}"
+                                    dateFin="${req.getDateFin()}"
+                                    nbLot="${req.nbLots}"
+                                    qteLot="${req.quantite.qte}${req.quantite.uniteQte}"
+                                    prixLot="${req.quantite.prix}"
+                                    prixSem="${req.quantite.prix*req.nbLots}"
+                                    offreur="${req.offreur.pseudo}">
+                                </t:renew_contrat_popup>                                    
                                 </td>
                              </c:if>
                                <c:if test="${status=='PROD'}">
