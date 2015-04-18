@@ -34,7 +34,7 @@
         <div><label>Prix d'un lot :</label>${prixLot}€</div>
         <div><label>Prix par semaine :</label>${prixSem}€</div>
         <div><label>Offreur :</label>${offreur}</div>
-        <form class="hidden" role="form" id="renew-form" data-toggle="validator" action="contrat" method="post">    
+        <form class="hidden" role="form" id="renew-form" data-toggle="validator" action="contract" method="post">    
         <input type="hidden" name="idContrat" id="idContrat" value="${idContrat}" readonly>
         </form>
     </jsp:body>
