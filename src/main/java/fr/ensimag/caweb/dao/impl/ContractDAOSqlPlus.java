@@ -52,7 +52,8 @@ public class ContractDAOSqlPlus implements ContractDAO {
     private static final String updateToReNewQuery =
             "UPDATE Contrat "
             + "SET aRenouveler = 1"
-            + "WHERE idContrat = ?";
+            + "WHERE idContrat = ?"
+            + "AND demandeur=?";
     
     private static final String updateValidateQuery =
             "UPDATE Contrat "
@@ -278,7 +279,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
     
     
     @Override
-    public void updateToReNew(int id) throws DAOException {
+    public void updateToReNew(int id, String pseudo) throws DAOException {
         Connection connec = daoFactory.getConnection();
         
         PreparedStatement updatePrep = null;
@@ -286,6 +287,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
         try {
             updatePrep = connec.prepareStatement(updateToReNewQuery);
             updatePrep.setInt(1, id);
+            updatePrep.setString(2, pseudo);
             updatePrep.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("erreur");
