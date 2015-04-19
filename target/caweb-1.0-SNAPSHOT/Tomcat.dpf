@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/caweb">
-  <!-- Database -->
-  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" maxActive="100" maxIdle="3" maxWait="10000" name="jdbc/pool/MyAppDB" password="ruppa" removeAbandoned="true" removeAbandonedTimeout="30" type="javax.sql.DataSource" url="jdbc:oracle:thin:@ensioracle1.imag.fr:1521:ensioracle1" username="ruppa"/>
-  <!-- factory="org.apache.tomcat.jdbc.pool.DataSourceFactory" -->
-</Context>

@@ -4,6 +4,9 @@
 <t:layout title="Accueil">        
     <jsp:body>
         <h1>Accueil</h1>
-        <p></p>
+        <p>
+            Bonjour, <br />
+            Veuillez vous connecter, ou créer un compte pour accéder au site-web des producteurs-consommateurs.
+        </p>
     </jsp:body>
 </t:layout>    

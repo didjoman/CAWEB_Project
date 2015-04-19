@@ -13,25 +13,28 @@ $danger: #C9302C;
 @mixin gradient($from, $to){
     /* fallback/image non-cover color */
     background-color: $from;
-    
     /* Firefox 3.6+ */
     background-image: -moz-linear-gradient($from, $to);
-    
     /* Safari 4+, Chrome 1+ */
     background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($from), to($to));
-    
     /* Safari 5.1+, Chrome 10+ */
     background-image: -webkit-linear-gradient($from, $to);
-    
     /* Opera 11.10+ */
     background-image: -o-linear-gradient($from, $to);
-    
     background: -ms-linear-gradient(top,  $from 0%,$to 100%); /* IE10+ */
-    
     background: linear-gradient(to bottom, $from 0%, $to 100%); /* W3C */
-    
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to',GradientType=0 ); /* IE6-9 */
-    
+}
+
+@mixin gradient5($col1, $col2, $col3, $col4, $col5){
+    background: #f85032 !important;/* Old Browsers */
+    background: -moz-linear-gradient(top, $col1 0%, $col2 50%, $col3 51%, $col4 71%, $col5 100%) !important; /* FF3.6+ */
+    background: -webkit-gradient(left top, left bottom,  color-stop(0%, $col1), color-stop(50%, $col2), color-stop(51%, $col3), color-stop(71%, $col4), color-stop(100%, $col5)) !important;/* Chrome, Safari4+ */
+    background: -webkit-linear-gradient(top, $col1 0%, $col2 50%, $col3 51%, $col4 71%, $col5 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, $col1 0%, $col2 50%, $col3 51%, $col4 71%, $col5 100%) !important; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, $col1 0%, $col2 50%, $col3 51%, $col4 71%, $col5 100%) !important; /* IE 10+ */
+    background: linear-gradient(to bottom, $col1 0%, $col2 50%, $col3 51%, $col4 71%, $col5 100%) !important;/* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$col1', endColorstr='$col5', GradientType=0 ) !important;/* IE6-9 */
 }
 
 /*
@@ -138,6 +141,10 @@ body {
     @include rounded(10, 1, solid, #DDDDDD);
 }
 
+ul{
+    list-style-type: none;
+}
+
 /*
 * *** Jquery UI components *** /
 */
@@ -155,23 +162,38 @@ body {
 #subscription-form{
     display: block;
     width: 300px;
-    
-    label{
-        width: 120px;
+    padding: 10px;
+    div.form-group{
+        margin: 7px;
+        clear: both;
     }
-    input:not(input[type=radio]){
-        width: 170px;
+    label{
+        width: 130px;
+        clear: both;
+    }
+    input:not([type=radio]){
+        width: 130px !important;
+        float: right;
     }
     #status-radio{
         list-style-type: none; 
         margin-left: 80px;
     }
+    #submit{
+        float: right;
+    }
 }
 
-#connexion-dropdown, #subscription-dropdown{
+#connexion-dropdown{
     padding: 8px;
     input{
         @include rounded(5, 1, solid, #DDDDDD);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar label, .navbar div{
+        color: white !important;
     }
 }
 
@@ -200,6 +222,7 @@ body {
 /* Hide for mobile, show later */
 .sidebar {
     display: none;
+    width: 16.66666667% !important;
 }
 @media (min-width: 768px) {
     .sidebar {
@@ -220,7 +243,7 @@ body {
 
 /* Sidebar navigation */
 .nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
+    margin-right: -16px;
     margin-bottom: 20px;
     margin-left: -20px;
 }
@@ -278,5 +301,55 @@ body {
 .modal-create-request{
     label{
         width: 150px;
+    }
+}
+
+#permanency-picker > .ui-datepicker-inline{
+    margin: auto;
+}
+
+@mixin selectedDate($borderColor, $bgCol1, $bgCol2, $bgCol3, $bgCol4, $bgCol5){
+    font-weight: bold !important;
+    color: #ffffff !important;
+    border: 1px solid $borderColor;
+    //background: $backgroundColor url("images/ui-bg_glass_50_3baae3_1x400.png") 50% 50% repeat-x !important;
+    @include gradient5($bgCol1, $bgCol2, $bgCol3, $bgCol4, $bgCol5);
+}
+
+
+
+.fullperms, .fullperms .ui-state-default{
+    @include selectedDate(#000763, #2c62ba, #3c74c8, #275ba5, #2b5ea6, #3063a1);
+}
+
+.perms, .perms .ui-state-default{
+    @include selectedDate(#000763, #2cb3ba, #3cc3c8, #27a3a5, #2ba4a6, #30a19f  );
+}
+
+.dispos, .dispos .ui-state-default{
+    @include selectedDate(#006633, #67ba2c, #79c83c, #60a527, #62a62b, #67a130 );
+}
+
+.undispos, .undispos .ui-state-default{
+    @include selectedDate(#990000, #ba2c41, #c83c53, #a5273e, #a62b41, #a13049  );
+}
+
+.demo-active, .consummer-week-picker .ui-state-active, .week-picker .ui-state-active {
+    background: url('../../img/date_hover.png') !important;
+    color: inherit !important;
+    border: 1px solid #2694e8;
+}
+
+#accordion-modif-perm div{
+    height: auto !important;
+}
+
+.navbar-right .onlyOnLowRes{
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .navbar-right .onlyOnLowRes{
+        display: block !important;
     }
 }

@@ -32,58 +32,78 @@
         <!-- Affichage des offres : -->
         <h3>Produits proposés</h3>
         <div class="row">
-            <div class="offre col-sm-4 col-md-3">
-                <div class="thumbnail">
-                    <h3>Produit 1</h3>
-                    <hr />
-                    <ul>
-                        <li><strong>Producteur: </strong> M. Machin</li>
-                        <li><strong>duréee contrat: </strong> 10 j</li>
-                        <li>
-                            <strong>Qtés proposées:</strong><br />
-                            <table class="table">
-                                <tr class="active">
-                                    <th>qté</th>
-                                    <th>prix</th>
-                                </tr>
-                                <tr>
-                                    <td>5 kg</td>
-                                    <td>20€</td>
-                                </tr>
-                                <tr>
-                                    <td>10 kg</td>
-                                    <td>30€</td>
-                                </tr>
-                            </table>
-                        </li>
-                    </ul>
-                    <p>
-                        <c:if test="${status == 'CONS'}">
-                            <a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target=".modal-create-request">
-                                Emettre une demande
-                            </a>
-                            <t:request_creation_popup 
-                                producer="${producer}"
-                                product="${product}"
-                                duration="${duration}"
-                                quantities="${quantities}">
-                            </t:request_creation_popup>
-                        </c:if>
-                    </p>
+            <c:forEach items="${offers}" var="offer">
+                
+                <div class="offre col-sm-4 col-md-3">
+                    <div class="thumbnail"> 
+                        
+                        
+                        
+                        <h3>${offer.nomProduit}</h3>
+                        <hr />
+                        <ul>
+                            <li><strong>Producteur: </strong> M. Machin</li>
+                            <li><strong>duréee contrat: </strong> ${offer.duree}</li>
+                            <li>
+                                <strong>Qtés proposées:</strong><br />
+                                <table class="table">
+                                    <tr class="active">
+                                        <th>qté</th>
+                                        <th>prix</th>
+                                    </tr>
+                                    <tr>
+                                        <td>5 kg</td>
+                                        <td>20€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>10 kg</td>
+                                        <td>30€</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                        <p>
+                            <c:if test="${status == 'CONS'}">
+                                <a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target=".modal-create-request">
+                                    Emettre une demande
+                                </a>
+                                <t:request_creation_popup 
+                                    producer="${producer}"
+                                    product="${offer.nomProduit}"
+                                    duration="${offer.duree}"
+                                    quantities="${quantities}">
+                                </t:request_creation_popup>
+                            </c:if>
+                        </p>
+                        
+                    </div>
                 </div>
-            </div>
+            </c:forEach>
             
             
             
         </div>
         
         <hr />
-        <div class="btn-group" role="group" aria-label="page numbers">
-            <button  type="button" class="btn btn-default" disabled="disabled"> Pages:</button>
-            <button type="button" class="active btn btn-default"><a href="#">1</a></button>
-            <button type="button" class="btn btn-default"><a href="#">2</a></button>
-            <button type="button" class="btn btn-default"><a href="#">3</a></button>
-        </div>
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </jsp:body>
 </t:layout>   
 

@@ -67,8 +67,9 @@ CREATE TABLE Contrat(
     qteLotContrat NUMBER NOT NULL,
     uniteContrat VARCHAR(20) NOT NULL,
     nbLots NUMBER NOT NULL,
-    dateDebutLivraison DATE, -- translation of the 1st inheritance by PUSH-UP
-    aRenouveler NUMBER(1,0), -- translation of the 2nd inheritance by PUSH-UP
+    dateDebutLivraison DATE, -- translation of the state "validated" inheritance by PUSH-UP
+    aRenouveler NUMBER(1,0), -- translation of the state "toRenew" inheritance by PUSH-UP
+    refuse NUMBER(1,0),
     CONSTRAINT pk_Contrat PRIMARY KEY(idContrat),
     CONSTRAINT fk_Contrat_Util_deman FOREIGN KEY (demandeur)
     REFERENCES Utilisateur(pseudo)
@@ -116,6 +117,7 @@ BEGIN
         If counter <> 1 then
                 RAISE_APPLICATION_ERROR ( -20012, 'Erreur ; le contrat ne repond a aucune offre valide' ) ;
         End If;
+        -- TODO : verifier dateCont < dateDebutLivraison
 END;
 /
 
@@ -148,6 +150,80 @@ CREATE TABLE EstDisponible(
     REFERENCES Utilisateur(pseudo) 
     ON DELETE CASCADE
 );
+
+--begin updateUserDispo(13,2015, 'test3', 1); end;
+
+CREATE OR REPLACE PROCEDURE updateUserDispo 
+(numSe IN NUMBER, anneeSe IN NUMBER, conso IN VARCHAR, dispo IN NUMBER)
+IS
+counterDispo INTEGER := 0;
+BEGIN
+   SELECT COUNT(*) INTO counterDispo
+   FROM EstDisponible
+   WHERE numSemaine = numSe
+   AND annee = anneeSe
+   AND consoDispo = conso;
+
+   IF(counterDispo <> 0) THEN
+      UPDATE EstDisponible
+      SET estDispo = dispo
+      WHERE numSemaine = numSe
+      AND annee = anneeSe
+      AND consoDispo = conso;
+   ELSE
+      INSERT INTO EstDisponible(numSemaine, annee, consoDispo, estDispo)
+      VALUES(numSe, anneeSe, conso, dispo);
+   END IF;
+END updateUserDispo;
+/
+
+CREATE OR REPLACE PROCEDURE updatePerm 
+(numSe IN NUMBER, anneeSe IN NUMBER, perm1 IN VARCHAR, perm2 IN VARCHAR)
+IS
+counterPerm INTEGER := 0;
+BEGIN
+   SELECT COUNT(*) INTO counterPerm
+   FROM AssurePermanence
+   WHERE numSemaine = numSe
+   AND annee = anneeSe;
+
+   IF(counterPerm <> 0) THEN
+      IF(perm1 IS NULL AND perm2 IS NULL) THEN
+         DELETE FROM AssurePermanence
+         WHERE numSemaine = numSe
+         AND annee = anneeSe;
+      ELSE
+         UPDATE AssurePermanence
+         SET permanencier1 = perm1, permanencier2 = perm2
+         WHERE numSemaine = numSe
+         AND annee = anneeSe;
+      END IF;
+   ELSE
+      INSERT INTO AssurePermanence(numSemaine, annee, permanencier1, permanencier2)
+      VALUES(numSe, anneeSe, perm1, perm2);
+   END IF;
+END updatePerm;
+/
+
+
+-- trigger pour supprimer un enregistrement dans AssurePermanence si les deux mecs sont vides.
+-- Trigger qui vérifie que les attributs du contrat proviennent d'une offre à la création.
+
+CREATE OR REPLACE TRIGGER trigger_verif_perm
+        AFTER INSERT ON AssurePermanence
+        FOR EACH ROW
+DECLARE
+        counter INTEGER := 0;
+BEGIN
+    if(:new.permanencier1 IS NULL AND :new.permanencier1 IS NULL) THEN
+        DELETE AssurePermanence 
+        WHERE numSemaine = :new.numSemaine
+        AND annee = :new.annee;
+    END IF;
+END;
+
+/
+
 
 COMMIT; 
 

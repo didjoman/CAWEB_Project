@@ -13,35 +13,15 @@
         <div class="page-header">
             <h1>Demandes de contrats</h1>
         </div>
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Consommateur</th>
-                    <th>Etat</th>
-                    <th>Voir</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10-11-1992</td>
-                    <td>M. Machin</td>
-                    <td><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></td>
-                    <td><a class="btn btn-primary" href="request?id=3" role="button">Voir</a></td>
-                </tr>
-                <tr>
-                    <td>10-11-1992</td>
-                    <td>M. Machin</td>
-                    <td><span class="success glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-                    <td><a class="btn btn-primary" href="request?id=3" role="button">Voir</a></td>
-                </tr>
-                <tr>
-                    <td>10-11-1992</td>
-                    <td>M. Machin</td>
-                    <td><span class="success glyphicon glyphicon-remove" aria-hidden="true"></span></td>
-                    <td><a class="btn btn-primary" href="request?id=3" role="button">Voir</a></td>
-                </tr>
-            </tbody>
-        </table>
+        
+        <h3>Demandes de contrats</h3>
+        <t:request_list items="${reqs}" />
+            
+        <h3>Demandes de renouvellements</h3>
+        <t:request_list items="${contractsToRenew}" />
+        
+        <h3>Demandes refusées</h3>
+        <t:request_list items="${reqsRefused}" />
+                 
     </jsp:body>
 </t:layout>   
