@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.20)  19 APR 2015 18:38
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.20)  19 APR 2015 21:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -874,14 +874,22 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip57
 )
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count127
+\float@exts=\toks25
+\float@box=\box29
+\@float@everytoks=\toks26
+\@floatcapt=\box30
+)
 (/usr/share/texlive/texmf-dist/tex/latex/titlesec/titlesec.sty
 Package: titlesec 2011/12/15 v2.10.0 Sectioning titles
-\ttl@box=\box29
+\ttl@box=\box31
 \beforetitleunit=\skip58
 \aftertitleunit=\skip59
 \ttl@plus=\dimen150
 \ttl@minus=\dimen151
-\ttl@toksa=\toks25
+\ttl@toksa=\toks27
 \titlewidth=\dimen152
 \titlewidthlast=\dimen153
 \titlewidthfirst=\dimen154
@@ -925,24 +933,24 @@ LaTeX Font Info:    Redeclaring math symbol \varkappa on input line 255.
 LaTeX Font Info:    Redeclaring math symbol \hslash on input line 257.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count127
-\lst@gtempboxa=\box30
-\lst@token=\toks26
-\lst@length=\count128
+\lst@mode=\count128
+\lst@gtempboxa=\box32
+\lst@token=\toks28
+\lst@length=\count129
 \lst@currlwidth=\dimen155
-\lst@column=\count129
-\lst@pos=\count130
+\lst@column=\count130
+\lst@pos=\count131
 \lst@lostspace=\dimen156
 \lst@width=\dimen157
-\lst@newlines=\count131
-\lst@lineno=\count132
+\lst@newlines=\count132
+\lst@lineno=\count133
 \lst@maxwidth=\dimen158
 
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count133
-\lst@skipnumbers=\count134
-\lst@framebox=\box31
+\c@lstnumber=\count134
+\lst@skipnumbers=\count135
+\lst@framebox=\box33
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2007/02/22 1.4 listings configuration
@@ -1077,17 +1085,17 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             ! on input line 169.
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count135
+\scratchcounter=\count136
 \scratchdimen=\dimen159
-\scratchbox=\box32
-\nofMPsegments=\count136
-\nofMParguments=\count137
-\everyMPshowfont=\toks27
-\MPscratchCnt=\count138
+\scratchbox=\box34
+\nofMPsegments=\count137
+\nofMParguments=\count138
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count139
 \MPscratchDim=\dimen160
-\MPnumerator=\count139
-\makeMPintoPDFobject=\count140
-\everyMPtoPDFconversion=\toks28
+\MPnumerator=\count140
+\makeMPintoPDFobject=\count141
+\everyMPtoPDFconversion=\toks30
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -1104,6 +1112,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 Package caption Info: End \AtBeginDocument code.
@@ -1126,7 +1135,7 @@ Package frenchb.ldf Warning: The definition of \@makecaption has been changed,
 
 LaTeX Info: Redefining \dots on input line 169.
 LaTeX Info: Redefining \up on input line 169.
-\AtBeginShipoutBox=\box33
+\AtBeginShipoutBox=\box35
 Package hyperref Info: Link coloring OFF on input line 169.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
@@ -1134,7 +1143,7 @@ Package: nameref 2010/04/30 v2.40 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count141
+\c@section@level=\count142
 )
 LaTeX Info: Redefining \ref on input line 169.
 LaTeX Info: Redefining \pageref on input line 169.
@@ -1144,7 +1153,7 @@ LaTeX Info: Redefining \nameref on input line 169.
 \@outlinefile=\write3
 \openout3 = `rapport.out'.
 
-\c@lstlisting=\count142
+\c@lstlisting=\count143
 LaTeX Font Info:    Try loading font information for FML+futmi on input line 18
 2.
 
@@ -1242,9 +1251,6 @@ LaTeX Font Info:    Font shape `T1/futs/bx/sc' in size <10.95> not available
 
 LaTeX Warning: Float too large for page by 28.35065pt on input line 290.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
 [3 <./ressources/use_case.png>]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 295.
@@ -1254,7 +1260,7 @@ File: ./ressources/desc_UC_parcourir_offres.png Graphic file (type png)
 
 <use ./ressources/desc_UC_parcourir_offres.png>
 Package pdftex.def Info: ./ressources/desc_UC_parcourir_offres.png used on inpu
-t line 299.
+t line 298.
 (pdftex.def)             Requested size: 452.9679pt x 350.34587pt.
  [4
 
@@ -1265,33 +1271,27 @@ File: ./ressources/desc_UC_inscrire.png Graphic file (type png)
 
 <use ./ressources/desc_UC_inscrire.png>
 Package pdftex.def Info: ./ressources/desc_UC_inscrire.png used on input line 3
-06.
+05.
 (pdftex.def)             Requested size: 452.9679pt x 633.52988pt.
 
 
-LaTeX Warning: Float too large for page by 23.623pt on input line 308.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+LaTeX Warning: Float too large for page by 23.623pt on input line 307.
 
 <./ressources/desc_UC_connecter.png, id=121, 604.2575pt x 666.49pt>
 File: ./ressources/desc_UC_connecter.png Graphic file (type png)
 
 <use ./ressources/desc_UC_connecter.png>
 Package pdftex.def Info: ./ressources/desc_UC_connecter.png used on input line 
-312.
+311.
 (pdftex.def)             Requested size: 452.9679pt x 499.6222pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[5 <./ressources/desc_UC_inscrire.png>] [6 <./ressources/desc_UC_connecter.png>
-] <./ressources/desc_UC_gerer_produit.png, id=137, 644.4075pt x 737.75626pt>
+ [5 <./ressources/desc_UC_inscrire.png>] [6 <./ressources/desc_UC_connecter.png
+>]
+<./ressources/desc_UC_gerer_produit.png, id=137, 644.4075pt x 737.75626pt>
 File: ./ressources/desc_UC_gerer_produit.png Graphic file (type png)
 
 <use ./ressources/desc_UC_gerer_produit.png>
 Package pdftex.def Info: ./ressources/desc_UC_gerer_produit.png used on input l
-ine 321.
+ine 320.
 (pdftex.def)             Requested size: 452.9679pt x 518.59851pt.
  [7
 
@@ -1302,9 +1302,14 @@ File: ./ressources/desc_UC_voir_demandes_prod.png Graphic file (type png)
 
 <use ./ressources/desc_UC_voir_demandes_prod.png>
 Package pdftex.def Info: ./ressources/desc_UC_voir_demandes_prod.png used on in
-put line 329.
-(pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
- [8
+put line 328.
+(pdftex.def)             Requested size: 498.26744pt x 268.34662pt.
+
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 328--329
+ [][] 
+ []
+
+[8
 
  <./ressources/desc_UC_voir_demandes_prod.png>]
 <./ressources/desc_UC_coo_user.png, id=153, 754.82pt x 557.08125pt>
@@ -1312,126 +1317,96 @@ File: ./ressources/desc_UC_coo_user.png Graphic file (type png)
 
 <use ./ressources/desc_UC_coo_user.png>
 Package pdftex.def Info: ./ressources/desc_UC_coo_user.png used on input line 3
-36.
+35.
 (pdftex.def)             Requested size: 452.9679pt x 334.30234pt.
- [9
-
- <./ressources/desc_UC_coo_user.png>] <./ressources/desc_UC_valider_demande.png
-, id=162, 754.82pt x 1014.79124pt>
+ [9 <./ressources/desc_UC_coo_user.png>] <./ressources/desc_UC_valider_demande.
+png, id=162, 754.82pt x 1014.79124pt>
 File: ./ressources/desc_UC_valider_demande.png Graphic file (type png)
 
 <use ./ressources/desc_UC_valider_demande.png>
 Package pdftex.def Info: ./ressources/desc_UC_valider_demande.png used on input
- line 343.
+ line 342.
 (pdftex.def)             Requested size: 452.9679pt x 608.97235pt.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[10 <./ressources/desc_UC_valider_demande.png>]
+ [10 <./ressources/desc_UC_valider_demande.png>]
 <./ressources/desc_UC_decliner_demande.png, id=170, 754.82pt x 913.4125pt>
 File: ./ressources/desc_UC_decliner_demande.png Graphic file (type png)
 
 <use ./ressources/desc_UC_decliner_demande.png>
 Package pdftex.def Info: ./ressources/desc_UC_decliner_demande.png used on inpu
-t line 350.
+t line 349.
 (pdftex.def)             Requested size: 452.9679pt x 548.13536pt.
- [11
-
-
- <./ressources/desc_UC_decliner_demande.png>]
-<./ressources/desc_UC_contrats_passes.png, id=178, 784.9325pt x 1761.58125pt>
+ [11 <./ressources/desc_UC_decliner_demande.png>]
+<./ressources/desc_UC_contrats_passes.png, id=178, 574.145pt x 366.36874pt>
 File: ./ressources/desc_UC_contrats_passes.png Graphic file (type png)
 
 <use ./ressources/desc_UC_contrats_passes.png>
 Package pdftex.def Info: ./ressources/desc_UC_contrats_passes.png used on input
- line 359.
-(pdftex.def)             Requested size: 452.9679pt x 1016.58386pt.
+ line 358.
+(pdftex.def)             Requested size: 452.9679pt x 289.04799pt.
+ [12
 
 
-LaTeX Warning: Float too large for page by 420.277pt on input line 361.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[12
 
 ] [13 <./ressources/desc_UC_contrats_passes.png>]
-<./ressources/desc_UC_coo_conso_contrats.png, id=192, 799.98875pt x 2564.58125p
-t>
+<./ressources/desc_UC_coo_conso_contrats.png, id=192, 754.82pt x 537.00626pt>
 File: ./ressources/desc_UC_coo_conso_contrats.png Graphic file (type png)
- <use ./ressources/desc_UC_coo_conso_contrats.png>
+
+<use ./ressources/desc_UC_coo_conso_contrats.png>
 Package pdftex.def Info: ./ressources/desc_UC_coo_conso_contrats.png used on in
-put line 366.
-(pdftex.def)             Requested size: 452.9679pt x 1452.12173pt.
-
-
-LaTeX Warning: Float too large for page by 855.81487pt on input line 368.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[14 <./ressources/desc_UC_coo_conso_contrats.png>]
+put line 365.
+(pdftex.def)             Requested size: 452.9679pt x 322.2554pt.
+ [14 <./ressources/desc_UC_coo_conso_contrats.png>]
 <./ressources/desc_UC_voir_demandes_cons.png, id=200, 754.82pt x 406.51875pt>
 File: ./ressources/desc_UC_voir_demandes_cons.png Graphic file (type png)
 
 <use ./ressources/desc_UC_voir_demandes_cons.png>
 Package pdftex.def Info: ./ressources/desc_UC_voir_demandes_cons.png used on in
-put line 378.
+put line 377.
 (pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
  [15
 
 
- <./ressources/desc_UC_voir_demandes_cons.png>]
-<./ressources/desc_UC_emettre_demande.png, id=208, 754.82pt x 858.20625pt>
+] [16 <./ressources/desc_UC_voir_demandes_cons.png>]
+<./ressources/desc_UC_emettre_demande.png, id=213, 754.82pt x 858.20625pt>
 File: ./ressources/desc_UC_emettre_demande.png Graphic file (type png)
 
 <use ./ressources/desc_UC_emettre_demande.png>
 Package pdftex.def Info: ./ressources/desc_UC_emettre_demande.png used on input
- line 385.
+ line 384.
 (pdftex.def)             Requested size: 452.9679pt x 515.0063pt.
- [16
-
- <./ressources/desc_UC_emettre_demande.png>]
-<./ressources/desc_UC_demander_renouvellement.png, id=216, 754.82pt x 769.87625
+ [17 <./ressources/desc_UC_emettre_demande.png>]
+<./ressources/desc_UC_demander_renouvellement.png, id=221, 754.82pt x 769.87625
 pt>
 File: ./ressources/desc_UC_demander_renouvellement.png Graphic file (type png)
  <use ./ressources/desc_UC_demander_renouvellement.png>
 Package pdftex.def Info: ./ressources/desc_UC_demander_renouvellement.png used 
-on input line 392.
+on input line 391.
 (pdftex.def)             Requested size: 452.9679pt x 461.9998pt.
- [17
-
- <./ressources/desc_UC_demander_renouvellement.png>]
-<./ressources/desc_UC_contrats_passes_conso.png, id=224, 784.9325pt x 1761.5812
-5pt>
+ [18 <./ressources/desc_UC_demander_renouvellement.png>]
+<./ressources/desc_UC_contrats_passes_conso.png, id=230, 574.145pt x 366.36874p
+t>
 File: ./ressources/desc_UC_contrats_passes_conso.png Graphic file (type png)
  <use ./ressources/desc_UC_contrats_passes_conso.png>
 Package pdftex.def Info: ./ressources/desc_UC_contrats_passes_conso.png used on
- input line 400.
-(pdftex.def)             Requested size: 452.9679pt x 1016.58386pt.
+ input line 399.
+(pdftex.def)             Requested size: 362.37569pt x 231.23839pt.
+ [19
 
 
-LaTeX Warning: Float too large for page by 420.277pt on input line 402.
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[18
-
-] [19 <./ressources/desc_UC_contrats_passes_conso.png>]
-<./ressources/desc_UC_coo_prod_contrats.png, id=238, 784.9325pt x 3217.01875pt>
+ <./ressources/desc_UC_contrats_passes_conso.png>]
+<./ressources/desc_UC_coo_prod_contrats.png, id=238, 754.82pt x 537.00626pt>
 File: ./ressources/desc_UC_coo_prod_contrats.png Graphic file (type png)
+
 <use ./ressources/desc_UC_coo_prod_contrats.png>
 Package pdftex.def Info: ./ressources/desc_UC_coo_prod_contrats.png used on inp
 ut line 407.
-(pdftex.def)             Requested size: 452.9679pt x 1856.49648pt.
+(pdftex.def)             Requested size: 498.26744pt x 354.48257pt.
 
-
-LaTeX Warning: Float too large for page by 1260.1896pt on input line 409.
-
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+Overfull \hbox (45.29955pt too wide) in paragraph at lines 407--408
+ [][] 
+ []
 
 [20 <./ressources/desc_UC_coo_prod_contrats.png>]
 <./ressources/desc_UC_preferences_calendrier.png, id=246, 754.82pt x 881.2925pt
@@ -1439,7 +1414,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 File: ./ressources/desc_UC_preferences_calendrier.png Graphic file (type png)
  <use ./ressources/desc_UC_preferences_calendrier.png>
 Package pdftex.def Info: ./ressources/desc_UC_preferences_calendrier.png used o
-n input line 417.
+n input line 416.
 (pdftex.def)             Requested size: 452.9679pt x 528.86026pt.
  [21
 
@@ -1450,29 +1425,27 @@ n input line 417.
 File: ./ressources/desc_UC_consulter_permanences.png Graphic file (type png)
  <use ./ressources/desc_UC_consulter_permanences.png>
 Package pdftex.def Info: ./ressources/desc_UC_consulter_permanences.png used on
- input line 424.
+ input line 423.
 (pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
- [22
-
- <./ressources/desc_UC_consulter_permanences.png>]
+ [22 <./ressources/desc_UC_consulter_permanences.png>]
 <./ressources/desc_UC_coo_binome.png, id=262, 754.82pt x 549.05125pt>
 File: ./ressources/desc_UC_coo_binome.png Graphic file (type png)
 
 <use ./ressources/desc_UC_coo_binome.png>
 Package pdftex.def Info: ./ressources/desc_UC_coo_binome.png used on input line
- 431.
+ 430.
 (pdftex.def)             Requested size: 452.9679pt x 329.48355pt.
- [23
-
- <./ressources/desc_UC_coo_binome.png>]
+ [23 <./ressources/desc_UC_coo_binome.png>]
 <./ressources/desc_UC_attribuer_permanences.png, id=270, 754.82pt x 777.90625pt
 >
 File: ./ressources/desc_UC_attribuer_permanences.png Graphic file (type png)
  <use ./ressources/desc_UC_attribuer_permanences.png>
 Package pdftex.def Info: ./ressources/desc_UC_attribuer_permanences.png used on
- input line 440.
+ input line 439.
 (pdftex.def)             Requested size: 452.9679pt x 466.81856pt.
  [24
+
+
 
  <./ressources/desc_UC_attribuer_permanences.png>]
 <./ressources/desc_UC_voir_permanences.png, id=279, 754.82pt x 705.63625pt>
@@ -1482,9 +1455,7 @@ File: ./ressources/desc_UC_voir_permanences.png Graphic file (type png)
 Package pdftex.def Info: ./ressources/desc_UC_voir_permanences.png used on inpu
 t line 447.
 (pdftex.def)             Requested size: 452.9679pt x 423.44962pt.
- [25
-
- <./ressources/desc_UC_voir_permanences.png>]
+ [25 <./ressources/desc_UC_voir_permanences.png>]
 <./ressources/desc_UC_stats_permanences.png, id=287, 754.82pt x 406.51875pt>
 File: ./ressources/desc_UC_stats_permanences.png Graphic file (type png)
 
@@ -1492,31 +1463,25 @@ File: ./ressources/desc_UC_stats_permanences.png Graphic file (type png)
 Package pdftex.def Info: ./ressources/desc_UC_stats_permanences.png used on inp
 ut line 454.
 (pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
- [26
-
- <./ressources/desc_UC_stats_permanences.png>]
-Underfull \hbox (badness 1527) in paragraph at lines 466--466
- |[]\T1/futs/b/n/14.4 Diagramme de classes d'-anal-yse                         
-      |
- []
-
+ [26 <./ressources/desc_UC_stats_permanences.png>]
 <./ressources/class_analyse.png, id=295, 758.835pt x 606.265pt>
 File: ./ressources/class_analyse.png Graphic file (type png)
 
 <use ./ressources/class_analyse.png>
-Package pdftex.def Info: ./ressources/class_analyse.png used on input line 467.
+Package pdftex.def Info: ./ressources/class_analyse.png used on input line 464.
 
 (pdftex.def)             Requested size: 510.26944pt x 407.66833pt.
 
-Overfull \hbox (57.30154pt too wide) in paragraph at lines 467--468
+Overfull \hbox (57.30154pt too wide) in paragraph at lines 464--465
  [][] 
  []
 
 [27
 
 
+
  <./ressources/class_analyse.png>]
-Underfull \hbox (badness 5203) in paragraph at lines 480--480
+Underfull \hbox (badness 5203) in paragraph at lines 478--478
  |[]\T1/futs/b/n/14.4 Architecture générale                               |
  []
 
@@ -1524,12 +1489,12 @@ Underfull \hbox (badness 5203) in paragraph at lines 480--480
 File: ./ressources/architecture.png Graphic file (type png)
 
 <use ./ressources/architecture.png>
-Package pdftex.def Info: ./ressources/architecture.png used on input line 481.
+Package pdftex.def Info: ./ressources/architecture.png used on input line 479.
 (pdftex.def)             Requested size: 253.7328pt x 498.26744pt.
  [28
 
  <./ressources/architecture.png>]
-Underfull \hbox (badness 1253) in paragraph at lines 489--489
+Underfull \hbox (badness 1253) in paragraph at lines 487--487
  |[]\T1/futs/b/n/14.4 Diagramme de classes logi-cielles                        
        |
  []
@@ -1539,7 +1504,7 @@ File: ./ressources/class_logicielle.png Graphic file (type png)
 
 <use ./ressources/class_logicielle.png>
 Package pdftex.def Info: ./ressources/class_logicielle.png used on input line 4
-90.
+88.
 (pdftex.def)             Requested size: 438.11743pt x 452.9679pt.
  [29
 
@@ -1549,57 +1514,57 @@ File: ./ressources/etat_transition_contrat.png Graphic file (type png)
 
 <use ./ressources/etat_transition_contrat.png>
 Package pdftex.def Info: ./ressources/etat_transition_contrat.png used on input
- line 502.
+ line 500.
 (pdftex.def)             Requested size: 452.9679pt x 159.09703pt.
  [30
 
  <./ressources/etat_transition_contrat.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 511.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 509.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 511.
+(Font)              scaled to size 9.19998pt on input line 509.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 511.
+(Font)              scaled to size 6.99199pt on input line 509.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 511.
+(Font)              scaled to size 5.51999pt on input line 509.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 511.
+(Font)              scaled to size 9.19998pt on input line 509.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 511.
+(Font)              scaled to size 6.99199pt on input line 509.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 511.
+(Font)              scaled to size 5.51999pt on input line 509.
 
 
 AED: lastpage setting LastPage
 [31
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 515.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 515.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 513.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 513.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 515.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 515.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 513.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 513.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: F4562286F06D2F1304405187CCF37025;1554.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 515.
+(rerunfilecheck)             Checksum: 485BFD44317F1960B88BE4B9362D740D;1478.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 513.
  ) 
 Here is how much of TeX's memory you used:
- 13740 strings out of 495059
- 205468 string characters out of 3182030
- 442176 words of memory out of 3000000
- 16415 multiletter control sequences out of 15000+200000
+ 13784 strings out of 495059
+ 206061 string characters out of 3182030
+ 442571 words of memory out of 3000000
+ 16455 multiletter control sequences out of 15000+200000
  154688 words of font info for 206 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,11n,43p,285b,498s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,11n,43p,285b,500s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/alexandre/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr
 /share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/
 utopia/putri8a.pfb>
-Output written on rapport.pdf (32 pages, 1542760 bytes).
+Output written on rapport.pdf (32 pages, 1339102 bytes).
 PDF statistics:
  379 PDF objects out of 1000 (max. 8388607)
  279 compressed objects within 3 object streams

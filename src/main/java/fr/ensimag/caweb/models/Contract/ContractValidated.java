@@ -32,7 +32,7 @@ class ContractValidated extends ContractState {
     
     @Override
     public void finish() {
-        contract.setState(contract.REFUSED);
+        contract.setState(contract.FINISHED);
     }
     
     @Override

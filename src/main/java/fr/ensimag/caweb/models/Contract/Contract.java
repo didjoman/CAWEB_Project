@@ -22,9 +22,9 @@ public class Contract{
     */
     
     public final ContractState IN_REQUEST = new ContractInRequest(this);
-    public final ContractState DELETED = new ContractRequestDeleted(this);
-    public final ContractState VALIDATED = new ContractValidated(this);
     public final ContractState REFUSED = new ContractRefused(this);
+    public final ContractState VALIDATED = new ContractValidated(this);
+    public final ContractState FINISHED = new ContractFinished(this);
     public final ContractState IN_RENEW = new ContractInRenew(this);
     
     private ContractState state;

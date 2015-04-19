@@ -24,7 +24,7 @@ class ContractInRequest extends ContractState {
     
     @Override
     public void refuse() {
-        contract.setState(contract.DELETED);
+        contract.setState(contract.REFUSED);
         contract.refuse = true;
     }
 }

@@ -28,7 +28,7 @@
 \usepackage{amsmath}
 \usepackage{pdflscape}
 \usepackage{hyperref}
-
+\usepackage{float}
 
 % [begin] Numérotation des sections /subsec / subsubsec 
 \usepackage{titlesec}
@@ -282,7 +282,7 @@ Nous avons identifié les acteurs suivants :
 \clearpage
 
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \subsection{Diagramme de cas d'utilisations~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
 \includegraphics[height=1.35\textwidth]{./ressources/use_case.png}
@@ -293,21 +293,20 @@ Nous avons identifié les acteurs suivants :
 \subsection{Description des cas d'utilisations et diagrammes de séquence système}
 
 \subsubsection{Cas du visiteur :}
-
-\begin{figure}[!h]
+\begin{figure}[h]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_parcourir_offres.png}
 \caption{Description du cas "parcourir les offres"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_inscrire.png}
 \caption{Description du cas "s'inscrire"}
 \end{figure}
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_connecter.png}
 \caption{Description du cas "se connecter"}
@@ -316,7 +315,7 @@ Nous avons identifié les acteurs suivants :
 
 \subsubsection{Cas du producteur :}
 \paragraph*{Gestion des produits :}
-\begin{figure}[!h]
+\begin{figure}[!Hb]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_gerer_produit.png}
 \caption{Description du cas "gérer les produits"}
@@ -324,28 +323,28 @@ Nous avons identifié les acteurs suivants :
 \clearpage
 
 \paragraph*{Gestion des demandes :}
-\begin{figure}[!h]
+\begin{figure}[!Hb]
 \centering
-\includegraphics[width=1.\textwidth]{./ressources/desc_UC_voir_demandes_prod.png}
-\caption{Description du cas "Voir les demandes de contrats/renouvellement et demandes refusées (producteur)"}
+\includegraphics[width=1.1\textwidth]{./ressources/desc_UC_voir_demandes_prod.png}
+\caption{Description du cas "Voir les demandes de contrats/renouvellement et demandes refusées (producteur)"}\vspace{80 mm}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_coo_user.png}
 \caption{Description du cas "Voir les coordonnées de l'utilisateur"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_valider_demande.png}
 \caption{Description du cas "Valider une demande"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_decliner_demande.png}
 \caption{Description du cas "Décliner une demande"}
@@ -354,14 +353,14 @@ Nous avons identifié les acteurs suivants :
 
 \paragraph*{Gestion des contrats :}
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_contrats_passes.png}
 \caption{Description du cas "Accéder aux informations des contrats passé (producteur)"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_coo_conso_contrats.png}
 \caption{Description du cas "Consulter les coordonnées du consommateur signataire"}
@@ -373,21 +372,21 @@ Nous avons identifié les acteurs suivants :
 \subsubsection{Cas du consommateur :}
 \paragraph*{Gestion des demandes :}
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_voir_demandes_cons.png}
 \caption{Description du cas "Voir les demandes de contrats/renouvellement et demandes refusées (consommateur)"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_emettre_demande.png}
 \caption{Description du cas "Emettre une demande de contrat"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_demander_renouvellement.png}
 \caption{Description du cas "Demander le renouvellement d'un contrat"}
@@ -395,38 +394,38 @@ Nous avons identifié les acteurs suivants :
 \clearpage
 
 \paragraph*{Gestion des contrats :}
-\begin{figure}[!h]
+\begin{figure}[!Hb]
 \centering
-\includegraphics[width=1.\textwidth]{./ressources/desc_UC_contrats_passes_conso.png}
+\includegraphics[width=.8\textwidth]{./ressources/desc_UC_contrats_passes_conso.png}
 \caption{Description du cas "Accéder aux informations des contrats passés (consommateur)"}
+\vspace{100mm}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
-\includegraphics[width=1.\textwidth]{./ressources/desc_UC_coo_prod_contrats.png}
+\includegraphics[width=1.1\textwidth]{./ressources/desc_UC_coo_prod_contrats.png}
 \caption{Description du cas "Consulter les coordonnées d'un producteur"}
 \end{figure}
 \clearpage
 
 
 \paragraph*{Gestion des permanences :}
-
-\begin{figure}[!h]
+\begin{figure}[!Hb]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_preferences_calendrier.png}
 \caption{Description du cas "Indiquer ses préférences concernant les permanences"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_consulter_permanences.png}
 \caption{Description du cas "Consulter ses dates de permanence"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_coo_binome.png}
 \caption{Description du cas "Consulter les coordonées de son binôme"}
@@ -435,21 +434,22 @@ Nous avons identifié les acteurs suivants :
 
 \subsubsection{Cas du responsable planning :}
 \paragraph*{Gestion des permanences}
-\begin{figure}[!h]
+\begin{figure}[!Hb]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_attribuer_permanences.png}
 \caption{Description du cas "Attribuer ou modifier l'attribution des permanences"}
+\vspace{20mm}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_voir_permanences.png}
 \caption{Description du cas "Consulter l'historique des permanences"}
 \end{figure}
 \clearpage
 
-\begin{figure}[!h]
+\begin{figure}[!H]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/desc_UC_stats_permanences.png}
 \caption{Description du cas "Consulter les statistiques des permanences"}
@@ -458,14 +458,12 @@ Nous avons identifié les acteurs suivants :
 
 
 
-
-\clearpage
-
-\begin{figure}[!h]
+\subsection{Diagramme de classes d'analyse}
+\begin{figure}[!Hb]
 \centering
-\subsection{Diagramme de classes d'analyse~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}
 \includegraphics[height=.9\textwidth]{./ressources/class_analyse.png}
 \caption{Diagramme de classes d'analyse.}
+\vspace{50mm}
 \end{figure}
 \clearpage
 

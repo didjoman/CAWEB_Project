@@ -9,14 +9,9 @@ package fr.ensimag.caweb.models.Contract;
  *
  * @author Alexandre Rupp
  */
-public class ContractRefused extends ContractValidated{
+public class ContractRefused extends ContractState {
     public ContractRefused(Contract contract) {
         super(contract);
-    }
-    
-    @Override
-    public void setToReNew(){
-        contract.setState(contract.IN_RENEW);
     }
     
 }

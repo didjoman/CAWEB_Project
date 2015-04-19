@@ -9,9 +9,14 @@ package fr.ensimag.caweb.models.Contract;
  *
  * @author Alexandre Rupp
  */
-public class ContractRequestDeleted extends ContractState {
-    public ContractRequestDeleted(Contract contract) {
+public class ContractFinished extends ContractValidated{
+    public ContractFinished(Contract contract) {
         super(contract);
+    }
+    
+    @Override
+    public void setToReNew(){
+        contract.setState(contract.IN_RENEW);
     }
     
 }
