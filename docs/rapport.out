@@ -3,28 +3,14 @@
 \BOOKMARK [2][-]{subsection.0.1.2}{Diagramme de cas d'utilisations \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.1}% 3
 \BOOKMARK [2][-]{subsection.0.1.3}{Description des cas d'utilisations et diagrammes de s\351quence syst\350me}{section.0.1}% 4
 \BOOKMARK [3][-]{subsubsection.0.1.3.1}{Cas du visiteur :}{subsection.0.1.3}% 5
-\BOOKMARK [3][-]{subsubsection.0.1.3.2}{S'inscrire \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 6
-\BOOKMARK [3][-]{subsubsection.0.1.3.3}{Parcourir les offres \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 7
-\BOOKMARK [3][-]{subsubsection.0.1.3.4}{G\351rer les produits \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 8
-\BOOKMARK [3][-]{subsubsection.0.1.3.5}{Voir les coordonn\351es du consommateur \(pour une demande donn\351e\) \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 9
-\BOOKMARK [3][-]{subsubsection.0.1.3.6}{Valider une demande de contrat / renouvellement \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 10
-\BOOKMARK [3][-]{subsubsection.0.1.3.7}{Acc\351der aux informations d'un contrat pass\351 \(producteur\) \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 11
-\BOOKMARK [3][-]{subsubsection.0.1.3.8}{Consulter les coordonn\351es d'un consommateur \(pour un contrat donn\351\) \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 12
-\BOOKMARK [3][-]{subsubsection.0.1.3.9}{Emettre une demande de contrat \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 13
-\BOOKMARK [3][-]{subsubsection.0.1.3.10}{Acc\351der aux informations d'un contrat pass\351 \(consommateur\) \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 14
-\BOOKMARK [3][-]{subsubsection.0.1.3.11}{Consulter les coordonn\351es d'un producteur \(pour un contrat donn\351\) \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 15
-\BOOKMARK [3][-]{subsubsection.0.1.3.12}{Demander le renouvellement d'un contrat \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 16
-\BOOKMARK [3][-]{subsubsection.0.1.3.13}{Modifier ses pr\351f\351rences concernant les permanences \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 17
-\BOOKMARK [3][-]{subsubsection.0.1.3.14}{Consulter ses dates de permanence \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 18
-\BOOKMARK [3][-]{subsubsection.0.1.3.15}{Consulter les coordon\351es de son bin\364me pour la permanence \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 19
-\BOOKMARK [3][-]{subsubsection.0.1.3.16}{Attribuer ou modifier l'attribution des permanences \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 20
-\BOOKMARK [3][-]{subsubsection.0.1.3.17}{Consulter l'historique des permanences \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 21
-\BOOKMARK [3][-]{subsubsection.0.1.3.18}{Consulter les statistiques des permanences \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{subsection.0.1.3}% 22
-\BOOKMARK [2][-]{subsection.0.1.4}{Diagramme de classes d'analyse \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.1}% 23
-\BOOKMARK [1][-]{section.0.2}{Conception}{}% 24
-\BOOKMARK [2][-]{subsection.0.2.1}{Architecture g\351n\351rale \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.2}% 25
-\BOOKMARK [2][-]{subsection.0.2.2}{Diagramme de classes logicielles \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.2}% 26
-\BOOKMARK [2][-]{subsection.0.2.3}{Diagrammes de s\351quence}{section.0.2}% 27
-\BOOKMARK [2][-]{subsection.0.2.4}{Diagrammes d'\351tats-transitions}{section.0.2}% 28
-\BOOKMARK [1][-]{section.0.3}{Manuel Utilisateur}{}% 29
-\BOOKMARK [1][-]{section.0.4}{Bilan sur les outils de mod\351lisation}{}% 30
+\BOOKMARK [3][-]{subsubsection.0.1.3.2}{Cas du producteur :}{subsection.0.1.3}% 6
+\BOOKMARK [3][-]{subsubsection.0.1.3.3}{Cas du consommateur :}{subsection.0.1.3}% 7
+\BOOKMARK [3][-]{subsubsection.0.1.3.4}{Cas du responsable planning :}{subsection.0.1.3}% 8
+\BOOKMARK [2][-]{subsection.0.1.4}{Diagramme de classes d'analyse \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.1}% 9
+\BOOKMARK [1][-]{section.0.2}{Conception}{}% 10
+\BOOKMARK [2][-]{subsection.0.2.1}{Architecture g\351n\351rale \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.2}% 11
+\BOOKMARK [2][-]{subsection.0.2.2}{Diagramme de classes logicielles \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 \040 }{section.0.2}% 12
+\BOOKMARK [2][-]{subsection.0.2.3}{Diagrammes de s\351quence}{section.0.2}% 13
+\BOOKMARK [2][-]{subsection.0.2.4}{Diagrammes d'\351tats-transitions}{section.0.2}% 14
+\BOOKMARK [1][-]{section.0.3}{Manuel Utilisateur}{}% 15
+\BOOKMARK [1][-]{section.0.4}{Bilan sur les outils de mod\351lisation}{}% 16

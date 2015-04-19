@@ -1,31 +1,17 @@
 \select@language {french}
-\contentsline {section}{\numberline {I}Analyse}{3}{section.0.1}
-\contentsline {subsection}{\numberline {I.1}Acteurs}{3}{subsection.0.1.1}
-\contentsline {subsection}{\numberline {I.2}Diagramme de cas d'utilisations~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{4}{subsection.0.1.2}
-\contentsline {subsection}{\numberline {I.3}Description des cas d'utilisations et diagrammes de s\IeC {\'e}quence syst\IeC {\`e}me}{5}{subsection.0.1.3}
-\contentsline {subsubsection}{\numberline {I.3.1}Cas du visiteur :}{5}{subsubsection.0.1.3.1}
-\contentsline {subsubsection}{\numberline {I.3.2}S'inscrire~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{6}{subsubsection.0.1.3.2}
-\contentsline {subsubsection}{\numberline {I.3.3}Parcourir les offres~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{7}{subsubsection.0.1.3.3}
-\contentsline {subsubsection}{\numberline {I.3.4}G\IeC {\'e}rer les produits~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{8}{subsubsection.0.1.3.4}
-\contentsline {subsubsection}{\numberline {I.3.5}Voir les coordonn\IeC {\'e}es du consommateur (pour une demande donn\IeC {\'e}e)~~~~~~~~~~~~~~~~~~~~~~~~~~~}{9}{subsubsection.0.1.3.5}
-\contentsline {subsubsection}{\numberline {I.3.6}Valider une demande de contrat / renouvellement~~~~~~~~~~~~~~~~~~~~~~~~~~~}{10}{subsubsection.0.1.3.6}
-\contentsline {subsubsection}{\numberline {I.3.7}Acc\IeC {\'e}der aux informations d'un contrat pass\IeC {\'e} (producteur)~~~~~~~~~~~~~~~~~~~~~~~~~~~}{11}{subsubsection.0.1.3.7}
-\contentsline {subsubsection}{\numberline {I.3.8}Consulter les coordonn\IeC {\'e}es d'un consommateur (pour un contrat donn\IeC {\'e})~~~~~~~~~~~~~~~~~~~~~~~~~~~}{12}{subsubsection.0.1.3.8}
-\contentsline {subsubsection}{\numberline {I.3.9}Emettre une demande de contrat~~~~~~~~~~~~~~~~~~~~~~~~~~~}{13}{subsubsection.0.1.3.9}
-\contentsline {subsubsection}{\numberline {I.3.10}Acc\IeC {\'e}der aux informations d'un contrat pass\IeC {\'e} (consommateur)~~~~~~~~~~~~~~~~~~~~~~~~~~~}{14}{subsubsection.0.1.3.10}
-\contentsline {subsubsection}{\numberline {I.3.11}Consulter les coordonn\IeC {\'e}es d'un producteur (pour un contrat donn\IeC {\'e})~~~~~~~~~~~~~~~~~~~~~~~~~~~}{15}{subsubsection.0.1.3.11}
-\contentsline {subsubsection}{\numberline {I.3.12}Demander le renouvellement d'un contrat~~~~~~~~~~~~~~~~~~~~~~~~~~~}{16}{subsubsection.0.1.3.12}
-\contentsline {subsubsection}{\numberline {I.3.13}Modifier ses pr\IeC {\'e}f\IeC {\'e}rences concernant les permanences~~~~~~~~~~~~~~~~~~~~~~~~~~~}{17}{subsubsection.0.1.3.13}
-\contentsline {subsubsection}{\numberline {I.3.14}Consulter ses dates de permanence~~~~~~~~~~~~~~~~~~~~~~~~~~~}{18}{subsubsection.0.1.3.14}
-\contentsline {subsubsection}{\numberline {I.3.15}Consulter les coordon\IeC {\'e}es de son bin\IeC {\^o}me pour la permanence~~~~~~~~~~~~~~~~~~~~~~~~~~~}{19}{subsubsection.0.1.3.15}
-\contentsline {subsubsection}{\numberline {I.3.16}Attribuer ou modifier l'attribution des permanences~~~~~~~~~~~~~~~~~~~~~~~~~~~}{20}{subsubsection.0.1.3.16}
-\contentsline {subsubsection}{\numberline {I.3.17}Consulter l'historique des permanences~~~~~~~~~~~~~~~~~~~~~~~~~~~}{21}{subsubsection.0.1.3.17}
-\contentsline {subsubsection}{\numberline {I.3.18}Consulter les statistiques des permanences~~~~~~~~~~~~~~~~~~~~~~~~~~~}{22}{subsubsection.0.1.3.18}
-\contentsline {subsection}{\numberline {I.4}Diagramme de classes d'analyse~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{23}{subsection.0.1.4}
-\contentsline {section}{\numberline {II}Conception}{24}{section.0.2}
-\contentsline {subsection}{\numberline {II.1}Architecture g\IeC {\'e}n\IeC {\'e}rale~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{24}{subsection.0.2.1}
-\contentsline {subsection}{\numberline {II.2}Diagramme de classes logicielles~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{25}{subsection.0.2.2}
-\contentsline {subsection}{\numberline {II.3}Diagrammes de s\IeC {\'e}quence}{26}{subsection.0.2.3}
-\contentsline {subsection}{\numberline {II.4}Diagrammes d'\IeC {\'e}tats-transitions}{26}{subsection.0.2.4}
-\contentsline {section}{\numberline {III}Manuel Utilisateur}{27}{section.0.3}
-\contentsline {section}{\numberline {IV}Bilan sur les outils de mod\IeC {\'e}lisation}{27}{section.0.4}
+\contentsline {section}{\numberline {I}Analyse}{2}{section.0.1}
+\contentsline {subsection}{\numberline {I.1}Acteurs}{2}{subsection.0.1.1}
+\contentsline {subsection}{\numberline {I.2}Diagramme de cas d'utilisations~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{3}{subsection.0.1.2}
+\contentsline {subsection}{\numberline {I.3}Description des cas d'utilisations et diagrammes de s\IeC {\'e}quence syst\IeC {\`e}me}{4}{subsection.0.1.3}
+\contentsline {subsubsection}{\numberline {I.3.1}Cas du visiteur :}{4}{subsubsection.0.1.3.1}
+\contentsline {subsubsection}{\numberline {I.3.2}Cas du producteur :}{7}{subsubsection.0.1.3.2}
+\contentsline {subsubsection}{\numberline {I.3.3}Cas du consommateur :}{15}{subsubsection.0.1.3.3}
+\contentsline {subsubsection}{\numberline {I.3.4}Cas du responsable planning :}{24}{subsubsection.0.1.3.4}
+\contentsline {subsection}{\numberline {I.4}Diagramme de classes d'analyse~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{27}{subsection.0.1.4}
+\contentsline {section}{\numberline {II}Conception}{28}{section.0.2}
+\contentsline {subsection}{\numberline {II.1}Architecture g\IeC {\'e}n\IeC {\'e}rale~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{28}{subsection.0.2.1}
+\contentsline {subsection}{\numberline {II.2}Diagramme de classes logicielles~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~}{29}{subsection.0.2.2}
+\contentsline {subsection}{\numberline {II.3}Diagrammes de s\IeC {\'e}quence}{30}{subsection.0.2.3}
+\contentsline {subsection}{\numberline {II.4}Diagrammes d'\IeC {\'e}tats-transitions}{30}{subsection.0.2.4}
+\contentsline {section}{\numberline {III}Manuel Utilisateur}{31}{section.0.3}
+\contentsline {section}{\numberline {IV}Bilan sur les outils de mod\IeC {\'e}lisation}{31}{section.0.4}
