@@ -19,7 +19,7 @@
                 Demande de contrat n°${id} 
                 <small>
                     <c:choose>
-                        <c:when test="${req.getState() == 'CONTRACTREQUESTDELETED'}">
+                        <c:when test="${req.getState() == 'CONTRACTREFUSED'}">
                             (supprimée ...)
                         </c:when>
                         <c:when test="${req.getState() == 'CONTRACTINREQUEST'}">
