@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.20)  19 APR 2015 12:02
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (TeX Live 2012/Debian) (format=pdflatex 2013.6.20)  19 APR 2015 17:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1179,7 +1179,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-<./ressources/logo-ensimag.jpg, id=52, 853.1875pt x 512.91624pt>
+<./ressources/logo-ensimag.jpg, id=124, 853.1875pt x 512.91624pt>
 File: ./ressources/logo-ensimag.jpg Graphic file (type jpg)
 
 <use ./ressources/logo-ensimag.jpg>
@@ -1202,36 +1202,54 @@ LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <24.88> not available
 jpg>]
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <17.28> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 243.
- (./rapport.toc)
-\tf@toc=\write4
-\openout4 = `rapport.toc'.
+ (./rapport.toc
+Overfull \hbox (11.37468pt too wide) in paragraph at lines 12--12
+ [][] [][]\T1/futs/m/n/12 (-20) Accéder aux in-for-ma-tions d'un con-trat passé
+ (pro-duc-teur)                           [] [][]  
+ []
+
+
+Overfull \hbox (30.90948pt too wide) in paragraph at lines 15--15
+ [][] [][]\T1/futs/m/n/12 (-20) Accéder aux in-for-ma-tions d'un con-trat passé
+ (con-som-ma-teur)                           [] [][]  
+ []
+
+
+Overfull \hbox (26.93254pt too wide) in paragraph at lines 20--20
+ [][] [][]\T1/futs/m/n/12 (-20) Consulter les co-or-donées de son binôme pour l
+a per-ma-nence                           [] [][]  
+ []
 
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.244 \newpage
-               [1
+l.27 ...~~~~~~~~~~~~~~~~~~~}{25}{subsection.0.2.2}
+                                                   [1
 
-]
+])
+\tf@toc=\write4
+\openout4 = `rapport.toc'.
+
+ [2]
 LaTeX Font Info:    Font shape `T1/futs/bx/sc' in size <17.28> not available
 (Font)              Font shape `T1/futs/b/sc' tried instead on input line 272.
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/futs/b/n' tried instead on input line 274.
- [2]
+ [3]
 Underfull \hbox (badness 1509) in paragraph at lines 287--287
  |[]\T1/futs/b/n/14.4 Diagramme de cas d'u-til-i-sa-tions                      
          |
  []
 
-<./ressources/use_case.png, id=83, 809.0225pt x 1043.9pt>
+<./ressources/use_case.png, id=182, 815.045pt x 1043.9pt>
 File: ./ressources/use_case.png Graphic file (type png)
 
 <use ./ressources/use_case.png>
 Package pdftex.def Info: ./ressources/use_case.png used on input line 288.
-(pdftex.def)             Requested size: 473.92436pt x 611.50941pt.
+(pdftex.def)             Requested size: 477.45232pt x 611.50941pt.
 
-Overfull \hbox (20.95647pt too wide) in paragraph at lines 288--289
+Overfull \hbox (24.48442pt too wide) in paragraph at lines 288--289
  [][] 
  []
 
@@ -1245,117 +1263,383 @@ LaTeX Warning: Float too large for page by 28.35065pt on input line 290.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[3 <./ressources/use_case.png>] [4
+[4 <./ressources/use_case.png>]
+LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 295.
+
+<./ressources/desc_UC_connecter.png, id=191, 604.2575pt x 666.49pt>
+File: ./ressources/desc_UC_connecter.png Graphic file (type png)
+
+<use ./ressources/desc_UC_connecter.png>
+Package pdftex.def Info: ./ressources/desc_UC_connecter.png used on input line 
+299.
+(pdftex.def)             Requested size: 452.9679pt x 499.6222pt.
+ [5
 
 
-]
-Underfull \hbox (badness 1527) in paragraph at lines 298--298
+ <./ressources/desc_UC_connecter.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 306--306
+ |[]\T1/futs/b/n/12 S'inscrire                                       |
+ []
+
+<./ressources/desc_UC_inscrire.png, id=199, 574.145pt x 803.0pt>
+File: ./ressources/desc_UC_inscrire.png Graphic file (type png)
+
+<use ./ressources/desc_UC_inscrire.png>
+Package pdftex.def Info: ./ressources/desc_UC_inscrire.png used on input line 3
+07.
+(pdftex.def)             Requested size: 452.9679pt x 633.52988pt.
+
+
+LaTeX Warning: Float too large for page by 46.8711pt on input line 309.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+
+Underfull \hbox (badness 6675) in paragraph at lines 313--313
+ |[]\T1/futs/b/n/12 Parcourir les of-fres                                      
+ |
+ []
+
+<./ressources/desc_UC_parcourir_offres.png, id=200, 513.92pt x 397.485pt>
+File: ./ressources/desc_UC_parcourir_offres.png Graphic file (type png)
+
+<use ./ressources/desc_UC_parcourir_offres.png>
+Package pdftex.def Info: ./ressources/desc_UC_parcourir_offres.png used on inpu
+t line 314.
+(pdftex.def)             Requested size: 452.9679pt x 350.34587pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[6 <./ressources/desc_UC_inscrire.png>] [7 <./ressources/desc_UC_parcourir_offr
+es.png>]
+Underfull \hbox (badness 7186) in paragraph at lines 321--321
+ |[]\T1/futs/b/n/12 Gérer les pro-duits                                       |
+
+ []
+
+<./ressources/desc_UC_gerer_produit.png, id=216, 644.4075pt x 737.75626pt>
+File: ./ressources/desc_UC_gerer_produit.png Graphic file (type png)
+
+<use ./ressources/desc_UC_gerer_produit.png>
+Package pdftex.def Info: ./ressources/desc_UC_gerer_produit.png used on input l
+ine 322.
+(pdftex.def)             Requested size: 452.9679pt x 518.59851pt.
+ [8
+
+
+ <./ressources/desc_UC_gerer_produit.png>] <./ressources/desc_UC_coo_user.png, 
+id=224, 754.82pt x 557.08125pt>
+File: ./ressources/desc_UC_coo_user.png Graphic file (type png)
+
+<use ./ressources/desc_UC_coo_user.png>
+Package pdftex.def Info: ./ressources/desc_UC_coo_user.png used on input line 3
+31.
+(pdftex.def)             Requested size: 452.9679pt x 334.30234pt.
+ [9
+
+ <./ressources/desc_UC_coo_user.png>]
+Underfull \hbox (badness 1097) in paragraph at lines 338--338
+ |[]\T1/futs/b/n/12 Valider une de-mande de con-trat / re-nou-velle-ment       
+                    |
+ []
+
+<./ressources/desc_UC_valider_demande.png, id=232, 754.82pt x 1014.79124pt>
+File: ./ressources/desc_UC_valider_demande.png Graphic file (type png)
+
+<use ./ressources/desc_UC_valider_demande.png>
+Package pdftex.def Info: ./ressources/desc_UC_valider_demande.png used on input
+ line 339.
+(pdftex.def)             Requested size: 452.9679pt x 608.97235pt.
+
+
+LaTeX Warning: Float too large for page by 22.31357pt on input line 341.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./ressources/desc_UC_valider_demande.png>]
+<./ressources/desc_UC_contrats_passes.png, id=240, 784.9325pt x 1761.58125pt>
+File: ./ressources/desc_UC_contrats_passes.png Graphic file (type png)
+
+<use ./ressources/desc_UC_contrats_passes.png>
+Package pdftex.def Info: ./ressources/desc_UC_contrats_passes.png used on input
+ line 347.
+(pdftex.def)             Requested size: 452.9679pt x 1016.58386pt.
+
+
+LaTeX Warning: Float too large for page by 443.52509pt on input line 349.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[11 <./ressources/desc_UC_contrats_passes.png>]
+<./ressources/desc_UC_coo_conso_contrats.png, id=248, 799.98875pt x 2564.58125p
+t>
+File: ./ressources/desc_UC_coo_conso_contrats.png Graphic file (type png)
+ <use ./ressources/desc_UC_coo_conso_contrats.png>
+Package pdftex.def Info: ./ressources/desc_UC_coo_conso_contrats.png used on in
+put line 355.
+(pdftex.def)             Requested size: 452.9679pt x 1452.12173pt.
+
+
+LaTeX Warning: Float too large for page by 879.06296pt on input line 357.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[12 <./ressources/desc_UC_coo_conso_contrats.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
+ |[]\T1/futs/b/n/12 Emettre une de-mande de con-trat                           
+|
+ []
+
+<./ressources/desc_UC_emettre_demande.png, id=257, 754.82pt x 858.20625pt>
+File: ./ressources/desc_UC_emettre_demande.png Graphic file (type png)
+
+<use ./ressources/desc_UC_emettre_demande.png>
+Package pdftex.def Info: ./ressources/desc_UC_emettre_demande.png used on input
+ line 363.
+(pdftex.def)             Requested size: 452.9679pt x 515.0063pt.
+ [13
+
+
+
+
+ <./ressources/desc_UC_emettre_demande.png>]
+<./ressources/desc_UC_contrats_passes_conso.png, id=265, 784.9325pt x 1761.5812
+5pt>
+File: ./ressources/desc_UC_contrats_passes_conso.png Graphic file (type png)
+ <use ./ressources/desc_UC_contrats_passes_conso.png>
+Package pdftex.def Info: ./ressources/desc_UC_contrats_passes_conso.png used on
+ input line 374.
+(pdftex.def)             Requested size: 452.9679pt x 1016.58386pt.
+
+
+LaTeX Warning: Float too large for page by 443.52509pt on input line 376.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[14 <./ressources/desc_UC_contrats_passes_conso.png>]
+<./ressources/desc_UC_coo_prod_contrats.png, id=273, 784.9325pt x 3217.01875pt>
+File: ./ressources/desc_UC_coo_prod_contrats.png Graphic file (type png)
+<use ./ressources/desc_UC_coo_prod_contrats.png>
+Package pdftex.def Info: ./ressources/desc_UC_coo_prod_contrats.png used on inp
+ut line 382.
+(pdftex.def)             Requested size: 452.9679pt x 1856.49648pt.
+
+
+LaTeX Warning: Float too large for page by 1283.4377pt on input line 384.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[15 <./ressources/desc_UC_coo_prod_contrats.png>]
+Underfull \hbox (badness 3009) in paragraph at lines 390--390
+ |[]\T1/futs/b/n/12 Demander le re-nou-velle-ment d'un con-trat                
+           |
+ []
+
+
+<./ressources/desc_UC_demander_renouvellement.png, id=281, 754.82pt x 769.87625
+pt>
+File: ./ressources/desc_UC_demander_renouvellement.png Graphic file (type png)
+ <use ./ressources/desc_UC_demander_renouvellement.png>
+Package pdftex.def Info: ./ressources/desc_UC_demander_renouvellement.png used 
+on input line 391.
+(pdftex.def)             Requested size: 452.9679pt x 461.9998pt.
+ [16
+
+
+
+ <./ressources/desc_UC_demander_renouvellement.png>]
+<./ressources/desc_UC_preferences_calendrier.png, id=289, 754.82pt x 881.2925pt
+>
+File: ./ressources/desc_UC_preferences_calendrier.png Graphic file (type png)
+ <use ./ressources/desc_UC_preferences_calendrier.png>
+Package pdftex.def Info: ./ressources/desc_UC_preferences_calendrier.png used o
+n input line 399.
+(pdftex.def)             Requested size: 452.9679pt x 528.86026pt.
+ [17
+
+ <./ressources/desc_UC_preferences_calendrier.png>]
+Underfull \hbox (badness 6157) in paragraph at lines 406--406
+ |[]\T1/futs/b/n/12 Consulter ses dates de per-ma-nence                        
+   |
+ []
+
+
+<./ressources/desc_UC_consulter_permanences.png, id=297, 754.82pt x 406.51875pt
+>
+File: ./ressources/desc_UC_consulter_permanences.png Graphic file (type png)
+ <use ./ressources/desc_UC_consulter_permanences.png>
+Package pdftex.def Info: ./ressources/desc_UC_consulter_permanences.png used on
+ input line 407.
+(pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
+ [18
+
+ <./ressources/desc_UC_consulter_permanences.png>]
+<./ressources/desc_UC_coo_binome.png, id=307, 754.82pt x 549.05125pt>
+File: ./ressources/desc_UC_coo_binome.png Graphic file (type png)
+
+<use ./ressources/desc_UC_coo_binome.png>
+Package pdftex.def Info: ./ressources/desc_UC_coo_binome.png used on input line
+ 415.
+(pdftex.def)             Requested size: 452.9679pt x 329.48355pt.
+ [19
+
+ <./ressources/desc_UC_coo_binome.png>]
+<./ressources/desc_UC_attribuer_permanences.png, id=315, 754.82pt x 777.90625pt
+>
+File: ./ressources/desc_UC_attribuer_permanences.png Graphic file (type png)
+ <use ./ressources/desc_UC_attribuer_permanences.png>
+Package pdftex.def Info: ./ressources/desc_UC_attribuer_permanences.png used on
+ input line 423.
+(pdftex.def)             Requested size: 452.9679pt x 466.81856pt.
+ [20
+
+ <./ressources/desc_UC_attribuer_permanences.png>]
+Underfull \hbox (badness 4291) in paragraph at lines 430--430
+ |[]\T1/futs/b/n/12 Consulter l'his-torique des per-ma-nences                  
+         |
+ []
+
+<./ressources/desc_UC_voir_permanences.png, id=323, 754.82pt x 705.63625pt>
+File: ./ressources/desc_UC_voir_permanences.png Graphic file (type png)
+
+<use ./ressources/desc_UC_voir_permanences.png>
+Package pdftex.def Info: ./ressources/desc_UC_voir_permanences.png used on inpu
+t line 431.
+(pdftex.def)             Requested size: 452.9679pt x 423.44962pt.
+ [21
+
+ <./ressources/desc_UC_voir_permanences.png>]
+Underfull \hbox (badness 2744) in paragraph at lines 438--438
+ |[]\T1/futs/b/n/12 Consulter les statis-tiques des per-ma-nences              
+             |
+ []
+
+<./ressources/desc_UC_stats_permanences.png, id=331, 754.82pt x 406.51875pt>
+File: ./ressources/desc_UC_stats_permanences.png Graphic file (type png)
+
+<use ./ressources/desc_UC_stats_permanences.png>
+Package pdftex.def Info: ./ressources/desc_UC_stats_permanences.png used on inp
+ut line 439.
+(pdftex.def)             Requested size: 452.9679pt x 243.95033pt.
+ [22
+
+ <./ressources/desc_UC_stats_permanences.png>]
+Underfull \hbox (badness 1527) in paragraph at lines 448--448
  |[]\T1/futs/b/n/14.4 Diagramme de classes d'-anal-yse                         
       |
  []
 
-<./ressources/class_analyse.png, id=97, 754.82pt x 629.35126pt>
+<./ressources/class_analyse.png, id=339, 758.835pt x 606.265pt>
 File: ./ressources/class_analyse.png Graphic file (type png)
 
 <use ./ressources/class_analyse.png>
-Package pdftex.def Info: ./ressources/class_analyse.png used on input line 299.
+Package pdftex.def Info: ./ressources/class_analyse.png used on input line 449.
 
-(pdftex.def)             Requested size: 488.94563pt x 407.66833pt.
+(pdftex.def)             Requested size: 510.26944pt x 407.66833pt.
 
-Overfull \hbox (35.97774pt too wide) in paragraph at lines 299--300
+Overfull \hbox (57.30154pt too wide) in paragraph at lines 449--450
  [][] 
  []
 
-[5
+[23
+
 
  <./ressources/class_analyse.png>]
-Underfull \hbox (badness 5203) in paragraph at lines 312--312
+Underfull \hbox (badness 5203) in paragraph at lines 462--462
  |[]\T1/futs/b/n/14.4 Architecture générale                               |
  []
 
-<./ressources/architecture.png, id=105, 664.4825pt x 1304.875pt>
+<./ressources/architecture.png, id=347, 664.4825pt x 1304.875pt>
 File: ./ressources/architecture.png Graphic file (type png)
 
 <use ./ressources/architecture.png>
-Package pdftex.def Info: ./ressources/architecture.png used on input line 313.
+Package pdftex.def Info: ./ressources/architecture.png used on input line 463.
 (pdftex.def)             Requested size: 253.7328pt x 498.26744pt.
- [6
+ [24
 
  <./ressources/architecture.png>]
-Underfull \hbox (badness 1253) in paragraph at lines 321--321
+Underfull \hbox (badness 1253) in paragraph at lines 471--471
  |[]\T1/futs/b/n/14.4 Diagramme de classes logi-cielles                        
        |
  []
 
-<./ressources/class_logicielle.png, id=114, 769.87625pt x 795.97375pt>
+<./ressources/class_logicielle.png, id=356, 769.87625pt x 795.97375pt>
 File: ./ressources/class_logicielle.png Graphic file (type png)
 
 <use ./ressources/class_logicielle.png>
-Package pdftex.def Info: ./ressources/class_logicielle.png used on input line 3
-22.
+Package pdftex.def Info: ./ressources/class_logicielle.png used on input line 4
+72.
 (pdftex.def)             Requested size: 438.11743pt x 452.9679pt.
- [7
+ [25
 
  <./ressources/class_logicielle.png>] <./ressources/etat_transition_contrat.png
-, id=122, 617.30624pt x 216.81pt>
+, id=364, 617.30624pt x 216.81pt>
 File: ./ressources/etat_transition_contrat.png Graphic file (type png)
 
 <use ./ressources/etat_transition_contrat.png>
 Package pdftex.def Info: ./ressources/etat_transition_contrat.png used on input
- line 334.
+ line 484.
 (pdftex.def)             Requested size: 452.9679pt x 159.09703pt.
- [8
+ [26
 
  <./ressources/etat_transition_contrat.png>]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 343.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 493.
 
  (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 343.
+(Font)              scaled to size 9.19998pt on input line 493.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 343.
+(Font)              scaled to size 6.99199pt on input line 493.
 LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 343.
+(Font)              scaled to size 5.51999pt on input line 493.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 343.
+(Font)              scaled to size 9.19998pt on input line 493.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 343.
+(Font)              scaled to size 6.99199pt on input line 493.
 LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 343.
+(Font)              scaled to size 5.51999pt on input line 493.
 
 
 AED: lastpage setting LastPage
-[9
+[27
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 347.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 347.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 497.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 497.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 347.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 347.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 497.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 497.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 191AD3381214C174B126E37136778FF6;1212.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 347.
+(rerunfilecheck)             Checksum: 7DA4F1DECBE4F76E9A2B2082317081AE;4401.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 497.
  ) 
 Here is how much of TeX's memory you used:
- 13545 strings out of 495059
- 199860 string characters out of 3182030
- 440176 words of memory out of 3000000
- 16314 multiletter control sequences out of 15000+200000
- 148596 words of font info for 184 fonts, out of 3000000 for 9000
+ 13744 strings out of 495059
+ 205356 string characters out of 3182030
+ 453176 words of memory out of 3000000
+ 16417 multiletter control sequences out of 15000+200000
+ 154524 words of font info for 205 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 42i,11n,43p,285b,498s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 42i,11n,43p,285b,530s stack positions out of 5000i,500n,10000p,200000b,50000s
  </home/alexandre/.texmf-var/fonts/pk/ljfour/jknappen/ec/ectt1000.600pk>{/usr
 /share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/
 type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/
 utopia/putri8a.pfb>
-Output written on rapport.pdf (10 pages, 477077 bytes).
+Output written on rapport.pdf (28 pages, 1426853 bytes).
 PDF statistics:
- 170 PDF objects out of 1000 (max. 8388607)
- 135 compressed objects within 2 object streams
- 29 named destinations out of 1000 (max. 500000)
- 52863 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 424 PDF objects out of 1000 (max. 8388607)
+ 333 compressed objects within 4 object streams
+ 83 named destinations out of 1000 (max. 500000)
+ 53609 words of extra memory for PDF output out of 61914 (max. 10000000)
 
