@@ -191,6 +191,11 @@ ul{
     }
 }
 
+@media (max-width: 768px) {
+    .navbar label, .navbar div{
+        color: white !important;
+    }
+}
 
 /*
  * Top navigation
@@ -217,6 +222,7 @@ ul{
 /* Hide for mobile, show later */
 .sidebar {
     display: none;
+    width: 16.66666667% !important;
 }
 @media (min-width: 768px) {
     .sidebar {
@@ -237,7 +243,7 @@ ul{
 
 /* Sidebar navigation */
 .nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
+    margin-right: -16px;
     margin-bottom: 20px;
     margin-left: -20px;
 }
@@ -336,4 +342,14 @@ ul{
 
 #accordion-modif-perm div{
     height: auto !important;
+}
+
+.navbar-right .onlyOnLowRes{
+    display: none !important;
+}
+
+@media (max-width: 768px) {
+    .navbar-right .onlyOnLowRes{
+        display: block !important;
+    }
 }

@@ -40,7 +40,7 @@ VALUES (2, 1, 'kg', 5);
 INSERT INTO Quantite(idOffrePrecisee, qte, uniteQte, prix)
 VALUES (3, 1, 'kg', 5);
 
--- Remplissage Contrat :
+-- Remplissage Contrat : -- SYSDATE
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
 VALUES ('', 'test1', 'test3', SYSDATE, 'tomate', 5, 60, 1, 'kg', 3, '', '');
 
@@ -49,13 +49,21 @@ VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, '
 
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
-VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('03/04/2015', 'DD.MM.YYYY'), '');
+VALUES ('', 'test1', 'test3', TO_DATE ('15/03/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('20/03/2015', 'DD.MM.YYYY'), '');
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
-VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('05/04/2015', 'DD.MM.YYYY'), '');
+VALUES ('', 'test1', 'test3', TO_DATE ('20/03/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('05/04/2015', 'DD.MM.YYYY'), '');
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
-VALUES ('', 'test1', 'test3', SYSDATE, 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('06/08/2014', 'DD.MM.YYYY'), 1);
+VALUES ('', 'test1', 'test3', TO_DATE ('03/08/2014', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 3, TO_DATE ('06/08/2014', 'DD.MM.YYYY'), 1);
+
+
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler)
+VALUES ('', 'test1', 'test31', TO_DATE ('19/03/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 8, TO_DATE ('23/03/2015', 'DD.MM.YYYY'), 0);
+
+
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler, refuse)
+VALUES ('', 'test1', 'test31', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, '', '', 1);
 
 SELECT * FROM CONTRAT JOIN UTILISATEUR ON(pseudo = offreur OR pseudo = demandeur) 
 WHERE (demandeur = 'test1' OR offreur = 'test1') AND dateDebutLivraison IS NOT NULL;
@@ -74,6 +82,10 @@ INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
 VALUES ('test3', 11, 2015, 0);
 
 -- Remplissage AssurePermanence
+INSERT INTO AssurePermanence VALUES (1, 2015, 'test3', '');
+INSERT INTO AssurePermanence VALUES (2, 2015, 'test3', '');
+INSERT INTO AssurePermanence VALUES (3, 2015, 'test3', 'test31');
+
 INSERT INTO AssurePermanence (permanencier1, permanencier2, numSemaine, annee)
 VALUES ('test3', '', 9, 2015);
 

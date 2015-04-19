@@ -20,7 +20,9 @@ import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.rmi.ServerException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.Json;
@@ -65,7 +67,6 @@ public class PermanencyServlet extends HttpServlet {
         String status = null;
         if(session != null && session.getAttribute("login") != null
                 && session.getAttribute("status") != null){
-            
             login = (String)session.getAttribute("login");
             status = (String)session.getAttribute("status");
         } else
@@ -92,13 +93,11 @@ public class PermanencyServlet extends HttpServlet {
                 response.setCharacterEncoding("utf-8");
                 Gson gson = new Gson();
                 
+                
                 // READ for RESPONSIBLE
                 if(status.equals(UserStatus.RESP.toString())){
-                    response.getWriter().write(week.getJSON());
-                    System.out.println(week.getJSON());
-                    // TODO: to change absolutely !!!!!
-                    // DANGEROUS : We transmit EVERYTHING to the client !
-                    // Juste transmit the required info.
+                    if(week != null)
+                        response.getWriter().write(week.getJSON());
                 }
                 // READ for CONSUMMER
                 else if(status.equals(UserStatus.CONS.toString())){
@@ -136,6 +135,7 @@ public class PermanencyServlet extends HttpServlet {
             }
             // READ ALL for RESPONSIBLES :
             else if(status.equals(UserStatus.RESP.toString())){
+                // Get the list of weeks (to print on the calendar, in the view)
                 try {
                     weeks =  DAOFactory.getInstance().getWeekDAO().readAll();
                 } catch (DAOException ex) {
@@ -143,6 +143,7 @@ public class PermanencyServlet extends HttpServlet {
                     throw new CAWEB_DatabaseAccessException();
                 }
                 
+                // Get the consummers list (to help the responsible choose a permanencier)
                 List<User> users = null;
                 try {
                     users =  DAOFactory.getInstance().getUserDAO().readAllWithStatus(UserStatus.CONS);
@@ -151,8 +152,27 @@ public class PermanencyServlet extends HttpServlet {
                     throw new CAWEB_DatabaseAccessException();
                 }
                 
-                request.setAttribute("consummers", users);
+                // Get the statistics about the perms.
+                List<Map.Entry<String, Integer>> stats = new ArrayList();
+                try {
+                    stats =  DAOFactory.getInstance().getWeekDAO().getNbPermsPerUser();
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new CAWEB_DatabaseAccessException();
+                }
+                
+                List<Map.Entry<String, Double>> stats2 = new ArrayList();
+                try {
+                    stats2 =  DAOFactory.getInstance().getWeekDAO().getPermFreqPerActiveUser();
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new CAWEB_DatabaseAccessException();
+                }
+                
                 request.setAttribute("weeks", weeks);
+                request.setAttribute("consummers", users);
+                request.setAttribute("stats", stats);
+                request.setAttribute("stats2", stats2);
                 
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/responsible/permanency_read_all.jsp");
                 view.forward(request, response);
@@ -162,7 +182,7 @@ public class PermanencyServlet extends HttpServlet {
             
         }
     }
-
+    
     
     /**
      * Handles the HTTP <code>POST</code> method.

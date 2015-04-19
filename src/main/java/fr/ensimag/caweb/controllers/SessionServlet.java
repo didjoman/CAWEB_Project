@@ -10,6 +10,7 @@ import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.ConnectionForm;
 import fr.ensimag.caweb.models.SubscriptionForm;
 import fr.ensimag.caweb.models.User.User;
+import fr.ensimag.caweb.models.User.UserStatus;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -103,7 +104,7 @@ public class SessionServlet extends HttpServlet {
         request.setAttribute("error", form.getError());
         request.setAttribute("success", form.getSuccess());
         
-        RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/index.jsp");
+        RequestDispatcher view = request.getRequestDispatcher("/index");
         view.forward(request, response);
     }
     

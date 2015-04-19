@@ -67,8 +67,9 @@ CREATE TABLE Contrat(
     qteLotContrat NUMBER NOT NULL,
     uniteContrat VARCHAR(20) NOT NULL,
     nbLots NUMBER NOT NULL,
-    dateDebutLivraison DATE, -- translation of the 1st inheritance by PUSH-UP
-    aRenouveler NUMBER(1,0), -- translation of the 2nd inheritance by PUSH-UP
+    dateDebutLivraison DATE, -- translation of the state "validated" inheritance by PUSH-UP
+    aRenouveler NUMBER(1,0), -- translation of the state "toRenew" inheritance by PUSH-UP
+    refuse NUMBER(1,0),
     CONSTRAINT pk_Contrat PRIMARY KEY(idContrat),
     CONSTRAINT fk_Contrat_Util_deman FOREIGN KEY (demandeur)
     REFERENCES Utilisateur(pseudo)
@@ -116,6 +117,7 @@ BEGIN
         If counter <> 1 then
                 RAISE_APPLICATION_ERROR ( -20012, 'Erreur ; le contrat ne repond a aucune offre valide' ) ;
         End If;
+        -- TODO : verifier dateCont < dateDebutLivraison
 END;
 /
 

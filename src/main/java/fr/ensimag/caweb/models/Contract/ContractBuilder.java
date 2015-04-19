@@ -27,6 +27,7 @@ public class ContractBuilder {
     
     private Date dateDebut;
     private Boolean aRenouveler;
+    private Boolean refuse;
     
     public ContractBuilder setIdContrat(int idContrat) {
         this.idContrat = idContrat;
@@ -78,10 +79,17 @@ public class ContractBuilder {
         return this;
     }
     
+    public ContractBuilder setRefuse(Boolean refuse) {
+        this.refuse = refuse;
+        return this;
+    }
+    
+    
+    
     public Contract build(){
-        return ContractFactory.createContract(idContrat, offreur, demandeur, 
-                dateContrat, nonProduitContrat, duree, quantite, nbLots, 
-                dateDebut, aRenouveler);
+        return ContractFactory.createContract(idContrat, offreur, demandeur,
+                dateContrat, nonProduitContrat, duree, quantite, nbLots,
+                dateDebut, aRenouveler, refuse);
     }
     
     

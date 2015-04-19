@@ -34,8 +34,17 @@ public class ContractFactory {
             String nonProduitContrat, int duree, Quantity quantite, int nbLots, Date dateDebut, Boolean aRenouveler){
         Contract contract = createContract(idContrat, offreur, demandeur,
                 dateContrat, nonProduitContrat, duree, quantite, nbLots, dateDebut);
-                if(aRenouveler != null && aRenouveler)
-            contract.reNew();
+        if(aRenouveler != null && aRenouveler)
+            contract.setToReNew();
+        return contract;
+    }
+    
+    public static Contract createContract(int idContrat, Producer offreur, Consummer demandeur, Date dateContrat,
+            String nonProduitContrat, int duree, Quantity quantite, int nbLots, Date dateDebut, Boolean aRenouveler, Boolean refuse){
+        Contract contract = createContract(idContrat, offreur, demandeur,
+                dateContrat, nonProduitContrat, duree, quantite, nbLots, dateDebut, aRenouveler);
+        if(refuse != null && refuse)
+            contract.refuse();
         return contract;
     }
 }

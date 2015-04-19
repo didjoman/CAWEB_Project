@@ -26,7 +26,11 @@ public abstract class ContractState {
     
     public void validate(Date dateDebut){}
     
-    public void reNew(){}
+    public void finish(){}
+    
+    public void setToReNew(){}
+    
+    public void refuse(){}
     
     public Date getDateDebut(){
         return null;
@@ -35,4 +39,7 @@ public abstract class ContractState {
     public Date getDateFin(){
         return null;
     }
+    
+    public void checkIsFinished(){}
+    
 }

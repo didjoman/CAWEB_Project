@@ -27,7 +27,7 @@
         <!-- our style -->    
         <link rel="stylesheet" media="screen" type="text/css" title="Design"
               href="${pageContext.request.contextPath}/css-min/css/styles.css" />
-                  
+        
         <!-- jquery UI style -->
         <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
@@ -46,12 +46,22 @@
         <!-- SCRIPTS -->
     </head>
     <body>
-        <t:nav_bar logged="false"/>
+        <t:nav_bar>
+            <jsp:attribute name="items">
+                <t:menu />
+            </jsp:attribute>
+        </t:nav_bar>
+            
             
         <div class="container-fluid">
             <div class="row">
-                <t:side_menu currentPage="${currentPage}"/>
-                    
+                
+                <div class="col-sm-3 col-md-2 sidebar navbar-collapse collapse">
+                    <ul class="nav nav-sidebar">
+                        <t:menu />
+                    </ul>
+                </div>
+                
                 <div id="content-wrapper" 
                      class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main hidden"
                      >
@@ -63,7 +73,7 @@
                             ${error}
                         </div>
                     </c:if>
-                        
+                    
                     <c:if test="${success != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -72,7 +82,7 @@
                             ${success}
                         </div>
                     </c:if>
-                        
+                    
                     <c:if test="${info != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -81,7 +91,7 @@
                             ${info}
                         </div>
                     </c:if>
-                        
+                    
                     <c:if test="${warning != null}">
                         <div class="alert alert-success" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -90,12 +100,12 @@
                             ${warning}
                         </div>
                     </c:if>
-                        
+                    
                     <jsp:doBody/>    
                 </div>
             </div>
         </div>
-            
+        
         <!-- jquery : -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <!-- jquery UI : -->
@@ -112,6 +122,6 @@
             .hidden{ display: block !important; }
         </style>
         </noscript>
-            
+        
     </body>
 </html>

@@ -22,15 +22,17 @@ public interface ContractDAO {
     
     public abstract List<Contract> readAll(String userPseudo)  throws DAOException ;
     
-    public List<Contract> readAllContractRequests(String offreurPseudo) throws DAOException;
+    public abstract List<Contract> readAllContractRequests(String offreurPseudo) throws DAOException;
     
-    public List<Contract> readAllValidatedContracts(String userPseudo) throws DAOException;
+    public abstract List<Contract> readAllRefusedContractRequests(String userPseudo) throws DAOException;
     
-    public List<Contract> readAllContractsToRenew(String userPseudo) throws DAOException;
+    public abstract List<Contract> readAllValidatedContracts(String userPseudo) throws DAOException;
+    
+    public abstract List<Contract> readAllContractsToRenew(String userPseudo) throws DAOException;
 
-    public void updateToReNew(int id) throws DAOException;
+    public abstract void updateToReNew(int id) throws DAOException;
     
-    public void updateValidate(int id, Date dateCont, Date begin) throws DAOException;
+    public abstract void updateValidate(int id, Date dateCont, Date begin) throws DAOException;
     
-    public abstract void delete(Contract obj)  throws DAOException ;
+    public abstract void delete(int id)  throws DAOException ;
 }

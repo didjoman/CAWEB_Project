@@ -102,9 +102,9 @@ $(function() {
     console.log(isInList(new Date(2015,00,05), listPermSet));
     
     var updateView = function(start, end, weekNum, year){
-        $.get('permanency', {async: "true", weekNum: weekNum, year: year}, 
-        function(data){
-            $( "#accordion-modif-perm" ).show();
+        $.get('permanency', {async: "true", weekNum: weekNum, year: year})
+                .always(function(){
+                    $( "#accordion-modif-perm" ).show();
             // Update of the view with static values : 
             $('#week-info #week-info-num').html(weekNum);
             $('#week-info #week-info-year').html(year);
@@ -112,14 +112,13 @@ $(function() {
             $('#week-info #week-info-end').html(printDate(end));
             
             // If there is no data for this week, we set values to default in the view
-            if(data === null){
-                $('#week-info #week-info-perm1').html("/");
-                $('#week-info #week-info-dispo').html("/");
-                $('#week-info #week-info-indispo').html("/");
-                return;
-            }
-            
-            // Update of the view with values got from the database :
+            $('#week-info #week-info-perm1').html("/");
+            $('#week-info #week-info-dispo').html("/");
+            $('#week-info #week-info-indispo').html("/");
+            return;
+        })
+                .done(function(data){
+                    // Update of the view with values got from the database :
             var perm1 = (!data.permanencier1) ? "" : data.permanencier1;
             $('#field-perm1').val(""+perm1);
             if(perm1 !== "")
@@ -150,6 +149,7 @@ $(function() {
                 indispo = "/";
             $('#week-info #week-info-indispo').html(indispo);
         });
+        
     };
     
     var renderColoredDays = function(date){

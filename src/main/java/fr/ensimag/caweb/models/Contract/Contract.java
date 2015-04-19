@@ -18,10 +18,13 @@ import java.util.Date;
 public class Contract{
     /*
     * /!\ NOTE : Contracts are implemented following the STATE design pattern.
+    * Implementation described in "Les designs pattern en Java" Ed. PEARSON
     */
     
     public final ContractState IN_REQUEST = new ContractInRequest(this);
+    public final ContractState DELETED = new ContractRequestDeleted(this);
     public final ContractState VALIDATED = new ContractValidated(this);
+    public final ContractState REFUSED = new ContractRefused(this);
     public final ContractState IN_RENEW = new ContractInRenew(this);
     
     private ContractState state;
@@ -36,6 +39,7 @@ public class Contract{
     private int nbLots;
     protected Date dateDebut;
     protected Date dateFin;
+    protected Boolean refuse;
     
     
     public Contract(int idContrat, Producer offreur, Consummer demandeur, Date dateContrat,
@@ -49,9 +53,11 @@ public class Contract{
         this.duree = duree;
         this.quantite = quantite;
         this.nbLots = nbLots;
+        this.refuse = false;
     }
     
     protected void setDateDebut(Date dateDebut) {
+        setState(this.VALIDATED);
         this.dateDebut = dateDebut;
         calculateAndSetDateFin(dateDebut);
     }
@@ -61,6 +67,11 @@ public class Contract{
         cal.setTime(dateDebut);
         cal.add(Calendar.DATE, getDuree());
         dateFin = cal.getTime();
+        checkIsFinished();
+    }
+    
+    private void checkIsFinished(){
+        state.checkIsFinished();
     }
     
     public String getState(){
@@ -143,12 +154,21 @@ public class Contract{
         return state.getDateFin();
     }
     
+    public boolean getSupprime(){
+        return refuse;
+    }
+    
     public void validate(Date dateDebut) {
         state.validate(dateDebut);
     }
     
-    public void reNew() {
-        state.reNew();
+    public void setToReNew() {
+        state.setToReNew();
     }
+    
+    public void refuse(){
+        state.refuse();
+    }
+
     
 }

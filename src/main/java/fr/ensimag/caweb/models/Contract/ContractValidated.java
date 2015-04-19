@@ -19,8 +19,20 @@ class ContractValidated extends ContractState {
     }
     
     @Override
-    public void reNew(){
-        contract.setState(contract.IN_RENEW);
+    public void checkIsFinished(){
+        if((new Date(System.currentTimeMillis())).after(getDateFin()))
+            finish();
+    }
+    
+    @Override
+    public String getState() {
+        checkIsFinished();
+        return super.getState();
+    }
+    
+    @Override
+    public void finish() {
+        contract.setState(contract.REFUSED);
     }
     
     @Override

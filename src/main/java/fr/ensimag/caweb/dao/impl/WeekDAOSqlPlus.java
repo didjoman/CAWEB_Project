@@ -17,8 +17,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  *
@@ -65,6 +69,53 @@ public class WeekDAOSqlPlus implements WeekDAO{
             "ON pseudo = consoDispo "
             + "WHERE estDispo = 0";
     
+    private static final String getNbPermsPerUser =
+            "SELECT Pseudo , coalesce(C1 ,0) + coalesce(C2 ,0) NbPerms " +
+            "FROM Utilisateur u " +
+            "LEFT OUTER JOIN (SELECT Permanencier1 p1, COUNT(*) c1  FROM AssurePermanence GROUP BY Permanencier1) " +
+            "ON p1 = u.pseudo " +
+            "LEFT OUTER JOIN (SELECT Permanencier2 p2, COUNT(*) c2  FROM AssurePermanence GROUP BY Permanencier2) " +
+            "ON p2 = u.pseudo " +
+            "ORDER BY NbPerms DESC";
+    
+    private static final String getPermFreqPerUser =
+            "SELECT DEMANDEUR, " +
+            "       WEEKNUM,  " +
+            "       YEAR,  " +
+            "       NBSEMAINESACTIF, " +
+            "       COUNT(A.NUMSEMAINE)  AS NBSEMAINESPERM,   " +
+            "       1 - ((NBSEMAINESACTIF - COUNT(A.NUMSEMAINE))/ NBSEMAINESACTIF) FREQPERM " +
+            "FROM (SELECT DEMANDEUR, " +
+            "                  COALESCE(MAX(ROUND((SYSDATE - DATEDEBUTLIVRAISON)/7)), 0) AS NBSEMAINESACTIF, " +
+            "                  to_number(to_char(to_date(MIN(DATEDEBUTLIVRAISON),'DD/MM/YYYY'),'WW')) AS WEEKNUM, " +
+            "                  EXTRACT(YEAR FROM (MIN(DATEDEBUTLIVRAISON))) AS YEAR " +
+            "           FROM CONTRAT " +
+            "           WHERE DATEDEBUTLIVRAISON + DUREEContrat >= SYSDATE " +
+            "           GROUP BY DEMANDEUR) " +
+            "LEFT JOIN AssurePermanence A " +
+            "ON (PERMANENCIER1 = DEMANDEUR OR PERMANENCIER2 = DEMANDEUR) " +
+            "AND ANNEE = YEAR " +
+            "AND A.NUMSEMAINE >= WEEKNUM " +
+            "GROUP BY DEMANDEUR, WEEKNUM, YEAR,  NBSEMAINESACTIF " +
+            "ORDER BY FREQPERM ASC ";
+    
+    /*
+    
+    SELECT DEMANDEUR, COUNT(*)
+    FROM AssurePermanence a,
+    (SELECT DEMANDEUR,
+    MAX(ROUND((SYSDATE - DATEDEBUTLIVRAISON)/7)) AS NBSEMAINES,
+    to_number(to_char(to_date(MIN(DATEDEBUTLIVRAISON),'DD/MM/YYYY'),'WW')) AS WEEKNUM,
+    EXTRACT(YEAR FROM (MIN(DATEDEBUTLIVRAISON))) AS YEAR
+    FROM CONTRAT
+    WHERE DATEDEBUTLIVRAISON + DUREEContrat >= SYSDATE
+    GROUP BY DEMANDEUR) C
+    WHERE (A.Permanencier1 = C.DEMANDEUR
+    OR A.Permanencier2 = C.DEMANDEUR)
+    AND A.ANNEE = C.YEAR
+    AND A.NUMSEMAINE >= C.WEEKNUM
+    GROUP BY DEMANDEUR;
+    */
     private static final String selectQuery = selectAllQuery +
             "WHERE (d.numSemaine = ? AND d.annee = ?) "
             + "OR (p.numSemaine = ? AND p.annee = ?)";
@@ -87,6 +138,65 @@ public class WeekDAOSqlPlus implements WeekDAO{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    @Override
+    public List<Entry<String, Integer>> getNbPermsPerUser()  throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        PreparedStatement selectPrep = null;
+        ResultSet rs = null;
+        List<Map.Entry<String, Integer>> ls = new ArrayList();
+        
+        try {
+            selectPrep = connec.prepareStatement(getNbPermsPerUser);
+            rs = selectPrep.executeQuery();
+            while(rs.next())
+                ls.add(new AbstractMap.SimpleEntry(rs.getString("pseudo"), rs.getInt("NbPerms")));
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return ls;
+    }
+    
+    @Override
+    public List<Entry<String, Double>> getPermFreqPerActiveUser()  throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        
+        PreparedStatement selectPrep = null;
+        ResultSet rs = null;
+        List<Map.Entry<String, Double>> ls = new ArrayList();
+        
+        try {
+            selectPrep = connec.prepareStatement(getPermFreqPerUser);
+            rs = selectPrep.executeQuery();
+            while(rs.next())
+                ls.add(new AbstractMap.SimpleEntry(rs.getString("demandeur"), rs.getDouble("FREQPERM")));
+            
+        } catch (SQLException ex) {
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if(rs != null)
+                    rs.close();
+                if(selectPrep != null)
+                    selectPrep.close();
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+        }
+        return ls;
+    }
     
     @Override
     public Week read(int weekNum, int year) throws DAOException {

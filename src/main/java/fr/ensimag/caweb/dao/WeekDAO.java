@@ -7,6 +7,8 @@ package fr.ensimag.caweb.dao;
 
 import fr.ensimag.caweb.models.Week;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  *
@@ -17,25 +19,29 @@ public interface WeekDAO {
     
     public abstract Week read(int weekNum, int year)  throws DAOException ;
     
+    public abstract List<Entry<String, Integer>> getNbPermsPerUser()  throws DAOException ;
+    
+    public abstract List<Entry<String, Double>> getPermFreqPerActiveUser()  throws DAOException;
+    
     public abstract List<Week> readAll()  throws DAOException ;
     
-    public List<Week> readAllPerms() throws DAOException;
+    public abstract List<Week> readAllPerms() throws DAOException;
     
-    public List<Week> readAllWhereConsumerAppears(String consummerPseudo) throws DAOException;
+    public abstract List<Week> readAllWhereConsumerAppears(String consummerPseudo) throws DAOException;
     
-    public List<Week> readAllPermsFullySet() throws DAOException;
+    public abstract List<Week> readAllPermsFullySet() throws DAOException;
     
-    public List<Week> readAllDispos() throws DAOException;
+    public abstract List<Week> readAllDispos() throws DAOException;
     
-    public List<Week> readAllUndispos() throws DAOException;
+    public abstract List<Week> readAllUndispos() throws DAOException;
     
     public abstract Week update(Week obj)  throws DAOException ;
     
-    public void updateSetPerm(int numSemaine, int annee,
+    public abstract void updateSetPerm(int numSemaine, int annee,
             String consummerPseudo1, String consummerPseudo2) throws DAOException;
     
-    public void updateSetDispo(int numSemaine, int annee,
+    public abstract void updateSetDispo(int numSemaine, int annee,
             String consummerPseudo, int estDispo) throws DAOException;
     
-    public void deleteDispo(int numSemaine, int annee, String consummerPseudo) throws DAOException;
+    public abstract void deleteDispo(int numSemaine, int annee, String consummerPseudo) throws DAOException;
 }

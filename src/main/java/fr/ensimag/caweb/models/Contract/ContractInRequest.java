@@ -20,6 +20,11 @@ class ContractInRequest extends ContractState {
     @Override
     public void validate(Date dateDebut){
         contract.setDateDebut(dateDebut);
-        contract.setState(contract.VALIDATED);
+    }
+    
+    @Override
+    public void refuse() {
+        contract.setState(contract.DELETED);
+        contract.refuse = true;
     }
 }
