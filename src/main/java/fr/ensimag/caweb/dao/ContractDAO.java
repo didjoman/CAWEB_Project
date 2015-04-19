@@ -30,7 +30,7 @@ public interface ContractDAO {
     
     public abstract List<Contract> readAllContractsToRenew(String userPseudo) throws DAOException;
 
-    public abstract void updateToReNew(int id) throws DAOException;
+    public void updateToReNew(int id, String pseudo) throws DAOException;
     
     public abstract void updateValidate(int id, Date dateCont, Date begin) throws DAOException;
     
