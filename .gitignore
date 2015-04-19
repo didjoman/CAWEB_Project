@@ -14,3 +14,11 @@ target
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+# latex : 
+docs/*.aux
+docs/*.log
+docs/*.pdf
+docs/*.toc
+docs/*.out
+docs/*.synctex.gz
