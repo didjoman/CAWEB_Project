@@ -97,13 +97,48 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "SET refuse = 1 "
             + "WHERE idContrat = ? ";
     
+    private static final String insertQuery
+            = "INSERT INTO Contrat (offreur, demandeur, dateContrat, nomProduitContrat,"
+            + " prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, aRenouveler)\n"
+            + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, 0)";
+    
     public ContractDAOSqlPlus(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
     
-    @Override
-    public Contract create(Contract obj) throws DAOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   @Override
+    public Contract create(Contract contrat) throws DAOException {
+        Connection connec = daoFactory.getConnection();
+        PreparedStatement insertPrep = null;
+        try {
+            insertPrep = connec.prepareStatement(insertQuery);
+            insertPrep.setString(1, contrat.getOffreur().getPseudo());
+            insertPrep.setString(2, contrat.getDemandeur().getPseudo());
+            insertPrep.setDate(3, (Date) contrat.getDateContrat());
+            insertPrep.setString(4, contrat.getNonProduitContrat());
+            insertPrep.setDouble(5, contrat.getPrixTotal());
+            insertPrep.setInt(6, contrat.getDuree());
+            insertPrep.setInt(7, contrat.getNbLots());
+            insertPrep.setString(8, contrat.getQuantite().getUniteQte());
+            insertPrep.setInt(9, contrat.getNbLots());
+            insertPrep.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ContractDAOSqlPlus.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("erreur");
+            ex.printStackTrace();
+            throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+        } finally {
+            try {
+                if (insertPrep != null) {
+                    insertPrep.close();
+                }
+                daoFactory.closeConnection(connec);
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                throw new DAOException("Erreur BD " + ex.getMessage(), ex);
+            }
+            return contrat;
+        }
     }
     
     @Override

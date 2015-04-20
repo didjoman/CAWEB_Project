@@ -169,6 +169,8 @@ public class Contract{
     public void refuse(){
         state.refuse();
     }
-
     
+    public double getPrixTotal() {
+        return nbLots*quantite.getPrix();
+    }
 }

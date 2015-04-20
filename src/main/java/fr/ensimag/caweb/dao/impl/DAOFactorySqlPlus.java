@@ -9,6 +9,7 @@ package fr.ensimag.caweb.dao.impl;
 import fr.ensimag.caweb.dao.ContractDAO;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
+import fr.ensimag.caweb.dao.OfferDAO;
 import fr.ensimag.caweb.dao.UserDAO;
 import fr.ensimag.caweb.dao.WeekDAO;
 import fr.ensimag.caweb.dao.impl.UserDAOSqlPlus;
@@ -78,5 +79,10 @@ public class DAOFactorySqlPlus extends DAOFactory {
     @Override
     public ContractDAO getContractDAO() {
         return new ContractDAOSqlPlus(getInstance());
+    }
+
+    @Override
+    public OfferDAO getOfferDAO() {
+        return new OfferDAOSqlPlus(getInstance());
     }
 }

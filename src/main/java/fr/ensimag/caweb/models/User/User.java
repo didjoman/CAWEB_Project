@@ -18,6 +18,16 @@ public abstract class User {
     private String prenom;
     private String tel;
     
+    public User() {
+        pseudo = null;
+        motDePasse = null;
+        email = null;
+        adresse = null;
+        nom = null;
+        prenom =null;
+        tel = null;
+    }
+    
     public User(String pseudo, String motDePasse, String email, String adresse, String nom, String prenom, String tel) {
         this.pseudo = pseudo;
         this.motDePasse = motDePasse;

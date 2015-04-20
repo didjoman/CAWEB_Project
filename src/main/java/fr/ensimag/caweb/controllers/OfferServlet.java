@@ -6,9 +6,12 @@
 package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
+import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.impl.OfferDAOSqlPlus;
+import fr.ensimag.caweb.models.Offer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -27,8 +30,6 @@ import javax.sql.DataSource;
 @WebServlet(name = "OfferServlet", urlPatterns = {"/offer"})
 public class OfferServlet extends HttpServlet {
     
-    @Resource(name = "jdbc/pool/MyAppDB")
-    private DataSource ds;
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -41,9 +42,9 @@ public class OfferServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            OfferDAOSqlPlus offerDAO = new OfferDAOSqlPlus(ds);
-            request.setAttribute("offers", offerDAO.readAll());
+       try {
+         List<Offer> offers = DAOFactory.getInstance().getOfferDAO().readAll();            
+            request.setAttribute("offers", offers);
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
             view.forward(request, response);
         } catch (DAOException ex) {

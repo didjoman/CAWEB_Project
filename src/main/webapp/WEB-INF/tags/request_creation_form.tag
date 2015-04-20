@@ -35,12 +35,15 @@
     </div>
     <div>
         <label for="quantity-field">*Lots de quantité :</label>
-        <select name="quantity" size="1" id="quantity-field" required>
-            <c:forEach items="${quantities}" var="quantity">
-                <option value="${quantity.qte}" data-unit="${quantity.unit}">
-                    ${quantity.qte}${quantity.unit}
+         <select name="quantity" size="1" id="quantity-field" required>
+            <%--<c:forEach items="${quantities}" var="quantity">
+                <option value="${quantity.qte}" data-unit="${quantity.uniteQte}">
+                    ${quantity.qte} ${quantity.unitQte}
                 </option>
-            </c:forEach>
+            </c:forEach>--%>
+            <option value="1">Valeur 1</option> 
+            <option value="2" selected>Valeur 2</option>
+            <option value="3">Valeur 3</option>
         </select>
     </div>
     <div>
