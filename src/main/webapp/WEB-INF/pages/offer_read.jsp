@@ -13,7 +13,7 @@
         <div class="page-header">
             <h1>Liste des offres</h1>
         </div>
-        
+
         <!-- Formulaire de recherche -->
         <div>Rechercher un produit en particulier :
             <div class="row">
@@ -28,21 +28,21 @@
             </div>
         </div>
         <hr />
-        
+
         <!-- Affichage des offres : -->
-        <h3>Produits proposés</h3>
+        <h3>${offer.nomProduit}</h3>
         <div class="row">
             <c:forEach items="${offers}" var="offer">
-                
+
                 <div class="offre col-sm-4 col-md-3">
                     <div class="thumbnail"> 
-                        
-                        
-                        
+
+
+
                         <h3>${offer.nomProduit}</h3>
                         <hr />
                         <ul>
-                            <li><strong>Producteur: </strong> M. Machin</li>
+                            <li><strong>Producteur: </strong>${offer.createur}</li>
                             <li><strong>duréee contrat: </strong> ${offer.duree}</li>
                             <li>
                                 <strong>Qtés proposées:</strong><br />
@@ -51,14 +51,12 @@
                                         <th>qté</th>
                                         <th>prix</th>
                                     </tr>
-                                    <tr>
-                                        <td>5 kg</td>
-                                        <td>20€</td>
-                                    </tr>
-                                    <tr>
-                                        <td>10 kg</td>
-                                        <td>30€</td>
-                                    </tr>
+                                    <c:forEach items="${offer.quantities}" var="quantity">
+                                        <tr>
+                                            <td>${quantity.qte} ${quantity.uniteQte}</td>
+                                            <td>${quantity.prix}</td>
+                                        </tr>
+                                    </c:forEach>
                                 </table>
                             </li>
                         </ul>
@@ -75,15 +73,15 @@
                                 </t:request_creation_popup>
                             </c:if>
                         </p>
-                        
+
                     </div>
                 </div>
             </c:forEach>
-            
-            
-            
+
+
+
         </div>
-        
+
         <hr />
         <nav>
             <ul class="pagination">
