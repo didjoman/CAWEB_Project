@@ -25,7 +25,7 @@
                     <th>Nombre de lot</th>
                     <th>Quantité d'un lot</th>
                     <th>Prix d'un lot</th>
-                    <th>Prix par semaine</th>
+                    <th>Prix total</th>
                     <c:if test="${status=='CONS'}">
                         <th>Offreur</th>
                         <th>Renouveller</th>
@@ -37,7 +37,15 @@
             </thead>
             <tbody>
                 <c:forEach items="${reqs}" var="req">
-                    <tr>
+                    <c:choose>
+                        <c:when test="${req.getDateFin().getTime()<now.getTime()}">
+                            <tr class="warning">
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                        </c:otherwise>
+                    </c:choose>
+                    
                         <td>${req.nonProduitContrat}</td>
                         <td>${req.dateContrat}</td>
                         <td>${req.getDateDebut()}</td>
@@ -56,10 +64,12 @@
                                     idContrat="${req.idContrat}"
                                     tel="${req.offreur.tel}"
                                     mail="${req.offreur.email}"
-                                    adresse="${req.offreur.adresse}">
+                                    adresse="${req.offreur.adresse}">   
                                 </t:info_producer_popup>
                                 </td>
+                                            <jsp:useBean id="now" class="java.util.Date" />
                                 <td>
+                                <c:if test="${req.getDateFin().getTime()<now.getTime()}">
                                 <a href="#" role="button" data-toggle="modal" data-target=".modal-renew-${req.idContrat}">
                                     Renouveller
                                 </a>
@@ -75,6 +85,7 @@
                                     prixSem="${req.quantite.prix*req.nbLots}"
                                     offreur="${req.offreur.pseudo}">
                                 </t:renew_contrat_popup>                                    
+                                </c:if>
                                 </td>
                              </c:if>
                                <c:if test="${status=='PROD'}">

@@ -82,6 +82,25 @@ public class ContractServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        HttpSession session = request.getSession(false);
+        String login, status;
+        int idContrat;
+        if (session != null && session.getAttribute("login") != null
+                && session.getAttribute("status") != null) {
+
+            login = (String) session.getAttribute("login");
+            status = (String) session.getAttribute("status");
+            idContrat = Integer.parseInt(request.getParameter("idContrat"));
+        } else {
+            throw new CAWEB_AccessRightsException(request.getRequestURI());
+        }
+        try {
+            DAOFactory.getInstance().getContractDAO().updateToReNew(idContrat, login);
+            doGet(request, response);
+        } catch (DAOException ex) {
+            Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**

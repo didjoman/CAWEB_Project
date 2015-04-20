@@ -107,7 +107,7 @@ public class Contract{
     }
     
     public Date getDateContrat() {
-        return dateContrat;
+        return dateContrat; 
     }
     
     public void setDateContrat(Date dateContrat) {
