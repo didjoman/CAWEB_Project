@@ -111,13 +111,6 @@ public class ContractDAOSqlPlus implements ContractDAO {
         Connection connec = daoFactory.getConnection();
         PreparedStatement insertPrep = null;
         try {
-           /* System.out.println(contrat.getOffreur().getPseudo());
-            System.out.println(contrat.getNomProduitContrat());
-            System.out.println
-                    System.out.println
-                            System.out.println
-                                    System.out.println
-            insertPrep = connec.prepareStatement(insertQuery);*/
             insertPrep.setString(1, contrat.getOffreur().getPseudo());
             insertPrep.setString(2, contrat.getDemandeur().getPseudo());
             insertPrep.setDate(3, (Date) contrat.getDateContrat());
@@ -142,8 +135,9 @@ public class ContractDAOSqlPlus implements ContractDAO {
             } catch (SQLException ex) {
                 ex.printStackTrace();
                 throw new DAOException("Erreur BD " + ex.getMessage(), ex);
-            }
+            } finally {
             return contrat;
+            }
         }
     }
     

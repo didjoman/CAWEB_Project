@@ -46,7 +46,7 @@
                         </c:otherwise>
                     </c:choose>
                     
-                        <td>${req.nonProduitContrat}</td>
+                        <td>${req.nomProduitContrat}</td>
                         <td>${req.dateContrat}</td>
                         <td>${req.getDateDebut()}</td>
                         <td> <fmt:formatDate pattern="yyyy-MM-dd" value="${req.getDateFin()}"/></td>
@@ -75,7 +75,7 @@
                                 </a>
                                 <t:renew_contrat_popup
                                     idContrat="${req.idContrat}"
-                                    produit="${req.nonProduitContrat}"
+                                    produit="${req.nomProduitContrat}"
                                     dateSign="${req.dateContrat}"
                                     dateDeb="${req.getDateDebut()}"
                                     dateFin="${req.getDateFin()}"

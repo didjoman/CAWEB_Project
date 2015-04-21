@@ -59,7 +59,7 @@
                     </div>
                     <div id="contract-info" class="panel-body">
                         <ul>
-                            <li><strong>Produit:</strong> ${req.nonProduitContrat}</li>
+                            <li><strong>Produit:</strong> ${req.nomProduitContrat}</li>
                             <li><strong>Quantité:</strong> ${req.quantite.qte} <em>${req.quantite.uniteQte}</em></li>
                             <li><strong>Prix:</strong> 3${req.quantite.prix}€</li>
                         </ul>
