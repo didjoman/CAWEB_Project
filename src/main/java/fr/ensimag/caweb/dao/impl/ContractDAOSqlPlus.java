@@ -111,11 +111,17 @@ public class ContractDAOSqlPlus implements ContractDAO {
         Connection connec = daoFactory.getConnection();
         PreparedStatement insertPrep = null;
         try {
-            insertPrep = connec.prepareStatement(insertQuery);
+           /* System.out.println(contrat.getOffreur().getPseudo());
+            System.out.println(contrat.getNomProduitContrat());
+            System.out.println
+                    System.out.println
+                            System.out.println
+                                    System.out.println
+            insertPrep = connec.prepareStatement(insertQuery);*/
             insertPrep.setString(1, contrat.getOffreur().getPseudo());
             insertPrep.setString(2, contrat.getDemandeur().getPseudo());
             insertPrep.setDate(3, (Date) contrat.getDateContrat());
-            insertPrep.setString(4, contrat.getNonProduitContrat());
+            insertPrep.setString(4, contrat.getNomProduitContrat());
             insertPrep.setDouble(5, contrat.getPrixTotal());
             insertPrep.setInt(6, contrat.getDuree());
             insertPrep.setInt(7, contrat.getNbLots());

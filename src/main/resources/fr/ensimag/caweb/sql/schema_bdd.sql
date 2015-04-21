@@ -14,7 +14,7 @@ CREATE TABLE Utilisateur(
 );
 
 -- /!\ idOffre is a - surrogate (or synthetic) key -,
--- while (createur, nomProduit, prixOffre, dureeOffre) is the businessKey 
+-- while (createur, nomProduit, dureeOffre) is the businessKey 
 CREATE TABLE Offre(
     idOffre NUMBER,
     createur VARCHAR(20) NOT NULL,
@@ -109,7 +109,6 @@ BEGIN
         ON idOffre = idOffrePrecisee
         WHERE createur = :new.offreur
         AND nomProduit = :new.nomProduitContrat
-        AND prix = :new.prixLotContrat
         AND dureeOffre = :new.dureeContrat
         AND qte = :new.qteLotContrat
         AND uniteQte = :new.uniteContrat;

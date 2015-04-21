@@ -12,6 +12,7 @@ import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.Contract.Contract;
 import fr.ensimag.caweb.models.Contract.ContractFactory;
+import fr.ensimag.caweb.models.Offer;
 import fr.ensimag.caweb.models.Quantity;
 import fr.ensimag.caweb.models.User.Consummer;
 import fr.ensimag.caweb.models.User.Producer;
@@ -148,65 +149,66 @@ public class ContractRequestServlet extends HttpServlet {
         String idParam = request.getParameter("contractId");
         String dateBeginParam = request.getParameter("begin");
         String action = request.getParameter("action");
-
-        if (idParam == null) {
-            throw new CAWEBServletException("Id de contrat incorrect");
-        }
-
-        // Get Contract Request Id <id>
-        Integer id = Integer.parseInt(idParam);
-
-        // Check that the producer is allowed to modify the contract (=owner)
-        checkAccessRights(request, id);
-
-        // REQUEST DELETE :
-        if (action != null && action.equals("delete")) {
-            // Update of the contract in DB :
-            try {
-                DAOFactory.getInstance().getContractDAO().delete(id);
-            } catch (DAOException ex) {
-                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                throw new CAWEB_DatabaseAccessException();
-            }
-
-            // Forwarding :
-            request.setAttribute("success", "La demande de contrat a été refusée");
-            this.doGet(request, response);
-        } // REQUEST VALIDATE :
-        else if (idParam != null && dateBeginParam != null) {
-            // Parse and check date :
-            Date dateBegin = checkDate(request);
-
-            // Update of the contract in DB :
-            try {
-                DAOFactory.getInstance().getContractDAO().updateValidate(id, new Date(System.currentTimeMillis()), dateBegin);
-            } catch (DAOException ex) {
-                Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
-                throw new CAWEB_DatabaseAccessException();
-            }
-
-            // Forwarding :
-            request.setAttribute("success", "Le contrat a été validé.");
-            this.doGet(request, response);
-        }
-
-        //Contract request
         String producer = request.getParameter("producer");
         String product = request.getParameter("product");
         String duration = request.getParameter("duration");
         String quantity = request.getParameter("quantity");
         String nbLots = request.getParameter("nbLots");
         String totalPrice = request.getParameter("total-price-label");
-        Producer producerObj = new Producer();
-        Consummer consummerObj = new Consummer();
 
-        if (producer != null && product != null && duration != null
-                && quantity != null && nbLots != null && totalPrice != null && action.equals("create")) {
-            //Create Producer object                                           
+        /*if (idParam == null) {
+         throw new CAWEBServletException("Id de contrat incorrect");
+         }*/
+        if (idParam != null) {
+            // Get Contract Request Id <id>
+            Integer id = Integer.parseInt(idParam);
+
+            // Check that the producer is allowed to modify the contract (=owner)
+            checkAccessRights(request, id);
+
+            // REQUEST DELETE :
+            if (action != null && action.equals("delete")) {
+                // Update of the contract in DB :
+                try {
+                    DAOFactory.getInstance().getContractDAO().delete(id);
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new CAWEB_DatabaseAccessException();
+                }
+
+                // Forwarding :
+                request.setAttribute("success", "La demande de contrat a été refusée");
+                this.doGet(request, response);
+            } // REQUEST VALIDATE :
+            else if (idParam != null && dateBeginParam != null) {
+                // Parse and check date :
+                Date dateBegin = checkDate(request);
+
+                // Update of the contract in DB :
+                try {
+                    DAOFactory.getInstance().getContractDAO().updateValidate(id, new Date(System.currentTimeMillis()), dateBegin);
+                } catch (DAOException ex) {
+                    Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new CAWEB_DatabaseAccessException();
+                }
+
+                // Forwarding :
+                request.setAttribute("success", "Le contrat a été validé.");
+                this.doGet(request, response);
+
+            }
+        } //REQUEST CREATION
+        else if (producer != null && product != null && duration != null
+                && quantity != null && nbLots != null && totalPrice != null
+                && action != null && action.equals("create")) {
+
+            //Create Producer object      
+            Producer producerObj = new Producer();
             producerObj.setPseudo(producer);
             //Get consummer name and create consummer object
             HttpSession session = request.getSession(false);
             String consummer = (String) session.getAttribute("login");
+            Consummer consummerObj = new Consummer();
             consummerObj.setPseudo(consummer);
             //Create a new contract in request
             Contract contract = ContractFactory.createContract(0, producerObj, consummerObj,
@@ -221,8 +223,15 @@ public class ContractRequestServlet extends HttpServlet {
             }
 
             // Forwarding :
-            request.setAttribute("success", "Le contrat a été validé.");
-            this.doGet(request, response);
+            request.setAttribute("success", "La demande de contrat a été effectuée.");
+            try {
+                List<Offer> offers = DAOFactory.getInstance().getOfferDAO().readAll();
+                request.setAttribute("offers", offers);
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
+                view.forward(request, response);
+            } catch (DAOException ex) {
+                Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

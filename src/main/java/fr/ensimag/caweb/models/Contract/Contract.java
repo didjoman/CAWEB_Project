@@ -114,7 +114,7 @@ public class Contract{
         this.dateContrat = dateContrat;
     }
     
-    public String getNonProduitContrat() {
+    public String getNomProduitContrat() {
         return nonProduitContrat;
     }
     

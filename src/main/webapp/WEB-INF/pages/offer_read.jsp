@@ -66,10 +66,13 @@
                                     Emettre une demande
                                 </a>
                                 <t:request_creation_popup 
-                                    producer="${producer}"
+                                    producer="${offer.createur}"
                                     product="${offer.nomProduit}"
                                     duration="${offer.duree}"
-                                    quantities="${quantities}">
+                                    quantities="${offer.quantities}"
+                                    prixUnite="${offer.quantities.get(0).prix}"
+                                    uniteQte="${offer.quantities.get(0).uniteQte}"
+                                    action="create">                                  
                                 </t:request_creation_popup>
                             </c:if>
                         </p>

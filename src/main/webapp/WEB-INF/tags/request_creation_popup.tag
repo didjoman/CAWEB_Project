@@ -11,7 +11,10 @@
 <%@attribute name="producer" required="true"%>
 <%@attribute name="product" required="true"%>
 <%@attribute name="duration" required="true"%>
-<%@attribute name="quantities" required="true"%>
+<%@attribute name="quantities" type="java.util.List" required="true"%>
+<%@attribute name="prixUnite" required="true"%>
+<%@attribute name="uniteQte" required="true"%>
+<%@attribute name="action" required="true"%>
 
 <t:popup title="Créer une demande" classes="modal-create-request" type="modal-lg">
     <jsp:attribute name="footer">
@@ -24,7 +27,10 @@
             producer="${producer}"
             product="${product}"
             duration="${duration}"
-            quantities="${quantities}">
+            quantities="${quantities}"
+            prixUnite="${prixUnite}"
+            uniteQte="${uniteQte}"
+            action="${create}">
         </t:request_creation_form>
     </jsp:body>
 </t:popup> 
