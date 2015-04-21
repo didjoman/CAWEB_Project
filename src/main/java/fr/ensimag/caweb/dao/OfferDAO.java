@@ -14,7 +14,7 @@ import java.util.List;
  * @author laguerrr
  */
 public interface OfferDAO {
-    public Contract create(Contract contrat) throws DAOException;
+    public abstract Offer create(Offer obj)  throws DAOException ;
     
     public abstract Offer read(int id)  throws DAOException ;
     

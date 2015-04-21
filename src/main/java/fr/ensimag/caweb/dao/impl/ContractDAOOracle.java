@@ -111,6 +111,7 @@ public class ContractDAOOracle implements ContractDAO {
         Connection connec = daoFactory.getConnection();
         PreparedStatement insertPrep = null;
         try {
+            insertPrep = connec.prepareStatement(insertQuery);
             insertPrep.setString(1, contrat.getOffreur().getPseudo());
             insertPrep.setString(2, contrat.getDemandeur().getPseudo());
             insertPrep.setDate(3, (Date) contrat.getDateContrat());
@@ -123,7 +124,6 @@ public class ContractDAOOracle implements ContractDAO {
             insertPrep.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("erreur");
             ex.printStackTrace();
             throw new DAOException("Erreur BD " + ex.getMessage(), ex);
         } finally {
