@@ -21,6 +21,10 @@ public class Producer extends User{
         super(u);
     }
     
+    public Producer() {
+        super();
+    }
+    
     @Override
     public UserStatus getRole() {
         return UserStatus.PROD;

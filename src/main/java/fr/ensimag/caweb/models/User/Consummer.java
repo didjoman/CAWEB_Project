@@ -19,6 +19,10 @@ public class Consummer extends User {
         super(u);
     }
     
+    public Consummer() {
+        super();
+    }
+    
     @Override
     public UserStatus getRole() {
         return UserStatus.CONS;

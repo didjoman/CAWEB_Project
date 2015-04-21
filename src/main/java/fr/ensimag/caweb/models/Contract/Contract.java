@@ -107,14 +107,14 @@ public class Contract{
     }
     
     public Date getDateContrat() {
-        return dateContrat;
+        return dateContrat; 
     }
     
     public void setDateContrat(Date dateContrat) {
         this.dateContrat = dateContrat;
     }
     
-    public String getNonProduitContrat() {
+    public String getNomProduitContrat() {
         return nonProduitContrat;
     }
     
@@ -169,6 +169,8 @@ public class Contract{
     public void refuse(){
         state.refuse();
     }
-
     
+    public double getPrixTotal() {
+        return nbLots*quantite.getPrix();
+    }
 }

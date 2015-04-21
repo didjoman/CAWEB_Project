@@ -12,7 +12,10 @@
 <%@attribute name="producer" required="true"%>
 <%@attribute name="product" required="true"%>
 <%@attribute name="duration" required="true"%>
-<%@attribute name="quantities" required="true"%>
+<%@attribute name="quantities" type="java.util.List" required="true"%>
+<%@attribute name="prixUnite" required="true"%>
+<%@attribute name="uniteQte" required="true"%>
+<%@attribute name="action" required="true"%>
 
 
 
@@ -31,27 +34,28 @@
     </div>
     <div>
         <label for="nbLots-field">*Nombre de lots :</label>
-        <input type="number" name="nbLots" id="nbLots-field" required/> 
+        <input type="number" name="nbLots"  id="nbLots-field" required/> 
     </div>
     <div>
         <label for="quantity-field">*Lots de quantité :</label>
-        <select name="quantity" size="1" id="quantity-field" required>
+         <select name="quantity" size="1" id="quantity-field" required>
             <c:forEach items="${quantities}" var="quantity">
-                <option value="${quantity.qte}" data-unit="${quantity.unit}">
-                    ${quantity.qte}${quantity.unit}
+                <option value="${quantity.qte}" data-unit="${quantity.uniteQte}">
+                    ${quantity.qte} ${quantity.uniteQte}
                 </option>
-            </c:forEach>
+            </c:forEach>           
         </select>
     </div>
     <div>
         <label for="unit-price-field">*Prix à l'unité : </label>
-        <input type="text" id="unit-price-field" value="" readonly><br />
+        <input type="text" id="unit-price-field" value="${prixUnite}" readonly><br />
     </div>
     <div>
         <label for="total-price-field">*Prix total :</label>
-        <input type="text" name="total-price-label" id="total-price-field" value="" readonly><br />
+        <input type="text" name="total-price-label" id="total-price-field" value="42" readonly><br />
     </div>
-    <input type="hidden" name="unit" id="unit-field" value="" />
+    <input type="hidden" name="uniteQte" id="unit-field" value="${uniteQte}" />
+    <input type="hidden" name="action" id="unit-field" value="create" />
     <br />
     <c:if test="${hasSubmitBtn == null ||  hasSubmitBtn == true}">
         <input class="submit btn btn-primary" type="submit" value="S'inscrire" id="submit" /><br />
