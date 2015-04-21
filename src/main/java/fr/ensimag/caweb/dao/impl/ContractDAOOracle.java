@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  *
  * @author Alexandre Rupp
  */
-public class ContractDAOSqlPlus implements ContractDAO {
+public class ContractDAOOracle implements ContractDAO {
     private final DAOFactory daoFactory;
     
     private static final String selectQuery =
@@ -97,7 +97,7 @@ public class ContractDAOSqlPlus implements ContractDAO {
             + "SET refuse = 1 "
             + "WHERE idContrat = ? ";
     
-    public ContractDAOSqlPlus(DAOFactory daoFactory) {
+    public ContractDAOOracle(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
     

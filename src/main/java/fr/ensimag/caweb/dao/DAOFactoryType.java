@@ -10,5 +10,5 @@ package fr.ensimag.caweb.dao;
  * @author Alexandre Rupp
  */
 public enum DAOFactoryType {
-    OracleSqlPlus;
+    ORACLE;
 }

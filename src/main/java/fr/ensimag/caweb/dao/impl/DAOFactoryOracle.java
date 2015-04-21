@@ -11,7 +11,7 @@ import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.dao.UserDAO;
 import fr.ensimag.caweb.dao.WeekDAO;
-import fr.ensimag.caweb.dao.impl.UserDAOSqlPlus;
+import fr.ensimag.caweb.dao.impl.UserDAOOracle;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,24 +25,24 @@ import javax.sql.DataSource;
  *
  * @author Alexandre Rupp
  */
-public class DAOFactorySqlPlus extends DAOFactory {
+public class DAOFactoryOracle extends DAOFactory {
     private static final String DB_DATASRC_REF = "java:comp/env/jdbc/pool/MyAppDB";
     private final DataSource dataSource;
     
-    private DAOFactorySqlPlus(DataSource dataSource) {
+    private DAOFactoryOracle(DataSource dataSource) {
         this.dataSource = dataSource;
     }
     
-    public static DAOFactorySqlPlus getInstance(){
+    public static DAOFactoryOracle getInstance(){
         DataSource dataSource = null;
         try {
             Context ctx = new InitialContext();
             dataSource = (DataSource)ctx.lookup(DB_DATASRC_REF);
         } catch (NamingException ex) {
-            Logger.getLogger(DAOFactorySqlPlus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryOracle.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return new DAOFactorySqlPlus(dataSource);
+        return new DAOFactoryOracle(dataSource);
     }
     
     @Override
@@ -50,7 +50,7 @@ public class DAOFactorySqlPlus extends DAOFactory {
         try {
             return dataSource.getConnection();
         } catch (SQLException ex) {
-            Logger.getLogger(DAOFactorySqlPlus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DAOFactoryOracle.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -67,16 +67,16 @@ public class DAOFactorySqlPlus extends DAOFactory {
     
     @Override
     public UserDAO getUserDAO(){
-        return new UserDAOSqlPlus(getInstance());
+        return new UserDAOOracle(getInstance());
     }
     
     @Override
     public WeekDAO getWeekDAO() {
-        return new WeekDAOSqlPlus(getInstance());
+        return new WeekDAOOracle(getInstance());
     }
     
     @Override
     public ContractDAO getContractDAO() {
-        return new ContractDAOSqlPlus(getInstance());
+        return new ContractDAOOracle(getInstance());
     }
 }

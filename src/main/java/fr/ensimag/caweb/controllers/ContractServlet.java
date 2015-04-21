@@ -9,7 +9,7 @@ import fr.ensimag.caweb.controllers.errors.CAWEB_AccessRightsException;
 import fr.ensimag.caweb.controllers.errors.CAWEB_DatabaseAccessException;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
-import fr.ensimag.caweb.dao.impl.ContractDAOSqlPlus;
+import fr.ensimag.caweb.dao.impl.ContractDAOOracle;
 import fr.ensimag.caweb.models.Contract.Contract;
 import fr.ensimag.caweb.models.Week;
 import java.io.IOException;

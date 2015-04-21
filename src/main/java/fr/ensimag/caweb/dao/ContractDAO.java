@@ -22,7 +22,7 @@ public interface ContractDAO {
     
     public abstract List<Contract> readAll(String userPseudo)  throws DAOException ;
     
-    public abstract List<Contract> readAllContractRequests(String offreurPseudo) throws DAOException;
+    public abstract List<Contract> readAllContractRequests(String userPseudo) throws DAOException;
     
     public abstract List<Contract> readAllRefusedContractRequests(String userPseudo) throws DAOException;
     

@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  *
  * @author Alexandre Rupp
  */
-public class UserDAOSqlPlus implements UserDAO{
+public class UserDAOOracle implements UserDAO{
     private final DAOFactory daoFactory;
     
     private static final String selectQuery =
@@ -43,7 +43,7 @@ public class UserDAOSqlPlus implements UserDAO{
             "INSERT INTO Utilisateur (pseudo, motDePasse, eMail, adresse, nom, prenom, tel, roleUtilisateur)\n" +
             "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
     
-    public UserDAOSqlPlus(DAOFactory daoFactory) {
+    public UserDAOOracle(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
     
@@ -183,10 +183,10 @@ public class UserDAOSqlPlus implements UserDAO{
     @Override
     public User read(String pseudo, String pwd){
         try {
-            User u = UserDAOSqlPlus.this.read(pseudo);
-            return (u != null && UserDAOSqlPlus.this.read(pseudo).getMotDePasse().equals(pwd)) ? u : null;
+            User u = UserDAOOracle.this.read(pseudo);
+            return (u != null && UserDAOOracle.this.read(pseudo).getMotDePasse().equals(pwd)) ? u : null;
         } catch (DAOException ex) {
-            Logger.getLogger(UserDAOSqlPlus.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAOOracle.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
         

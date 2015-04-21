@@ -9,7 +9,7 @@ import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.User.Consummer;
 import fr.ensimag.caweb.models.User.Producer;
-import fr.ensimag.caweb.models.SubscriptionForm;
+import fr.ensimag.caweb.models.business.SubscriptionForm;
 import fr.ensimag.caweb.models.User.User;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.business;
 
 import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.controllers.UserServlet;
@@ -71,7 +71,7 @@ public class ConnectionForm {
             throw new EmptyFieldException("Mot de passe");
     }
     
-    public User getLoggedUser(String login, String pwd){
+    private User getLoggedUser(String login, String pwd){
         try {
             return DAOFactory.getInstance().getUserDAO().read(login, pwd);
         } catch (DAOException ex) {

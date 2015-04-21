@@ -7,8 +7,8 @@ package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.DAOFactory;
-import fr.ensimag.caweb.models.ConnectionForm;
-import fr.ensimag.caweb.models.SubscriptionForm;
+import fr.ensimag.caweb.models.business.ConnectionForm;
+import fr.ensimag.caweb.models.business.SubscriptionForm;
 import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.models.User.UserStatus;
 import java.io.IOException;

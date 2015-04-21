@@ -5,8 +5,8 @@
 */
 package fr.ensimag.caweb.dao;
 
-import fr.ensimag.caweb.dao.impl.DAOFactorySqlPlus;
-import fr.ensimag.caweb.dao.impl.UserDAOSqlPlus;
+import fr.ensimag.caweb.dao.impl.DAOFactoryOracle;
+import fr.ensimag.caweb.dao.impl.UserDAOOracle;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -31,15 +31,15 @@ public abstract class DAOFactory {
     */
     
     public static DAOFactory getInstance(){
-        return getInstance(DAOFactoryType.OracleSqlPlus);
+        return getInstance(DAOFactoryType.ORACLE);
     }
     
     public static DAOFactory getInstance(DAOFactoryType type){
         switch(type){
-            case OracleSqlPlus:
-                return DAOFactorySqlPlus.getInstance();
+            case ORACLE:
+                return DAOFactoryOracle.getInstance();
             default:
-                return DAOFactorySqlPlus.getInstance();
+                return DAOFactoryOracle.getInstance();
         }
     }
     

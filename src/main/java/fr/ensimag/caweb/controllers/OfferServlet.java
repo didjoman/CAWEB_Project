@@ -6,7 +6,7 @@
 package fr.ensimag.caweb.controllers;
 
 import fr.ensimag.caweb.dao.DAOException;
-import fr.ensimag.caweb.dao.impl.OfferDAOSqlPlus;
+import fr.ensimag.caweb.dao.impl.OfferDAOOracle;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -42,7 +42,7 @@ public class OfferServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            OfferDAOSqlPlus offerDAO = new OfferDAOSqlPlus(ds);
+            OfferDAOOracle offerDAO = new OfferDAOOracle(ds);
             request.setAttribute("offers", offerDAO.readAll());
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
             view.forward(request, response);

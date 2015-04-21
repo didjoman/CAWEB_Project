@@ -154,7 +154,7 @@ public class Contract{
         return state.getDateFin();
     }
     
-    public boolean getSupprime(){
+    public boolean getRefuse(){
         return refuse;
     }
     

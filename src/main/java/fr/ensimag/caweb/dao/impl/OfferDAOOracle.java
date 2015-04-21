@@ -24,14 +24,14 @@ import javax.sql.DataSource;
  *
  * @author laguerrr
  */
-public class OfferDAOSqlPlus extends AbstractDataBaseDAO implements OfferDAO {
+public class OfferDAOOracle extends AbstractDataBaseDAO implements OfferDAO {
 
-    public OfferDAOSqlPlus(DataSource ds) {
+    public OfferDAOOracle(DataSource ds) {
         super(ds);
     }
 
     @Override
-    public Offer create(Contract obj) throws DAOException {
+    public Offer create(Offer obj) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

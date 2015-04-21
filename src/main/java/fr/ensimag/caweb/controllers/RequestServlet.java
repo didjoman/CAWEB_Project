@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
  * @author Alexandre Rupp
  */
 @WebServlet(name = "ContractRequestServlet", urlPatterns = {"/request"},  loadOnStartup = 1)
-public class ContractRequestServlet extends HttpServlet {
+public class RequestServlet extends HttpServlet {
     
     /**
      * Handles the HTTP <code>GET</code> method.

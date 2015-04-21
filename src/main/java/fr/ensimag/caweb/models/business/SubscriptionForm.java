@@ -3,7 +3,7 @@
 * To change this template file, choose Tools | Templates
 * and open the template in the editor.
 */
-package fr.ensimag.caweb.models;
+package fr.ensimag.caweb.models.business;
 
 import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.models.User.Consummer;

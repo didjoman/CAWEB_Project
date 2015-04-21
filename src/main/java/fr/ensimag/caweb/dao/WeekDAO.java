@@ -24,16 +24,8 @@ public interface WeekDAO {
     public abstract List<Entry<String, Double>> getPermFreqPerActiveUser()  throws DAOException;
     
     public abstract List<Week> readAll()  throws DAOException ;
-    
-    public abstract List<Week> readAllPerms() throws DAOException;
-    
+
     public abstract List<Week> readAllWhereConsumerAppears(String consummerPseudo) throws DAOException;
-    
-    public abstract List<Week> readAllPermsFullySet() throws DAOException;
-    
-    public abstract List<Week> readAllDispos() throws DAOException;
-    
-    public abstract List<Week> readAllUndispos() throws DAOException;
     
     public abstract Week update(Week obj)  throws DAOException ;
     
