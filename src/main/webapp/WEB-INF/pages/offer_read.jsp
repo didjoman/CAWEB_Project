@@ -62,7 +62,7 @@
                         </ul>
                         <p>
                             <c:if test="${status == 'CONS'}">
-                                <a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target=".modal-create-request">
+                                <a href="#" class="btn btn-primary" role="button" data-toggle="modal" data-target=".modal-create-request${offer.id}">
                                     Emettre une demande
                                 </a>
                                 <t:request_creation_popup 
@@ -72,6 +72,7 @@
                                     quantities="${offer.quantities}"
                                     prixUnite="${offer.quantities.get(0).prix}"
                                     uniteQte="${offer.quantities.get(0).uniteQte}"
+                                    id="${offer.id}"
                                     action="create">                                  
                                 </t:request_creation_popup>
                             </c:if>

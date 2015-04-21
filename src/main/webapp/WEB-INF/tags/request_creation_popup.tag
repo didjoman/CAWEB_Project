@@ -15,8 +15,9 @@
 <%@attribute name="prixUnite" required="true"%>
 <%@attribute name="uniteQte" required="true"%>
 <%@attribute name="action" required="true"%>
+<%@attribute name="id" required="true"%> <!-- 1, 2 ... -->
 
-<t:popup title="Créer une demande" classes="modal-create-request" type="modal-lg">
+<t:popup title="Créer une demande" classes="modal-create-request${id}" type="modal-lg">
     <jsp:attribute name="footer">
         <input form="request-creation-form" class="submit btn btn-primary" type="submit" value="Emettre la demande" id="submit" />
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
