@@ -16,10 +16,10 @@
 <%@attribute name="prixUnite" required="true"%>
 <%@attribute name="uniteQte" required="true"%>
 <%@attribute name="action" required="true"%>
+<%@attribute name="id" required="true"%>
 
 
-
-<form role="form" id="request-creation-form" data-toggle="validator" action="request" method="post">
+<form role="form" id="request-creation-form${id}" data-toggle="validator" action="request" method="post">
     <div>
         <label for="producer-field">*Producteur :</label>
         <input type="text" name="producer" id="producer-field" value="${producer}" readonly required/> 
@@ -34,7 +34,7 @@
     </div>
     <div>
         <label for="nbLots-field">*Nombre de lots :</label>
-        <input type="number" name="nbLots"  id="nbLots-field" required/> 
+        <input type="number" name="nbLots"  id="nbLots-field" value="1" required/> 
     </div>
     <div>
         <label for="quantity-field">*Lots de quantité :</label>
@@ -48,7 +48,7 @@
     </div>
     <div>
         <label for="unit-price-field">*Prix à l'unité : </label>
-        <input type="text" id="unit-price-field" value="${prixUnite}" readonly><br />
+        <input type="text" name="price" id="unit-price-field" value="${prixUnite}" readonly><br />
     </div>
     <div>
         <label for="total-price-field">*Prix total :</label>

@@ -19,7 +19,7 @@
 
 <t:popup title="Créer une demande" classes="modal-create-request${id}" type="modal-lg">
     <jsp:attribute name="footer">
-        <input form="request-creation-form" class="submit btn btn-primary" type="submit" value="Emettre la demande" id="submit" />
+        <input form="request-creation-form${id}" class="submit btn btn-primary" type="submit" value="Emettre la demande" id="submit" />
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
     </jsp:attribute>
     <jsp:body>
@@ -31,7 +31,8 @@
             quantities="${quantities}"
             prixUnite="${prixUnite}"
             uniteQte="${uniteQte}"
-            action="${create}">
+            action="${create}"
+            id="${id}">
         </t:request_creation_form>
     </jsp:body>
 </t:popup> 

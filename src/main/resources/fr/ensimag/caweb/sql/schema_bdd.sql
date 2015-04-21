@@ -109,6 +109,7 @@ BEGIN
         ON idOffre = idOffrePrecisee
         WHERE createur = :new.offreur
         AND nomProduit = :new.nomProduitContrat
+        AND prix = :new.prixLotContrat
         AND dureeOffre = :new.dureeContrat
         AND qte = :new.qteLotContrat
         AND uniteQte = :new.uniteContrat;

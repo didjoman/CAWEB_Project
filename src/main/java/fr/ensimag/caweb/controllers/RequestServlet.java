@@ -153,7 +153,7 @@ public class RequestServlet extends HttpServlet {
         String duration = request.getParameter("duration");
         String quantity = request.getParameter("quantity");
         String nbLots = request.getParameter("nbLots");
-        String totalPrice = request.getParameter("total-price-label");
+        String price = request.getParameter("price");
 
         /*if (idParam == null) {
          throw new CAWEBServletException("Id de contrat incorrect");
@@ -198,7 +198,7 @@ public class RequestServlet extends HttpServlet {
             }
         } //REQUEST CREATION
         else if (producer != null && product != null && duration != null
-                && quantity != null && nbLots != null && totalPrice != null
+                && quantity != null && nbLots != null && price != null
                 && action != null && action.equals("create")) {
 
             //Create Producer object      
@@ -212,7 +212,7 @@ public class RequestServlet extends HttpServlet {
             //Create a new contract in request
             Contract contract = ContractFactory.createContract(0, producerObj, consummerObj,
                     new Date(System.currentTimeMillis()), product, Integer.parseInt(duration),
-                    new Quantity(Integer.parseInt(quantity), null, Integer.parseInt(totalPrice)),
+                    new Quantity(Integer.parseInt(quantity), null, Double.parseDouble(price)),
                     Integer.parseInt(nbLots));
             try {
                 DAOFactory.getInstance().getContractDAO().create(contract);
