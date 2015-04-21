@@ -10,21 +10,21 @@ package fr.ensimag.caweb.models;
  * @author Alexandre Rupp
  */
 public class Quantity {
-    private int qte;
+    private double qte;
     private String uniteQte;
-    private double prix;
+    private int prix;
 
-    public Quantity(int qte, String uniteQte, double prix) {
+    public Quantity(double qte, String uniteQte, int prix) {
         this.qte = qte;
         this.uniteQte = uniteQte;
         this.prix = prix;
     }
 
-    public int getQte() {
+    public double getQte() {
         return qte;
     }
 
-    public void setQte(int qte) {
+    public void setQte(double qte) {
         this.qte = qte;
     }
 
@@ -36,11 +36,11 @@ public class Quantity {
         this.uniteQte = uniteQte;
     }
 
-    public double getPrix() {
+    public int getPrix() {
         return prix;
     }
 
-    public void setPrix(double prix) {
+    public void setPrix(int prix) {
         this.prix = prix;
     }
 

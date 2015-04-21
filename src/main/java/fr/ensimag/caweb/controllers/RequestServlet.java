@@ -153,6 +153,7 @@ public class RequestServlet extends HttpServlet {
         String duration = request.getParameter("duration");
         String quantity = request.getParameter("quantity");
         String nbLots = request.getParameter("nbLots");
+        String uniteQte = request.getParameter("uniteQte");
         String price = request.getParameter("price");
 
         /*if (idParam == null) {
@@ -198,9 +199,8 @@ public class RequestServlet extends HttpServlet {
             }
         } //REQUEST CREATION
         else if (producer != null && product != null && duration != null
-                && quantity != null && nbLots != null && price != null
-                && action != null && action.equals("create")) {
-
+                && quantity != null && nbLots != null && price != null && 
+                uniteQte != null && action != null && action.equals("create")) {
             //Create Producer object      
             Producer producerObj = new Producer();
             producerObj.setPseudo(producer);
@@ -212,7 +212,7 @@ public class RequestServlet extends HttpServlet {
             //Create a new contract in request
             Contract contract = ContractFactory.createContract(0, producerObj, consummerObj,
                     new Date(System.currentTimeMillis()), product, Integer.parseInt(duration),
-                    new Quantity(Integer.parseInt(quantity), null, Double.parseDouble(price)),
+                    new Quantity(Double.parseDouble(quantity),uniteQte, Integer.parseInt(price)),
                     Integer.parseInt(nbLots));
             try {
                 DAOFactory.getInstance().getContractDAO().create(contract);

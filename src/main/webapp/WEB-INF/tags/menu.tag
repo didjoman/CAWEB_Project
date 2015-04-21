@@ -41,7 +41,7 @@
     
     <c:if test="${sessionScope.status == 'PROD'}">
         <li class="onlyOnLowRes <c:if test="${page == 'product_read'}">active</c:if>">
-            <a href="${pageContext.request.contextPath}/offer">
+            <a href="${pageContext.request.contextPath}/offer?id=${sessionScope.login}" >
                 Offres proposés
             </a>
         </li>

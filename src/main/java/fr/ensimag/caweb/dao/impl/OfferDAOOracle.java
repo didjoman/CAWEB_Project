@@ -68,7 +68,7 @@ public class OfferDAOOracle implements OfferDAO {
                 selectPrep.setInt(1, rs.getInt("idOffre")); 
                 ResultSet rs_qte = selectPrep.executeQuery();
                 while (rs_qte.next()) {
-                    int qte = rs_qte.getInt("qte");
+                    double qte = rs_qte.getDouble("qte");
                     String uniteQte = rs_qte.getString("uniteQte");
                     int prix = rs_qte.getInt("prix");
                     quantities.add(new Quantity(qte, uniteQte, prix));
