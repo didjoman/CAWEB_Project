@@ -25,12 +25,13 @@
                            name="prix" id="prix" placeholder="prix" required/>                    
                 </div>
                 
+                <!-- ATTENTION : j'ai modifié les noms qte et unite pour être cohérent, ça ne va plus marcher avec la servlet ! -->
                 <div class="form-group">
                     <label for="quantite" class="control-label">*Quantité  :</label>
                     <input type="number"  class="form-control input-sm"
-                           name="qte" id="qte" placeholder="qte" required/>
+                           name="qte" id="qte0" placeholder="qte" required/>
                     <input type="text"  class="form-control input-sm"
-                           name="unite" id="unite" placeholder="unite" required/>
+                           name="unite" id="unite0" placeholder="unite" required/>
                 </div>
                 
                 <a href="#" id="add_qte">ajouter une quantité</a>
