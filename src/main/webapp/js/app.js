@@ -1,4 +1,3 @@
-
 $(function() {
     // Little extension of jquery to test wether an object is empty :
     $.fn.exists = function () {
@@ -422,5 +421,30 @@ connec.submit(function (ev) {
 });
  
  */
+
+
+var id_qte = 0;
+
+
+$('#add_qte').click(function(e){
+    // Install the new quantity, with the correct attributes : 
+    var newQte = $('.new-qte').clone().fadeIn(400).removeClass('new-qte');
+    ++id_qte;
+    newQte.find('[name=qte]').attr('name', 'qte'+(id_qte));
+    newQte.find('[name=unite]').attr('name', 'unite'+(id_qte));
+    $('#add_qte').before(newQte);
+    
+    // Install a remove button on the new quantity : 
+    $('.rm-btn').click(function(e){
+        // Delete the new quantity field : 
+        $(this).parent('div').fadeOut(400, function(){$(this).remove()});
+        // Dicrease the number of quantity : 
+        $('[name=nbQte]').val(3);
+    });
+    
+    // Increase the number of quantity
+    $('[name=nbQte]').val(3);
+    e.preventDefault();
+});
 
 

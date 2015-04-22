@@ -1,4 +1,4 @@
-               
+    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
@@ -12,13 +12,19 @@
                     <input type="text" class="form-control input-sm"
                            name="produit" id="produit" placeholder="Produit" required/>
                 </div>   
-
+                
                 <div class="form-group">
-                    <label for="duree" class="control-label">*Durée :</label>
+                    <label for="duree" class="control-label">*Durée (en jours):</label>
                     <input type="text" class="form-control input-sm"
                            name="duree" id="duree" placeholder="Durée" required/>
                 </div>
 
+                <div class="form-group">
+                    <label for="prix" class="control-label">*Prix  (en €):</label>
+                    <input type="number"  class="form-control input-sm"
+                           name="prix" id="prix" placeholder="prix" required/>                    
+                </div>
+                
                 <div class="form-group">
                     <label for="quantite" class="control-label">*Quantité  :</label>
                     <input type="number"  class="form-control input-sm"
@@ -26,16 +32,22 @@
                     <input type="text"  class="form-control input-sm"
                            name="unite" id="unite" placeholder="unite" required/>
                 </div>
-
-                <div class="form-group">
-                    <label for="prix" class="control-label">*Prix  :</label>
-                    <input type="number"  class="form-control input-sm"
-                           name="prix" id="prix" placeholder="prix" required/>                    
-                </div>
-
+                
+                <a href="#" id="add_qte">ajouter une quantité</a>
+                
                 <br />
+                <input type="hidden" name="nbQte" value="1" >
                 <input class="submit btn btn-primary" type="submit" value="Créer" id="create" /><br />
             </form>
+            
+            
+            <div class="form-group new-qte" style="display: none">
+                <label for="quantite" class="control-label">*Quantité  :</label> <span class="rm-btn clickable glyphicon glyphicon-remove"></span>
+                <input type="number"  class="form-control input-sm"
+                       name="qte" id="qte" placeholder="qte" required/>
+                <input type="text"  class="form-control input-sm"
+                       name="unite" id="unite" placeholder="unite" required/>
+            </div>
         </div>
     </jsp:body>
 </t:layout>   

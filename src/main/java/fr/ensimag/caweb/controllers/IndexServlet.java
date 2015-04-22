@@ -61,7 +61,7 @@ public class IndexServlet extends HttpServlet {
         }
         
         if(status.equals(UserStatus.CONS.toString()))
-            response.sendRedirect("offer");
+            response.sendRedirect("permanency");
         else if(status.equals(UserStatus.PROD.toString()))
             response.sendRedirect("offer");
         else if(status.equals(UserStatus.RESP.toString()))

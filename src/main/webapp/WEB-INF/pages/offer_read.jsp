@@ -13,32 +13,17 @@
         <div class="page-header">
             <h1>Liste des offres</h1>
         </div>
-
-        <!-- Formulaire de recherche -->
-        <div>Rechercher un produit en particulier :
-            <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-4 col-lg-4">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">Go!</button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr />
-
+        
         <!-- Affichage des offres : -->
         <h3>${offer.nomProduit}</h3>
         <div class="row">
             <c:forEach items="${offers}" var="offer">
-
+                
                 <div class="offre col-sm-4 col-md-3">
                     <div class="thumbnail"> 
-
-
-
+                        
+                        
+                        
                         <h3>${offer.nomProduit}</h3>
                         <hr />
                         <ul>
@@ -77,35 +62,12 @@
                                 </t:request_creation_popup>
                             </c:if>
                         </p>
-
+                        
                     </div>
                 </div>
             </c:forEach>
-
-
-
         </div>
-
-        <hr />
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        
     </jsp:body>
 </t:layout>   
 
