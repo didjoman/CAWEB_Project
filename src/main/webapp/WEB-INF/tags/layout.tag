@@ -17,7 +17,7 @@
 <html>
     <head>
         <title>${title}</title>
-            
+        <link rel="icon" type="image/png" href="img/smile.png" />
         <!-- META INFOS -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
             

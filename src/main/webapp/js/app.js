@@ -1,3 +1,17 @@
+
+
+        
+$(".positif").change(function(){
+    if(($(".positif").val())<0)
+        $('.positif').val(0);
+});
+        
+$(".target").change(function(){
+    $(".prix").val($('[name=quantity] option:selected').attr("data-prix"));
+    $(".prixtot").val(($('[name=quantity] option:selected').attr("data-prix")*$('#nbLots-field').val()))
+});
+        
+
 $(function() {
     // Little extension of jquery to test wether an object is empty :
     $.fn.exists = function () {
@@ -421,7 +435,6 @@ connec.submit(function (ev) {
 });
  
  */
-
 
 var id_qte = 0;
 
