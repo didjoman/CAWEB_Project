@@ -113,8 +113,6 @@
         <!-- Bootstrap : -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/validator.js"></script>
-        <!-- Plugin Jquery for week-selection in jquery calendar -->
-        <!--<script src="${pageContext.request.contextPath}/js/jquery.weekpicker.js"></script>-->
         <!-- Our Js : -->
         <script src="${pageContext.request.contextPath}/js/app.js"></script>
         <noscript>

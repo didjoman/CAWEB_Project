@@ -100,6 +100,7 @@ public class ContractServlet extends HttpServlet {
             doGet(request, response);
         } catch (DAOException ex) {
             Logger.getLogger(ContractServlet.class.getName()).log(Level.SEVERE, null, ex);
+            throw new CAWEB_DatabaseAccessException();
         }
     }
     

@@ -32,7 +32,7 @@
         </a>
     </li>
 </c:if>
-<li class="onlyOnLowRes <c:if test="${page == 'offer_read'}">active</c:if>">
+<li class="onlyOnLowRes <c:if test="${page == 'offer_read' && requestScope.isProd != 'true'}">active</c:if>">
     <a href="${pageContext.request.contextPath}/offer">
         Liste des offres
     </a>
@@ -40,9 +40,15 @@
 <c:if test="${sessionScope.status == 'PROD' || sessionScope.status == 'CONS'}">
 
     <c:if test="${sessionScope.status == 'PROD'}">
-        <li class="onlyOnLowRes <c:if test="${page == 'product_read'}">active</c:if>">
+        <li class="onlyOnLowRes <c:if test="${page == 'offer_read' && requestScope.isProd == 'true'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/offer?id=${sessionScope.login}" >
                 Offres proposés
+            </a>
+        </li>
+
+        <li class="onlyOnLowRes <c:if test="${page == 'create_offer'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/offer?idCreate=${sessionScope.login}">
+                Créer une offre
             </a>
         </li>
     </c:if>
@@ -56,14 +62,7 @@
             Contrats
         </a>
     </li>
-    <c:if test="${sessionScope.status == 'PROD'}">
-        <li class="onlyOnLowRes <c:if test="${page == 'create_offer'}">active</c:if>">
-            <a href="${pageContext.request.contextPath}/offer?idCreate=${sessionScope.login}">
-                Créer une offre
-            </a>
-
-        </li>
-    </c:if>
+    
 </c:if>
 
 </ul>

@@ -52,6 +52,7 @@ public class OfferServlet extends HttpServlet {
             try {
                 List<Offer> offers = DAOFactory.getInstance().getOfferDAO().read(id);
                 request.setAttribute("offers", offers);
+                request.setAttribute("isProd", "true");
                 RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
                 view.forward(request, response);
             } catch (DAOException ex) {

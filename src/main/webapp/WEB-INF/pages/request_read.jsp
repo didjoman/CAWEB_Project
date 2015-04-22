@@ -9,7 +9,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
     
     
-<c:if test="${sessionScope.status == 'PROD' && req.supprime != true}">
+<c:if test="${sessionScope.status == 'PROD' && req.refuse != true}">
     <c:set var="frag">
         <div class="panel panel-default hidden" id="validation-panel">
             <div class="panel-heading">
