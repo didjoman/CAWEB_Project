@@ -295,7 +295,7 @@ Nous avons identifié les acteurs suivants :
 \subsubsection{Cas du visiteur :}
 \begin{figure}[h]
 \centering
-\includegraphics[width=1.\textwidth]{./ressources/desc_UC_parcourir_offres.png}
+\includegraphics[width=.8\textwidth]{./ressources/desc_UC_parcourir_offres.png}
 \caption{Description du cas "parcourir les offres"}
 \end{figure}
 \clearpage
@@ -491,10 +491,6 @@ Nous avons identifié les acteurs suivants :
 \clearpage
 
 \subsection{Diagrammes de séquence}
-TODO
-
-\subsection{Diagrammes d'états-transitions}
-TODO
 \begin{figure}[!hp]
 \centering
 \includegraphics[width=1.\textwidth]{./ressources/etat_transition_contrat.png}
@@ -502,9 +498,90 @@ TODO
 \end{figure}
 \clearpage
 
-\section{Manuel Utilisateur}
-TODO
+\subsection{Diagrammes d'états-transitions}
+\begin{figure}[!hp]
+\centering
+\includegraphics[width=1.\textwidth]{./ressources/seq_contrats.png}
+\caption{Diagramme de séquence pour la lecture de la liste des contrats}
+\end{figure}
+\clearpage
+Nous n'avons mis qu'un seul schéma pour illustrer la séquence des appels, car cette séquence ne varie que trés peu en fonction des requêtes.\\
+Dans tous les cas, les mêmes actions ont lieu :
+\begin{itemize}
+\item Une servlet reçoit une requête HTTP de la part du client.
+\item La servlet traite les informations passées en paramètres.
+\item La servlet fait appel à un DAO.
+\item Le DAO effectue des requêtes vers la base de donnée puis stock les informations sous formes d'objets du modèle.
+\item La servlet récupère les objets ainsi créés et effectue les traitements nécessaires avec.
+\item La servlet transmet les informations à la vue, et l'appelle.
+\end{itemize}
 
+\clearpage
+\section{Manuel Utilisateur}
+\subsection{Note sur l'accessibilité}
+L'application web propose un design responsive, capable de s'adapter aux différents appareils de l'utilisateur (smartphones, tablettes, ordinateurs, télévisions).\\
+Par exemple, le menu latéral présent sur les grands écrans, laisse place à un menu déroulant sur tablettes et smartphones.\\
+De la même manière, le reste du contenu s'adapte en taille pour permettre la meilleure visibilité possible quelque soit le périphérique utilisé.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.\textwidth]{./ressources/responsive_design.png}
+\caption{Illustration du design responsive de l'application.}
+\end{figure}
+
+
+\subsection{Pour le visiteur}
+\paragraph{S'inscrire}
+L'utilisateur peut s'inscrire en tant que consommateur ou producteur en saisissant les informations requises dans le formulaire d'inscription.
+Le formulaire est accessible par un simple clique sur "Inscription" en haut de la page d'accueil.
+
+\paragraph{Se connecter}
+Pour s'inscrire, cliquer sur le lien "Login" en haut de la page d'accueil, puis remplir le formulaire.
+
+\paragraph{Voir la liste des offres}
+La liste des offres est consultable par tous les utilisateurs (inscris ou non), via le lien "Liste des offres" du menu.
+
+\subsection{Pour le producteur}
+\paragraph{Gestion des produits}
+Le producteur peut voir la liste de ses produits proposés en cliquant sur "Offres proposées".\\
+Il peut également proposer de nouvelles offres en cliquant sur "Créer une offre" dans le menu.\\
+Enfin, il peut voir l'ensemble des offres proposées par les producteurs, en cliquant sur l'onglet "Liste des offres" dans le menu.
+
+\paragraph{Gestion des demandes}
+Par le biais de l'onglet "Demandes de contrats" du menu, le producteur a accés aux demandes de contrats, ainsi qu'aux demandes de renouvellement émises par les consommateurs.\\
+Sur cette même page, il peut également avoir accés au demandes qu'il a refusé.\\
+En cliquant sur l'une des demandes de contrat / renouvellement, l'utilisateur peut accéder aux détails de la demande (coordonnées de l'utilisateur et précisions sur l'offre) et ensuite l'accepter ou la refuser.
+
+\paragraph{Gestion des contrats}
+Le producteur peut voir les contrats qu'il a passé en cliquant sur l'onglet "Contrats" du menu.\\
+Il peut ensuite accéder aux coordonnées du signataire du contrats en cliquant sur son nom.
+
+\subsection{Pour le consommateur}
+\paragraph{Gestion des demandes}
+L'utilisateur peut créer une demande en allant dans "Liste des Offres", puis en cliquant sur "Emettre une demande" au bas de l'une des offres.\\
+L'utilisateur peut consulter les demandes qu'il a émises dans l'onglet "Demandes de contrats" du menu. Il a ainsi accés à ses demandes de contrats, demandes de renouvellement et à ses demandes qui ont été refusées.\\
+Pour chaque demande, il peut voir le détail de celle-ci en cliquant sur "voir" à coté de la demande.
+
+\paragraph{Gestion des contrats}
+En cliquant sur l'onglet "Offres" du menu, le consommateur peut voir ses contrats en cours et ses contrats terminés. \\
+A coté de la description de chaque contrat se trouve le nom du producteur associé. En cliquant sur le nom du producteur, le consommateur peut accéder à ses coordonnées.\\
+
+A coté des contrats terminés se trouve le lien "Renouveler" permettant à l'utilisateur de faire une demande de renouvellement pour le contrat.
+
+\paragraph{Gestion des permanences}
+Dans l'onglet permanence, le consommateur trouvera un calendrier lui permettant de consulter les préférences qu'il a déjà indiquées pour chaque semaine, ainsi que les permanences qui lui sont attribuées.\\
+En cliquant sur une semaine, il peut changer ses préférences. \\
+Dans le cas où une permanence lui a été attribuée, le consommateur peut également voir les coordonnées de son binome, en cliquant sur la semaine de permanence.
+
+\subsection{Pour le responsable du planning}
+\paragraph{Gestion des permanences}
+L'onglet "Permanences", qui se trouve également être la page d'accueil, permet de voir et modifier les permanences des consommateurs.\\
+Par le biais du calendrier, le responsable peut accéder aux informations des semaines passées, présentes et futures (permanences et disponibilités des consommateurs).\\
+En cliquant sur une semaine en particulier, il peut voir les consommateurs et producteurs disponibles et indisponibles cette semaine; et il peut modifier ou attribuer des permanences.\\
+
+Enfin, sur cette même page se trouvent des statistiques sur les permanences.
+
+\clearpage
 \section{Bilan sur les outils de modélisation}
 Afin de réaliser nos différents diagrammes, nous avons utilisé l'application web \textit{Draw.io Pro} \footnote{Draw.io : \url{www.draw.io}}.\\
 Nous n'avons pas rencontré de difficulté particulière à ce niveau. Les formes "UML" et "SysML" disponibles dans \textit{Draw.io} permettent de réaliser l'ensemble des diagrammes de la norme UML2.
