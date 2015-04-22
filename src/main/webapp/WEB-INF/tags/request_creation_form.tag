@@ -34,25 +34,25 @@
     </div>
     <div>
         <label for="nbLots-field">*Nombre de lots :</label>
-        <input type="number" name="nbLots"  id="nbLots-field" value="1" required/> 
+        <input class="target positif" type="number" name="nbLots"  id="nbLots-field" value="1" required/> 
     </div>
     <div>
         <label for="quantity-field">*Lots de quantité :</label>
-         <select name="quantity" size="1" id="quantity-field" required>
+         <select class="target" name="quantity" size="1" id="quantity-field" required>
             <c:forEach items="${quantities}" var="quantity">
-                <option value="${quantity.qte}" data-unit="${quantity.uniteQte}">
+                <option value="${quantity.qte}" data-unit="${quantity.uniteQte}" data-prix="${quantity.prix}">
                     ${quantity.qte} ${quantity.uniteQte}
                 </option>
-            </c:forEach>           
+            </c:forEach>          
         </select>
     </div>
     <div>
         <label for="unit-price-field">*Prix à l'unité : </label>
-        <input type="text" name="price" id="unit-price-field" value="${prixUnite}" readonly><br />
+        <input class="prix" type="text" name="price" id="unit-price-field" value="${prixUnite}" readonly><br />
     </div>
     <div>
         <label for="total-price-field">*Prix total :</label>
-        <input type="text" name="total-price-label" id="total-price-field" value="42" readonly><br />
+        <input class="prixtot" type="text" name="total-price-label" id="total-price-field" value="${prixUnite}" readonly><br />
     </div>
     <input type="hidden" name="uniteQte" id="unit-field" value="${uniteQte}" />
     <input type="hidden" name="action" id="unit-field" value="create" />
