@@ -3,20 +3,20 @@
     Created on : 26 mars 2015, 22:41:21
     Author     : Alexandre Rupp
 --%>
-    
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@tag import="java.util.HashMap"%>
 <%@tag import="java.util.Map"%>
 <%@tag pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-    
-    
+
+
 <c:set var="page">
     ${pageContext.request.requestURL.substring(pageContext.request.requestURL.lastIndexOf("/")+1, pageContext.request.requestURL.lastIndexOf(".jsp"))}
 </c:set>
-    
-    
-    
+
+
+
 <c:if test="${sessionScope.status == null}">
     <li class="onlyOnLowRes <c:if test="${page == 'index'}">active</c:if>">
         <a href="${pageContext.request.contextPath}/index">
@@ -24,7 +24,7 @@
         </a>
     </li> 
 </c:if>
-            
+
 <c:if test="${sessionScope.status == 'RESP' || sessionScope.status == 'CONS'}">
     <li class="onlyOnLowRes <c:if test="${page == 'permanency_read_all'}">active</c:if>">
         <a href="${pageContext.request.contextPath}/permanency">
@@ -38,7 +38,7 @@
     </a>
 </li>
 <c:if test="${sessionScope.status == 'PROD' || sessionScope.status == 'CONS'}">
-    
+
     <c:if test="${sessionScope.status == 'PROD'}">
         <li class="onlyOnLowRes <c:if test="${page == 'product_read'}">active</c:if>">
             <a href="${pageContext.request.contextPath}/offer?id=${sessionScope.login}" >
@@ -56,10 +56,19 @@
             Contrats
         </a>
     </li>
+    <c:if test="${sessionScope.status == 'PROD'}">
+        <li class="onlyOnLowRes <c:if test="${page == 'create_offer'}">active</c:if>">
+            <a href="${pageContext.request.contextPath}/offer?idCreate=${sessionScope.login}">
+                Créer une offre
+            </a>
+
+        </li>
+    </c:if>
 </c:if>
-
-
 
 </ul>
 
 </div>
+
+
+

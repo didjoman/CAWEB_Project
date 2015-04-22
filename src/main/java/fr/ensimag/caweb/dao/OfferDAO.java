@@ -7,6 +7,7 @@ package fr.ensimag.caweb.dao;
 
 import fr.ensimag.caweb.models.Contract.Contract;
 import fr.ensimag.caweb.models.Offer;
+import fr.ensimag.caweb.models.Quantity;
 import java.util.List;
 
 /**
@@ -14,9 +15,9 @@ import java.util.List;
  * @author laguerrr
  */
 public interface OfferDAO {
-    public abstract Offer create(Offer obj)  throws DAOException ;
+    public abstract Offer create(Offer offer, Quantity quantity)  throws DAOException ;
     
-    public abstract Offer read(int id)  throws DAOException ;
+    public abstract List<Offer> read(String id)  throws DAOException ;
     
     public abstract List<Offer> readAll()  throws DAOException ;
 

@@ -9,8 +9,10 @@ import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.impl.OfferDAOOracle;
 import fr.ensimag.caweb.dao.DAOFactory;
 import fr.ensimag.caweb.models.Offer;
+import fr.ensimag.caweb.models.Quantity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
@@ -43,8 +46,22 @@ public class OfferServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
+        String idCreate = request.getParameter("idCreate");
         if (id != null) {
             System.out.println("offres proposées");
+            try {
+                List<Offer> offers = DAOFactory.getInstance().getOfferDAO().read(id);
+                request.setAttribute("offers", offers);
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
+                view.forward(request, response);
+            } catch (DAOException ex) {
+                Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (idCreate != null) {
+            System.out.println("creer une offre");
+            request.setAttribute("creater", idCreate);
+            RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/create_offer.jsp");
+            view.forward(request, response);
         } else {
             System.out.println("offres");
             try {
@@ -69,7 +86,35 @@ public class OfferServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //CREATE AN OFFER
+        String produit = request.getParameter("produit");
+        String duree = request.getParameter("duree");
+        String qte = request.getParameter("qte");
+        String unite = request.getParameter("unite");
+        String prix = request.getParameter("prix");
+        HttpSession session = request.getSession(false);
+        String createur = (String) session.getAttribute("login");
 
+        if (produit != null && duree != null && qte != null && unite != null
+                && prix != null) {
+            Offer offer = new Offer(0, createur, produit, Integer.parseInt(duree), null);
+            Quantity quantity = new Quantity(Double.parseDouble(qte), unite, Integer.parseInt(prix));
+            try {
+                DAOFactory.getInstance().getOfferDAO().create(offer, quantity);
+                
+            } catch (DAOException ex) {
+                Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            // Forwarding :
+            request.setAttribute("success", "La création d'offre a été effectuée.");
+            try {
+                List<Offer> offers = DAOFactory.getInstance().getOfferDAO().readAll();
+                request.setAttribute("offers", offers);
+                RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/offer_read.jsp");
+                view.forward(request, response);
+            } catch (DAOException ex) {
+                Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
-
 }

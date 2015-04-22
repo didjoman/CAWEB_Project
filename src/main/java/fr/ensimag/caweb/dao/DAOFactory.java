@@ -6,6 +6,7 @@
 package fr.ensimag.caweb.dao;
 
 import fr.ensimag.caweb.dao.impl.DAOFactoryOracle;
+import static fr.ensimag.caweb.dao.impl.DAOFactoryOracle.getInstance;
 import fr.ensimag.caweb.dao.impl.UserDAOOracle;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public abstract class DAOFactory {
     public abstract WeekDAO getWeekDAO();
     public abstract ContractDAO getContractDAO();
     public abstract OfferDAO getOfferDAO();
-    
+     
     public abstract Connection getConnection();
     
     public abstract void closeConnection(Connection c) throws DAOException;
