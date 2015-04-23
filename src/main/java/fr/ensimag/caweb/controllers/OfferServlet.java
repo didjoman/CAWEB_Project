@@ -90,18 +90,27 @@ public class OfferServlet extends HttpServlet {
         //CREATE AN OFFER
         String produit = request.getParameter("produit");
         String duree = request.getParameter("duree");
-        String qte = request.getParameter("qte");
-        String unite = request.getParameter("unite");
-        String prix = request.getParameter("prix");
+        String qte0 = request.getParameter("qte0");
+        String unite0 = request.getParameter("unite0");
+        String prix0 = request.getParameter("prix0");
+        String nbQte = request.getParameter("nbQte");
         HttpSession session = request.getSession(false);
         String createur = (String) session.getAttribute("login");
+        
 
-        if (produit != null && duree != null && qte != null && unite != null
-                && prix != null) {
+        if (produit != null && duree != null && qte0 != null && unite0 != null
+                && prix0 != null && nbQte != null) {
             Offer offer = new Offer(0, createur, produit, Integer.parseInt(duree), null);
-            Quantity quantity = new Quantity(Double.parseDouble(qte), unite, Integer.parseInt(prix));
+            List<Quantity> quantities = new ArrayList<Quantity>();         
+            quantities.add(new Quantity(Double.parseDouble(qte0), unite0, Integer.parseInt(prix0)));
+            for (int i = 1; i < Integer.parseInt(nbQte); i++){
+                String qte = request.getParameter("qte"+i);
+                String unite = request.getParameter("unite"+i);
+                String prix = request.getParameter("prix"+i);
+                quantities.add(new Quantity(Double.parseDouble(qte), unite, Integer.parseInt(prix)));
+            }
             try {
-                DAOFactory.getInstance().getOfferDAO().create(offer, quantity);
+                DAOFactory.getInstance().getOfferDAO().create(offer, quantities);
                 
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);

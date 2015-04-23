@@ -15,7 +15,7 @@ import java.util.List;
  * @author laguerrr
  */
 public interface OfferDAO {
-    public abstract Offer create(Offer offer, Quantity quantity)  throws DAOException ;
+    public abstract Offer create(Offer offer, List<Quantity> quantities)  throws DAOException ;
     
     public abstract List<Offer> read(String id)  throws DAOException ;
     
