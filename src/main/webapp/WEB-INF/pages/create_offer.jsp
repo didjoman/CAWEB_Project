@@ -19,7 +19,7 @@
 
                 <div class="form-group">
                     <label for="duree" class="control-label">*Durée (en jours):</label>
-                    <input type="text" class="form-control input-sm"
+                    <input type="text" class="form-control input-sm "
                            name="duree" id="duree" placeholder="Durée" required/>
                 </div>
 
@@ -27,12 +27,12 @@
                 <!-- ATTENTION : j'ai modifié les noms qte et unite pour être cohérent, ça ne va plus marcher avec la servlet ! -->
                 <div class="form-group">
                     <label for="quantite" class="control-label">*Quantité  :</label>
-                    <input type="number"  class="form-control input-sm"
+                    <input type="number"  class="form-control input-sm positif"
                            name="qte0" id="qte0" placeholder="qte" required/>
                     <input type="text"  class="form-control input-sm"
                            name="unite0" id="unite0" placeholder="unite" required/>
                     <label for="prix" class="control-label">*Prix  (en €):</label>
-                    <input type="number"  class="form-control input-sm"
+                    <input type="number"  class="form-control input-sm positif"
                            name="prix0" id="prix" placeholder="prix" required/>
                 </div>
 
@@ -46,12 +46,12 @@
 
             <div class="form-group new-qte" style="display: none">
                 <label for="quantite" class="control-label">*Quantité  :</label> <span class="rm-btn clickable glyphicon glyphicon-remove"></span>
-                <input type="number"  class="form-control input-sm"
+                <input type="number"  class="form-control input-sm positif"
                        name="qte" id="qte" placeholder="qte" required/>
                 <input type="text"  class="form-control input-sm"
                        name="unite" id="unite" placeholder="unite" required/>
                 <label for="prix" class="control-label">*Prix  (en €):</label>
-                <input type="number"  class="form-control input-sm"
+                <input type="number"  class="form-control input-sm positif"
                        name="prix" id="prix" placeholder="prix" required/>
             </div>
         </div>

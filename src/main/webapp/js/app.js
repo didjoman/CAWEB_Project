@@ -462,7 +462,11 @@ $('#add_qte').click(function(e){
         $('[name=nbQte]').val(id_qte+1);
         // Dicrease the number of quantity : 
     });
-    
+    $(".positif").change(function(){
+    if(($(this).val())<0)
+        $(this).val(0);
+});
+        
     // Increase the number of quantity
     $('[name=nbQte]').val(id_qte+1);
     e.preventDefault();
