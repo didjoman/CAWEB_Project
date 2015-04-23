@@ -2,13 +2,13 @@
 
         
 $(".positif").change(function(){
-    if(($(".positif").val())<0)
-        $('.positif').val(0);
+    if(($(this).val())<0)
+        $(this).val(0);
 });
         
 $(".target").change(function(){
-    $(".prix").val($('[name=quantity] option:selected').attr("data-prix"));
-    $(".prixtot").val(($('[name=quantity] option:selected').attr("data-prix")*$('#nbLots-field').val()))
+    $(this).find($('[name=price]')).val($(this).find($('[name=quantity] option:selected')).attr("data-prix"));
+    $(this).find($('[name=total-price-label]')).val($(this).find($('[name=quantity] option:selected')).attr("data-prix")*$(this).find($('[name=nbLots]')).val());
 });
         
 

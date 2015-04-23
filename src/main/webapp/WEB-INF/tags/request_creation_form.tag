@@ -32,13 +32,14 @@
         <label for="duration-field">*Durée du contrat :</label>
         <input type="text" name="duration" id="duration-field" value="${duration}" readonly required/> 
     </div>
+    <span class="target">
     <div>
         <label for="nbLots-field">*Nombre de lots :</label>
-        <input class="target positif" type="number" name="nbLots"  id="nbLots-field" value="1" required/> 
+        <input class="positif" type="number" name="nbLots"  id="nbLots-field" value="1" required/> 
     </div>
     <div>
         <label for="quantity-field">*Lots de quantité :</label>
-         <select class="target" name="quantity" size="1" id="quantity-field" required>
+         <select name="quantity" size="1" id="quantity-field" required>
             <c:forEach items="${quantities}" var="quantity">
                 <option value="${quantity.qte}" data-unit="${quantity.uniteQte}" data-prix="${quantity.prix}">
                     ${quantity.qte} ${quantity.uniteQte}
@@ -54,6 +55,7 @@
         <label for="total-price-field">*Prix total :</label>
         <input class="prixtot" type="text" name="total-price-label" id="total-price-field" value="${prixUnite}" readonly><br />
     </div>
+     </span>
     <input type="hidden" name="uniteQte" id="unit-field" value="${uniteQte}" />
     <input type="hidden" name="action" id="unit-field" value="create" />
     <br />
