@@ -1,8 +1,7 @@
 *.class
-/target/*
-/target
-target/*
-target
+projet/target/*
+projet/target
+projet/target
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
@@ -16,9 +15,9 @@ target
 hs_err_pid*
 
 # latex : 
-docs/*.aux
-docs/*.log
-docs/*.pdf
-docs/*.toc
-docs/*.out
-docs/*.synctex.gz
+projet/docs/*.aux
+projet/docs/*.log
+projet/docs/*.pdf
+projet/docs/*.toc
+projet/docs/*.out
+projet/docs/*.synctex.gz

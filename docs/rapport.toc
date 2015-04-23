@@ -14,19 +14,19 @@
 \contentsline {subsection}{\numberline {II.3}Diagrammes de s\IeC {\'e}quence}{31}{subsection.0.2.3}
 \contentsline {subsection}{\numberline {II.4}Diagrammes d'\IeC {\'e}tats-transitions}{32}{subsection.0.2.4}
 \contentsline {section}{\numberline {III}Manuel Utilisateur}{34}{section.0.3}
-\contentsline {subsection}{\numberline {III.1}Note sur l'accessibilit\IeC {\'e}}{34}{subsection.0.3.1}
-\contentsline {subsection}{\numberline {III.2}Pour le visiteur}{34}{subsection.0.3.2}
-\contentsline {paragraph}{\numberline {III.2.0.1}S'inscrire}{34}{paragraph.0.3.2.0.1}
-\contentsline {paragraph}{\numberline {III.2.0.2}Se connecter}{34}{paragraph.0.3.2.0.2}
-\contentsline {paragraph}{\numberline {III.2.0.3}Voir la liste des offres}{34}{paragraph.0.3.2.0.3}
-\contentsline {subsection}{\numberline {III.3}Pour le producteur}{35}{subsection.0.3.3}
-\contentsline {paragraph}{\numberline {III.3.0.4}Gestion des produits}{35}{paragraph.0.3.3.0.4}
-\contentsline {paragraph}{\numberline {III.3.0.5}Gestion des demandes}{35}{paragraph.0.3.3.0.5}
-\contentsline {paragraph}{\numberline {III.3.0.6}Gestion des contrats}{35}{paragraph.0.3.3.0.6}
-\contentsline {subsection}{\numberline {III.4}Pour le consommateur}{35}{subsection.0.3.4}
-\contentsline {paragraph}{\numberline {III.4.0.7}Gestion des demandes}{35}{paragraph.0.3.4.0.7}
-\contentsline {paragraph}{\numberline {III.4.0.8}Gestion des contrats}{35}{paragraph.0.3.4.0.8}
-\contentsline {paragraph}{\numberline {III.4.0.9}Gestion des permanences}{36}{paragraph.0.3.4.0.9}
-\contentsline {subsection}{\numberline {III.5}Pour le responsable du planning}{36}{subsection.0.3.5}
-\contentsline {paragraph}{\numberline {III.5.0.10}Gestion des permanences}{36}{paragraph.0.3.5.0.10}
+\contentsline {subsection}{\numberline {III.1}Pour le visiteur}{34}{subsection.0.3.1}
+\contentsline {paragraph}{\numberline {III.1.0.1}S'inscrire}{34}{paragraph.0.3.1.0.1}
+\contentsline {paragraph}{\numberline {III.1.0.2}Se connecter}{34}{paragraph.0.3.1.0.2}
+\contentsline {paragraph}{\numberline {III.1.0.3}Voir la liste des offres}{34}{paragraph.0.3.1.0.3}
+\contentsline {subsection}{\numberline {III.2}Pour le producteur}{34}{subsection.0.3.2}
+\contentsline {paragraph}{\numberline {III.2.0.4}Gestion des produits}{34}{paragraph.0.3.2.0.4}
+\contentsline {paragraph}{\numberline {III.2.0.5}Gestion des demandes}{34}{paragraph.0.3.2.0.5}
+\contentsline {paragraph}{\numberline {III.2.0.6}Gestion des contrats}{34}{paragraph.0.3.2.0.6}
+\contentsline {subsection}{\numberline {III.3}Pour le consommateur}{35}{subsection.0.3.3}
+\contentsline {paragraph}{\numberline {III.3.0.7}Gestion des demandes}{35}{paragraph.0.3.3.0.7}
+\contentsline {paragraph}{\numberline {III.3.0.8}Gestion des contrats}{35}{paragraph.0.3.3.0.8}
+\contentsline {paragraph}{\numberline {III.3.0.9}Gestion des permanences}{35}{paragraph.0.3.3.0.9}
+\contentsline {subsection}{\numberline {III.4}Pour le responsable du planning}{35}{subsection.0.3.4}
+\contentsline {paragraph}{\numberline {III.4.0.10}Gestion des permanences}{35}{paragraph.0.3.4.0.10}
+\contentsline {subsection}{\numberline {III.5}Note sur l'accessibilit\IeC {\'e}}{36}{subsection.0.3.5}
 \contentsline {section}{\numberline {IV}Bilan sur les outils de mod\IeC {\'e}lisation}{37}{section.0.4}
