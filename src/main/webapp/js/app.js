@@ -443,20 +443,27 @@ $('#add_qte').click(function(e){
     // Install the new quantity, with the correct attributes : 
     var newQte = $('.new-qte').clone().fadeIn(400).removeClass('new-qte');
     ++id_qte;
+    newQte.attr('data-id',id_qte);
     newQte.find('[name=qte]').attr('name', 'qte'+(id_qte));
     newQte.find('[name=unite]').attr('name', 'unite'+(id_qte));
+    newQte.find('.rm-btn').attr('name','rm'+(id_qte));
+    $('#create-offer-form').find('[data-id='+(id_qte-1)+']').find('.rm-btn').hide();
     $('#add_qte').before(newQte);
+
     
     // Install a remove button on the new quantity : 
     $('.rm-btn').click(function(e){
-        // Delete the new quantity field : 
+        // Delete the new quantity field :
+        if($(this).attr('name')=="rm"+id_qte)
+            id_qte--;
         $(this).parent('div').fadeOut(400, function(){$(this).remove()});
+        $('#create-offer-form').find('[data-id='+id_qte+']').find('.rm-btn').show();
+        $('[name=nbQte]').val(id_qte+1);
         // Dicrease the number of quantity : 
-        $('[name=nbQte]').val(3);
     });
     
     // Increase the number of quantity
-    $('[name=nbQte]').val(3);
+    $('[name=nbQte]').val(id_qte+1);
     e.preventDefault();
 });
 
