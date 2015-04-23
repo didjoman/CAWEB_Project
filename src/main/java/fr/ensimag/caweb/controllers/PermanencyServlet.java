@@ -5,9 +5,7 @@
 */
 package fr.ensimag.caweb.controllers;
 
-import fr.ensimag.caweb.controllers.errors.CAWEBServletException;
 import com.google.gson.Gson;
-import static com.google.gson.internal.bind.TypeAdapters.URL;
 import fr.ensimag.caweb.controllers.errors.CAWEB_AccessRightsException;
 import fr.ensimag.caweb.controllers.errors.CAWEB_DatabaseAccessException;
 import fr.ensimag.caweb.dao.DAOException;
@@ -16,10 +14,6 @@ import fr.ensimag.caweb.models.User.User;
 import fr.ensimag.caweb.models.User.UserStatus;
 import fr.ensimag.caweb.models.Week;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.net.URL;
-import java.rmi.ServerException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
