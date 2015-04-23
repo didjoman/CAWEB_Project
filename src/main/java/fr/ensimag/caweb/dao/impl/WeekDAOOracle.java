@@ -244,7 +244,6 @@ public class WeekDAOOracle implements WeekDAO{
                         else
                             week.addIndispo(consummer);
                 }
-                System.out.println(week);
                 
             }
         } catch (SQLException ex) {

@@ -110,7 +110,6 @@ public class PermanencyServlet extends HttpServlet {
                     else if(perm2 != null && !perm2.getPseudo().equals(login))
                         returnVal += "\"perm\" : " + perm2.getJSONContactInfo();
                     returnVal += "}";
-                    System.out.println(returnVal);
                     response.getWriter().write(returnVal);
                 }
             }

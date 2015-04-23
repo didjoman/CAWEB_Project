@@ -122,13 +122,6 @@ public class ContractDAOOracle implements ContractDAO {
             insertPrep.setDouble(7, contrat.getQuantite().getQte());
             insertPrep.setString(8, contrat.getQuantite().getUniteQte());
             insertPrep.setInt(9, contrat.getNbLots());
-            System.out.println("PREPARED STATEMENT : ");
-            System.out.println("OFFREUR :" + contrat.getOffreur().getPseudo());
-            System.out.println("NOM PRODUIT :" + contrat.getNomProduitContrat());
-            System.out.println("PRIX :" + contrat.getQuantite().getPrix());
-            System.out.println("DUREE OFFRE :" + contrat.getDuree());
-            System.out.println("QTE :"+ contrat.getQuantite().getQte());
-            System.out.println("UNITEQTE :"+ contrat.getQuantite().getUniteQte());
             insertPrep.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);

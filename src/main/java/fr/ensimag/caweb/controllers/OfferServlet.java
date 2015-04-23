@@ -49,7 +49,6 @@ public class OfferServlet extends HttpServlet {
         String id = request.getParameter("id");
         String idCreate = request.getParameter("idCreate");
         if (id != null) {
-            System.out.println("offres proposées");
             try {
                 List<Offer> offers = DAOFactory.getInstance().getOfferDAO().read(id);
                 request.setAttribute("offers", offers);
@@ -61,12 +60,10 @@ public class OfferServlet extends HttpServlet {
                 throw new CAWEB_DatabaseAccessException();
             }
         } else if (idCreate != null) {
-            System.out.println("creer une offre");
             request.setAttribute("creater", idCreate);
             RequestDispatcher view = request.getRequestDispatcher("./WEB-INF/pages/create_offer.jsp");
             view.forward(request, response);
         } else {
-            System.out.println("offres");
             try {
                 List<Offer> offers = DAOFactory.getInstance().getOfferDAO().readAll();
                 request.setAttribute("offers", offers);
