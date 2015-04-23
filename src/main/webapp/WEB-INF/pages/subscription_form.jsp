@@ -15,13 +15,13 @@
     </div>
         
     <div class="form-group">
-        <label for="password" class="control-label">*Mot de passe :</label>
-        <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Mot de passe" required/>
+        <label for="pwd" class="control-label">*Mot de passe :</label>
+        <input type="password" name="password" id="pwd" class="form-control input-sm" placeholder="Mot de passe" required/>
     </div>
     <div class="form-group">
         <label for="password-verif-field" class="control-label">*Mot de passe(2) :</label>
         <input type="password" name="passwordverif" id="password-verif-field" 
-               data-match="#password" 
+               data-match="#pwd" 
                data-error="Veuillez confirmer le mot de passe." 
                data-match-error="Mdp(2) doit être identique au mdp ..." 
                class="form-control input-sm"  placeholder="Verif Mot de passe" required/>
