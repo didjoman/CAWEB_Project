@@ -446,6 +446,7 @@ $('#add_qte').click(function(e){
     newQte.attr('data-id',id_qte);
     newQte.find('[name=qte]').attr('name', 'qte'+(id_qte));
     newQte.find('[name=unite]').attr('name', 'unite'+(id_qte));
+    newQte.find('[name=prix]').attr('name', 'prix'+(id_qte));
     newQte.find('.rm-btn').attr('name','rm'+(id_qte));
     $('#create-offer-form').find('[data-id='+(id_qte-1)+']').find('.rm-btn').hide();
     $('#add_qte').before(newQte);
