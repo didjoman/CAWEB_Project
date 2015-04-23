@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package fr.ensimag.caweb.dao.impl;
 
 import fr.ensimag.caweb.dao.ContractDAO;
@@ -29,34 +29,34 @@ import javax.sql.DataSource;
  * @author laguerrr
  */
 public class OfferDAOOracle implements OfferDAO {
-
+    
     private final DAOFactory daoFactory;
-
+    
     private static final String selectAll
             = "SELECT * FROM Offre";
-
+    
     private static final String selectProducer
             = "SELECT * FROM Offre WHERE createur = ?";
     private static final String selectQuantities
             = "SELECT * FROM Quantite WHERE idOffrePrecisee = ?";
-
+    
     private static final String insertQueryOffer
             = "INSERT INTO Offre (createur, nomProduit, dureeOffre)"
             + " VALUES(?,?,?)";
-
+    
     private static final String selectOffer
             = "SELECT idOffre FROM Offre WHERE createur = ? "
             + " AND nomProduit = ?"
             + " AND dureeOffre = ?";
-
+    
     private static final String insertQueryQuantity
             = "INSERT INTO Quantite (idOffrePrecisee, qte, uniteQte, prix)"
             + " VALUES(?,?,?,?)";
-
+    
     public OfferDAOOracle(DAOFactory daoFactory) {
         this.daoFactory = daoFactory;
     }
-
+    
     @Override
     public Offer create(Offer offer, List<Quantity> quantities) throws DAOException {
         Connection connec = daoFactory.getConnection();
@@ -85,7 +85,7 @@ public class OfferDAOOracle implements OfferDAO {
                 insertPrepQuantity.setInt(1, idOffrePrecisee);
                 insertPrepQuantity.setDouble(2, quantity.getQte());
                 insertPrepQuantity.setString(3, quantity.getUniteQte());
-                insertPrepQuantity.setInt(4, quantity.getPrix());
+                insertPrepQuantity.setDouble(4, quantity.getPrix());
                 insertPrepQuantity.executeUpdate();
             }
         } catch (SQLException ex) {
@@ -110,7 +110,7 @@ public class OfferDAOOracle implements OfferDAO {
             }
         }
     }
-
+    
     @Override
     public List<Offer> read(String id) throws DAOException {
         List<Offer> result = new ArrayList<Offer>();
@@ -130,7 +130,7 @@ public class OfferDAOOracle implements OfferDAO {
                 while (rs_qte.next()) {
                     double qte = rs_qte.getDouble("qte");
                     String uniteQte = rs_qte.getString("uniteQte");
-                    int prix = rs_qte.getInt("prix");
+                    double prix = rs_qte.getDouble("prix");
                     quantities.add(new Quantity(qte, uniteQte, prix));
                 }
                 Offer offer = new Offer(rs.getInt("idOffre"), rs.getString("createur"), rs.getString("nomProduit"),
@@ -144,7 +144,7 @@ public class OfferDAOOracle implements OfferDAO {
         }
         return result;
     }
-
+    
     @Override
     public List<Offer> readAll() throws DAOException {
         List<Offer> result = new ArrayList<Offer>();
@@ -164,7 +164,7 @@ public class OfferDAOOracle implements OfferDAO {
                 while (rs_qte.next()) {
                     double qte = rs_qte.getDouble("qte");
                     String uniteQte = rs_qte.getString("uniteQte");
-                    int prix = rs_qte.getInt("prix");
+                    double prix = rs_qte.getDouble("prix");
                     quantities.add(new Quantity(qte, uniteQte, prix));
                 }
                 Offer offer = new Offer(rs.getInt("idOffre"), rs.getString("createur"), rs.getString("nomProduit"),
@@ -178,15 +178,15 @@ public class OfferDAOOracle implements OfferDAO {
         }
         return result;
     }
-
+    
     @Override
     public Offer update(Offer obj) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public void delete(Offer obj) throws DAOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
 }

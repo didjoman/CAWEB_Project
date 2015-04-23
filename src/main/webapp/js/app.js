@@ -1,16 +1,16 @@
 
 
-        
+
 $(".positif").change(function(){
     if(($(this).val())<0)
         $(this).val(0);
 });
-        
+
 $(".target").change(function(){
     $(this).find($('[name=price]')).val($(this).find($('[name=quantity] option:selected')).attr("data-prix"));
     $(this).find($('[name=total-price-label]')).val($(this).find($('[name=quantity] option:selected')).attr("data-prix")*$(this).find($('[name=nbLots]')).val());
 });
-        
+
 
 $(function() {
     // Little extension of jquery to test wether an object is empty :
@@ -24,7 +24,7 @@ $(function() {
     });
     
     $(".hidden").css('display','none').removeClass('hidden');
-
+    
     $( "#content-wrapper" ).fadeIn(500);
     $( "#validation-panel" ).css('display','none').removeClass('hidden')
             .show('drop', null, 1000, null );
@@ -40,7 +40,7 @@ $(function() {
         dateFormat: "dd-mm-yy",
         minDate: 0  // disables dates before today
     });
-
+    
     $( "#accordion-modif-perm" ).accordion({
         collapsible: true,
         active: false
@@ -61,12 +61,12 @@ $(function() {
     //var listDispo = $.map($('#dates-dispo').html().split("\n"), $.trim).filter(function(e){return e;});
     //var listUnDispo = $.map($('#dates-undispo').html().split("\n"), $.trim).filter(function(e){return e;});
     
-
+    
     
     function getDateOfWeek(w, y) {
         return new Date(y, 0, 1 + (w - 1) * 7);
     }
-
+    
     var selectCurrentWeek = function() {
         window.setTimeout(function () {
             $('.ui-datepicker-current-day a').addClass('ui-state-active');
@@ -143,7 +143,7 @@ $(function() {
             if(perm2 !== "")
                 perm2 += "<br />";
             $('#week-info #week-info-perm2').html(perm2);
-
+            
             if(perm1 === "" && perm2 ==="")
                 $('#week-info #week-info-perm1').html("/");
             
@@ -211,7 +211,7 @@ $(function() {
             selectCurrentWeek();
         }
     });
-
+    
     var onOnSelecConsummer = function(dateText, inst) { 
         var updateViewCons = function(){
             // Update textual info on the right
@@ -219,7 +219,7 @@ $(function() {
             $('#week-info #week-info-year').html(startDate.getFullYear());
             $('#week-info #week-info-start').html(printDate(startDate));
             $('#week-info #week-info-end').html(printDate(endDate));
-        
+            
             // Hide/Show the Form Or Info about the perm
             if(isInList(date, listPermFullySet) !== -1){
                 $('#disponibility-form').hide(200);
@@ -282,10 +282,10 @@ $(function() {
     });
     
     $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] ); // texte en french
-
+    
     weekMouseMoveHandler();
     weekMouseLeaveHandler();
-
+    
     
     
     var dispoForm = $('#disponibility-form');
@@ -418,7 +418,7 @@ connec.submit(function (ev) {
         'async' : 'true'
     };
     dataToSend = connec.serialize() + '&' + $.param(dataToSend);
-    
+
     $.ajax({
         type: connec.attr('method'),
         url: connec.attr('action'),
@@ -427,13 +427,13 @@ connec.submit(function (ev) {
             if(data !== null){
                 // Update the navbar with 
             }
-                
+
         }
     });
 
     ev.preventDefault();
 });
- 
+
  */
 
 var id_qte = 0;
@@ -450,7 +450,8 @@ $('#add_qte').click(function(e){
     newQte.find('.rm-btn').attr('name','rm'+(id_qte));
     $('#create-offer-form').find('[data-id='+(id_qte-1)+']').find('.rm-btn').hide();
     $('#add_qte').before(newQte);
-
+    replaceComas($('input[type="number"]'));
+    
     
     // Install a remove button on the new quantity : 
     $('.rm-btn').click(function(e){
@@ -463,13 +464,25 @@ $('#add_qte').click(function(e){
         // Dicrease the number of quantity : 
     });
     $(".positif").change(function(){
-    if(($(this).val())<0)
-        $(this).val(0);
-});
-        
+        if(($(this).val())<0)
+            $(this).val(0);
+    });
+    
     // Increase the number of quantity
     $('[name=nbQte]').val(id_qte+1);
     e.preventDefault();
 });
 
 
+// Replace comas by points in inputs ...
+var replaceComas = function(elem){
+    $(elem).keypress(function( event ) {
+        if ( event.which == 44 ) {
+            if($(this).val().indexOf(".") === -1)
+                $(this).val(($(this).val()+"."));
+            event.preventDefault();
+        }
+    });
+};
+
+replaceComas($('input[type="number"]'));

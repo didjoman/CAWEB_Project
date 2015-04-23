@@ -117,7 +117,7 @@ public class ContractDAOOracle implements ContractDAO {
             insertPrep.setString(2, contrat.getDemandeur().getPseudo());
             insertPrep.setDate(3, (Date) contrat.getDateContrat());
             insertPrep.setString(4, contrat.getNomProduitContrat());
-            insertPrep.setInt(5, contrat.getQuantite().getPrix());
+            insertPrep.setDouble(5, contrat.getQuantite().getPrix());
             insertPrep.setInt(6, contrat.getDuree());
             insertPrep.setDouble(7, contrat.getQuantite().getQte());
             insertPrep.setString(8, contrat.getQuantite().getUniteQte());
@@ -166,7 +166,7 @@ public class ContractDAOOracle implements ContractDAO {
                             .setDuree(rs.getInt("dureeContrat"))
                             .setQuantite(new Quantity(rs.getInt("qteLotContrat"),
                                             rs.getString("uniteContrat"),
-                                            rs.getInt("prixLotContrat")))
+                                            rs.getDouble("prixLotContrat")))
                             .setNbLots(rs.getInt("nbLots"))
                             .setDateDebut(rs.getDate("dateDebutLivraison"))
                             .setaRenouveler((rs.getInt("aRenouveler") == 1))
@@ -251,7 +251,7 @@ public class ContractDAOOracle implements ContractDAO {
                             .setDuree(rs.getInt("dureeContrat"))
                             .setQuantite(new Quantity(rs.getInt("qteLotContrat"),
                                             rs.getString("uniteContrat"),
-                                            rs.getInt("prixLotContrat")))
+                                            rs.getDouble("prixLotContrat")))
                             .setNbLots(rs.getInt("nbLots"))
                             .setDateDebut(rs.getDate("dateDebutLivraison"))
                             .setaRenouveler((rs.getInt("aRenouveler") == 1))

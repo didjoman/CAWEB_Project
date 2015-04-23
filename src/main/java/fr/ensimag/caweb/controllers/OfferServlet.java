@@ -102,12 +102,12 @@ public class OfferServlet extends HttpServlet {
                 && prix0 != null && nbQte != null) {
             Offer offer = new Offer(0, createur, produit, Integer.parseInt(duree), null);
             List<Quantity> quantities = new ArrayList<Quantity>();         
-            quantities.add(new Quantity(Double.parseDouble(qte0), unite0, Integer.parseInt(prix0)));
+            quantities.add(new Quantity(Double.parseDouble(qte0), unite0, Double.parseDouble(prix0)));
             for (int i = 1; i < Integer.parseInt(nbQte); i++){
                 String qte = request.getParameter("qte"+i);
                 String unite = request.getParameter("unite"+i);
                 String prix = request.getParameter("prix"+i);
-                quantities.add(new Quantity(Double.parseDouble(qte), unite, Integer.parseInt(prix)));
+                quantities.add(new Quantity(Double.parseDouble(qte), unite, Double.parseDouble(prix)));
             }
             try {
                 DAOFactory.getInstance().getOfferDAO().create(offer, quantities);

@@ -14,10 +14,9 @@ public class Quantity {
 
     private double qte;
     private String uniteQte;
-    private int prix;
+    private double prix;
 
-    public Quantity(double qte, String uniteQte, int prix) {
-    
+    public Quantity(double qte, String uniteQte, double prix) {
         this.qte = qte;
         this.uniteQte = uniteQte;
         this.prix = prix;
@@ -39,11 +38,11 @@ public class Quantity {
         this.uniteQte = uniteQte;
     }
 
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 

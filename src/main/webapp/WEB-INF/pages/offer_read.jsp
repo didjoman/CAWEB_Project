@@ -39,7 +39,7 @@
                                     <c:forEach items="${offer.quantities}" var="quantity">
                                         <tr>
                                             <td>${quantity.qte} ${quantity.uniteQte}</td>
-                                            <td>${quantity.prix}</td>
+                                            <td>${quantity.prix} €</td>
                                         </tr>
                                     </c:forEach>
                                 </table>
