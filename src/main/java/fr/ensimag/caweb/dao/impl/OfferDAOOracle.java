@@ -58,7 +58,7 @@ public class OfferDAOOracle implements OfferDAO {
     }
 
     @Override
-    public Offer create(Offer offer, Quantity quantity) throws DAOException {
+    public Offer create(Offer offer, List<Quantity> quantities) throws DAOException {
         Connection connec = daoFactory.getConnection();
         PreparedStatement insertPrepOffer = null;
         PreparedStatement selectPrepOffer = null;
@@ -76,13 +76,15 @@ public class OfferDAOOracle implements OfferDAO {
             selectPrepOffer.setInt(3, offer.getDuree());
             rs = selectPrepOffer.executeQuery();
             //CREATE QUANTITIES
-            while (rs.next()) {
-                insertPrepQuantity = connec.prepareStatement(insertQueryQuantity);
-                insertPrepQuantity.setInt(1, rs.getInt("idOffre"));
-                insertPrepQuantity.setDouble(2, quantity.getQte());
-                insertPrepQuantity.setString(3, quantity.getUniteQte());
-                insertPrepQuantity.setInt(4, quantity.getPrix());
-                insertPrepQuantity.executeUpdate();
+            for (Quantity quantity : quantities) {
+                while (rs.next()) {
+                    insertPrepQuantity = connec.prepareStatement(insertQueryQuantity);
+                    insertPrepQuantity.setInt(1, rs.getInt("idOffre"));
+                    insertPrepQuantity.setDouble(2, quantity.getQte());
+                    insertPrepQuantity.setString(3, quantity.getUniteQte());
+                    insertPrepQuantity.setInt(4, quantity.getPrix());
+                    insertPrepQuantity.executeUpdate();
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(ContractDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,7 +101,7 @@ public class OfferDAOOracle implements OfferDAO {
                     selectPrepOffer.close();
                 }
                 daoFactory.closeConnection(connec);
-            } catch (SQLException ex) {               
+            } catch (SQLException ex) {
                 throw new DAOException("Erreur BD " + ex.getMessage(), ex);
             } finally {
                 return offer;
