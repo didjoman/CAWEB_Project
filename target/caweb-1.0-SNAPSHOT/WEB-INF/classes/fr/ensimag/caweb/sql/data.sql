@@ -66,7 +66,7 @@ INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContra
 VALUES ('', 'test1', 'test31', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, '', '', 1);
 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler, refuse)
-VALUES ('', 'test1', 'test3', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, '', '', 0);
+VALUES ('', 'test1', 'test3', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 0, '');
 
 SELECT * FROM CONTRAT JOIN UTILISATEUR ON(pseudo = offreur OR pseudo = demandeur) 
 WHERE (demandeur = 'test1' OR offreur = 'test1') AND dateDebutLivraison IS NOT NULL;
