@@ -76,6 +76,7 @@ public class RequestServlet extends HttpServlet {
                 req = DAOFactory.getInstance().getContractDAO().read(id);
             } catch (DAOException ex) {
                 Logger.getLogger(PermanencyServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new CAWEB_DatabaseAccessException();
             }
 
             // Checks if the contract exists
@@ -230,6 +231,7 @@ public class RequestServlet extends HttpServlet {
                 view.forward(request, response);
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new CAWEB_DatabaseAccessException();
             }
         }
 

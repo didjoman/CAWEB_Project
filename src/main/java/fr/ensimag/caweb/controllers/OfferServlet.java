@@ -5,6 +5,7 @@
  */
 package fr.ensimag.caweb.controllers;
 
+import fr.ensimag.caweb.controllers.errors.CAWEB_DatabaseAccessException;
 import fr.ensimag.caweb.dao.DAOException;
 import fr.ensimag.caweb.dao.impl.OfferDAOOracle;
 import fr.ensimag.caweb.dao.DAOFactory;
@@ -57,6 +58,7 @@ public class OfferServlet extends HttpServlet {
                 view.forward(request, response);
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new CAWEB_DatabaseAccessException();
             }
         } else if (idCreate != null) {
             System.out.println("creer une offre");
@@ -72,6 +74,7 @@ public class OfferServlet extends HttpServlet {
                 view.forward(request, response);
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new CAWEB_DatabaseAccessException();
             }
         }
     }
@@ -114,6 +117,7 @@ public class OfferServlet extends HttpServlet {
                 
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
+                throw new CAWEB_DatabaseAccessException();
             }
             // Forwarding :
             request.setAttribute("success", "La création d'offre a été effectuée.");
@@ -124,7 +128,7 @@ public class OfferServlet extends HttpServlet {
                 view.forward(request, response);
             } catch (DAOException ex) {
                 Logger.getLogger(OfferServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                throw new CAWEB_DatabaseAccessException();}
         }
     }
 }
