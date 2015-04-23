@@ -47,9 +47,9 @@
                     </c:choose>
                     
                         <td>${req.nomProduitContrat}</td>
-                        <td>${req.dateContrat}</td>
-                        <td>${req.getDateDebut()}</td>
-                        <td> <fmt:formatDate pattern="yyyy-MM-dd" value="${req.getDateFin()}"/></td>
+                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${req.dateContrat}"/></td>
+                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${req.getDateDebut()}"/></td>
+                        <td><fmt:formatDate pattern="dd/MM/yyyy" value="${req.getDateFin()}"/></td>
                         <td>${req.nbLots}</td>
                         <td>${req.quantite.qte}${req.quantite.uniteQte}</td>
                         <td>${req.quantite.prix}€</td>
