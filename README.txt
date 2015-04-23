@@ -4,6 +4,8 @@ Pour déployer l'application :
 
 I-Base de donnée
 
+Attention, comme nous utilisons des triggers, les scripts sql ne peuvent pas être exécutés depuis netbeans. Il faut créer 
+la base de donnée dans un SGBD.
 Il faut exécuter successivement dans cet ordre les scripts 
 sql suivants (localisés dans CAWEB_project src/main/resources/fr/ensimag/caweb/sql/):
         - schema_bdd.sql

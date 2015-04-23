@@ -65,6 +65,9 @@ VALUES ('', 'test1', 'test31', TO_DATE ('19/03/2015', 'DD.MM.YYYY'), 'pommes de 
 INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler, refuse)
 VALUES ('', 'test1', 'test31', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, '', '', 1);
 
+INSERT INTO Contrat(idContrat, offreur, demandeur, dateContrat, nomProduitContrat, prixLotContrat, dureeContrat, qteLotContrat, uniteContrat, nbLots, dateDebutLivraison, aRenouveler, refuse)
+VALUES ('', 'test1', 'test3', TO_DATE ('17/01/2015', 'DD.MM.YYYY'), 'pommes de terre', 3, 60, 2.5, 'kg', 15, '', '', 0);
+
 SELECT * FROM CONTRAT JOIN UTILISATEUR ON(pseudo = offreur OR pseudo = demandeur) 
 WHERE (demandeur = 'test1' OR offreur = 'test1') AND dateDebutLivraison IS NOT NULL;
 
@@ -81,10 +84,17 @@ VALUES ('test3', 10, 2015, 0);
 INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
 VALUES ('test3', 11, 2015, 0);
 
+INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
+VALUES ('test3', 18, 2015, 1);
+
+INSERT INTO EstDisponible (consoDispo, numSemaine, annee, estDispo)
+VALUES ('test3', 19, 2015, 0);
+
 -- Remplissage AssurePermanence
 INSERT INTO AssurePermanence VALUES (1, 2015, 'test3', '');
 INSERT INTO AssurePermanence VALUES (2, 2015, 'test3', '');
 INSERT INTO AssurePermanence VALUES (3, 2015, 'test3', 'test31');
+INSERT INTO AssurePermanence VALUES (17, 2015, 'test3', 'test31');
 
 INSERT INTO AssurePermanence (permanencier1, permanencier2, numSemaine, annee)
 VALUES ('test3', '', 9, 2015);
